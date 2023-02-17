@@ -1,0 +1,25 @@
+.sort {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.icons {
+  fill: var(--color-text-primary);
+  width: 0.8rem;
+  height: 0.8rem;
+  display: inline-block;
+}
+
+.icons:first-of-type {
+  position: relative;
+  top: 2px;
+}
+
+.icons:last-of-type {
+  position: relative;
+  bottom: 2px;
+}
+
+.icon--sorted {
+  fill: var(--color-primary);
+}

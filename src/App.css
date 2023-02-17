@@ -1,0 +1,60 @@
+/*
+Variables
+*/
+
+:root {
+  --color-text-primary: #d8e4ff;
+  --color-primary: #31e981;
+  --color-secondary: #35605a;
+  --color-grey: #6b818c;
+  --color-grey-light: rgb(174, 187, 193, 10%);
+  --color-primary-dark: #00120b;
+  --color-secondary-dark: #162725;
+
+  --color-border: rgba(0, 18, 11, 0.2);
+
+  --divider: 1px solid var(--color-grey-light);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/**
+ * Set up a decent box model on the root element
+ */
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+  color: var(--color-text-primary);
+}
+
+body {
+  background: radial-gradient(var(--color-secondary), var(--color-primary-dark));
+
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  color: var(--color-text-primary);
+  font-size: 1.6rem;
+  line-height: 1.5;
+}
+
+main {
+}
+
+#root {
+  display: flex;
+  min-height: 100vh;
+}
+
+button {
+  all: unset;
+}
