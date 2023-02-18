@@ -1,6 +1,6 @@
 import styles from "../Table.module.scss";
 import { formatNumberToLocale } from "../../../utils/helpers";
-import { SortedHeader } from "../HeaderSort";
+import { LogoName } from "../LogoName";
 
 export const feesColumns = [
   {
@@ -8,16 +8,12 @@ export const feesColumns = [
     accessorKey: "name",
     cell: ({ getValue, row }) => {
       const logo = row.original.logo;
-
+      const value = getValue();
       return (
-        <span className={styles.info}>
-          <img
-            src={logo}
-            alt={getValue() + " image"}
-            className={styles.logo}
-          />
-          <span>{getValue()}</span>
-        </span>
+        <LogoName
+          logoSrc={logo}
+          value={value}
+        />
       );
     },
   },
@@ -29,7 +25,9 @@ export const feesColumns = [
     header: "1d change",
     accessorKey: "change_1d",
     cell: ({ getValue }) => (getValue() ? getValue() + "%" : "-"),
-    meta: {},
+    meta: {
+      color: true,
+    },
   },
   {
     header: "7d change",

@@ -12,6 +12,7 @@ export const Table = ({ tableInstance }) => {
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 const value = flexRender(header.column.columnDef.header, header.getContext());
+
                 return (
                   <th key={header.id}>
                     {header.isPlaceholder ? null : (
@@ -37,13 +38,27 @@ export const Table = ({ tableInstance }) => {
         <tbody>
           {getRowModel().rows.map((row) => (
             <tr key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
-              ))}
+              {row.getVisibleCells().map((cell) => {
+                const meta = cell.column.columnDef?.meta;
+
+                return (
+                  <td
+                    key={cell.id}
+                    className={meta?.color ? styleNumber(cell.getValue()) : ""}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                );
+              })}
             </tr>
           ))}
         </tbody>
       </table>
     </div>
   );
+};
+
+const styleNumber = (value) => {
+  if (value > 0) return styles.positive;
+  if (value < 0) return styles.negative;
+  else return "";
 };

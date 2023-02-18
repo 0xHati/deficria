@@ -11,12 +11,13 @@ export const Menu = () => {
       </NavLink>
 
       <NavLink
-        to="fees"
+        to="protocols"
         className={({ isActive }) => (isActive ? styles.active : "undefined")}>
-        Fees
+        Protocols
       </NavLink>
+      <NavLink to="fees">Fees</NavLink>
+
       <NavLink to="test">TVL</NavLink>
-      <NavLink>Coins</NavLink>
       <NavLink>Volumes</NavLink>
     </ul>
   );
