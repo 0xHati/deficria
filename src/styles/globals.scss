@@ -2,6 +2,8 @@
 Variables
 */
 
+@use "./include-media.scss" as *;
+
 :root {
   --color-text-primary: #d8e4ff;
   --color-primary: #31e981;
@@ -14,6 +16,8 @@ Variables
   --color-border: rgba(0, 18, 11, 0.2);
 
   --divider: 1px solid var(--color-grey-light);
+
+  --border-radius: 1.5rem;
 }
 
 * {
@@ -43,15 +47,22 @@ body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-weight: 400;
   color: var(--color-text-primary);
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   line-height: 1.5;
+
+  @include media(">phone") {
+    font-size: 1.6rem;
+    line-height: 1.2;
+  }
 }
 
-main {
+ul {
+  list-style: none;
 }
 
 #root {
-  display: flex;
+  // display: flex;
+  // flex: 1;
   min-height: 100vh;
 }
 

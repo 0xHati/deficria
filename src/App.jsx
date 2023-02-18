@@ -1,5 +1,4 @@
-import reactLogo from "./assets/react.svg";
-import "./App.css";
+import "./styles/index.scss";
 import Home from "./pages/Home/Home";
 import Root from "./pages/Root/Root";
 import NotFound from "./pages/Error/Error";

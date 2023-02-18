@@ -1,0 +1,74 @@
+@use "../../styles/index" as *;
+
+.table-container {
+  border-radius: var(--border-radius);
+  box-shadow: var(--color-border) 0px 3px 6px, var(--color-border) 0px 3px 6px, 0 0 0 1px var(--color-border);
+  background-color: var(--color-secondary-dark);
+  width: 100%;
+  overflow-x: auto;
+
+  & table {
+    border-collapse: collapse;
+    width: 100%;
+
+    @include media(">phone") {
+      table-layout: fixed;
+    }
+  }
+
+  & th {
+    border-bottom: var(--divider);
+    white-space: nowrap;
+  }
+
+  & thead tr > :first-child {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background-color: var(--color-secondary-dark);
+  }
+
+  & tbody tr > :first-child {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background-color: var(--color-secondary-dark);
+  }
+
+  & tr {
+    border-bottom: var(--divider);
+  }
+
+  & tr:last-child {
+    border: none;
+  }
+
+  & td,
+  & th {
+    padding: 1rem 1.5rem;
+    text-align: right;
+  }
+
+  & td:first-of-type,
+  & th:first-of-type {
+    text-align: left;
+  }
+}
+
+.logo {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header {
+  display: inline-flex;
+  gap: 3px;
+  align-items: center;
+}

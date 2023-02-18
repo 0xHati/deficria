@@ -1,4 +1,4 @@
-import styles from "../Table.module.css";
+import styles from "../Table.module.scss";
 import { formatNumberToLocale } from "../../../utils/helpers";
 import { SortedHeader } from "../HeaderSort";
 

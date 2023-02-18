@@ -1,4 +1,4 @@
-import styles from "./Table.module.css";
+import styles from "./Table.module.scss";
 import { flexRender } from "@tanstack/react-table";
 
 export const Table = ({ tableInstance }) => {
@@ -15,7 +15,17 @@ export const Table = ({ tableInstance }) => {
                 return (
                   <th key={header.id}>
                     {header.isPlaceholder ? null : (
-                      <>{header.column.getCanSort() ? <button onClick={() => header.column.toggleSorting()}>{value}</button> : value}</>
+                      <>
+                        {header.column.getCanSort() ? (
+                          <button
+                            onClick={() => header.column.toggleSorting()}
+                            style={{ cursor: "pointer" }}>
+                            {value}
+                          </button>
+                        ) : (
+                          value
+                        )}
+                      </>
                     )}
                     {/* {header.column.getCanSort() && <SortIcon dir={header.column.getIsSorted()} />} */}
                   </th>
