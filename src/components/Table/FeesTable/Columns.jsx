@@ -29,6 +29,7 @@ export const feesColumns = [
     header: "1d change",
     accessorKey: "change_1d",
     cell: ({ getValue }) => (getValue() ? getValue() + "%" : "-"),
+    meta: {},
   },
   {
     header: "7d change",

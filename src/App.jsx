@@ -1,6 +1,7 @@
 import "./styles/index.scss";
 import Home from "./pages/Home/Home";
-import Root from "./pages/Root/Root";
+import Layout from "./pages/Layout/Layout";
+import Fees from "./pages/Fees/Fees";
 import NotFound from "./pages/Error/Error";
 import { QueryClient, QueryClientProvider } from "react-query";
 
@@ -11,14 +12,23 @@ const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
+    element: <Layout />,
     children: [
       {
-        path: "/",
-        element: <Home />,
+        errorElement: <NotFound />,
+        children: [
+          {
+            path: "/",
+            element: <Home />,
+          },
+          {
+            path: "/fees",
+            element: <Fees />,
+          },
+        ],
       },
     ],
-    errorElement: <NotFound />,
+    errorElement: <Layout outlet={<NotFound />} />,
   },
 ]);
 

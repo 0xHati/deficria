@@ -6,6 +6,8 @@ Variables
 
 :root {
   --color-text-primary: #d8e4ff;
+  --color-text-primary-transparent: rgb(216, 228, 255, 50%);
+
   --color-primary: #31e981;
   --color-secondary: #35605a;
   --color-grey: #6b818c;
@@ -60,10 +62,9 @@ ul {
   list-style: none;
 }
 
-#root {
-  // display: flex;
-  // flex: 1;
-  min-height: 100vh;
+a {
+  color: inherit;
+  text-decoration: inherit;
 }
 
 button {

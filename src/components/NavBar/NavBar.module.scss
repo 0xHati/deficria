@@ -1,0 +1,22 @@
+@use "../../styles/index" as *;
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem;
+  margin-bottom: 4rem;
+}
+
+.menu {
+  & a {
+    color: var(--color-text-primary-transparent);
+    @include media(">phone") {
+      margin: 1rem 1rem;
+      font-size: 1.8rem;
+    }
+  }
+
+  & a.active {
+    color: var(--color-text-primary);
+  }
+}
