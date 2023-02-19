@@ -1,12 +1,10 @@
 import { Menu } from "./Menu";
 import styles from "./NavBar.module.scss";
 
-export const NavBar = () => {
+export const NavBar = ({ show }) => {
   return (
-    <div className={styles.navbar}>
-      <div>Defi Cria</div>
+    <div className={`${styles.navbar} ${show ? styles["navbar--open"] : ""}`}>
       <Menu />
-      <div>Profile</div>
     </div>
   );
 };

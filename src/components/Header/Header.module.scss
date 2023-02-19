@@ -1,0 +1,38 @@
+@use "../../styles/index" as *;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem;
+  position: sticky;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+}
+
+.menu__icon {
+  fill: var(--color-text-primary);
+  height: 2.5rem;
+  width: 2.5rem;
+
+  @include media(">phone") {
+    display: none;
+  }
+}
+
+.menu__button {
+  @include media(">phone") {
+    display: none;
+  }
+}
+
+.profile {
+  display: none;
+
+  @include media(">phone") {
+    display: block;
+  }
+}

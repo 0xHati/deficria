@@ -1,13 +1,45 @@
 @use "../../styles/index" as *;
 
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  margin: 2rem;
-  margin-bottom: 4rem;
+  display: none;
+  position: fixed;
+  width: 100%;
+  top: 5rem;
+  right: 0;
+  z-index: 100;
+  background-color: var(--color-primary-dark);
+  height: 100vh;
+  // transform-origin: top;
+  // transition: all 1s ease-in;
+
+  @include media(">phone") {
+    display: flex;
+    position: static;
+    width: auto;
+    height: auto;
+    background-color: unset;
+  }
+
+  &--open {
+    display: block;
+  }
 }
 
 .menu {
+  padding: 2rem 0;
+  font-size: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
+  @include media(">phone") {
+    flex-direction: row;
+    align-items: flex-start;
+
+    padding: 0;
+  }
+
   & a {
     color: var(--color-text-primary-transparent);
     @include media(">phone") {
