@@ -10,13 +10,16 @@ export const Menu = () => {
           className={({ isActive }) => (isActive ? styles.active : "undefined")}>
           Home
         </NavLink>
-
         <NavLink
           to="protocols"
           className={({ isActive }) => (isActive ? styles.active : "undefined")}>
           Protocols
         </NavLink>
-        <NavLink to="fees">Fees</NavLink>
+        <NavLink
+          to="fees"
+          className={({ isActive }) => (isActive ? styles.active : "undefined")}>
+          Fees
+        </NavLink>
 
         <NavLink to="test">TVL</NavLink>
         <NavLink>Volumes</NavLink>

@@ -3,7 +3,6 @@ Variables
 */
 
 @use "./include-media.scss" as *;
-
 :root {
   --color-text-primary: #d8e4ff;
   --color-text-primary-transparent: rgb(216, 228, 255, 50%);
@@ -49,7 +48,6 @@ html {
 
 body {
   background: radial-gradient(var(--color-secondary), var(--color-primary-dark));
-
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-weight: 400;
   color: var(--color-text-primary);

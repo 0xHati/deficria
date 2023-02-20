@@ -1,14 +1,20 @@
+@use "../../styles/include-media.scss" as *;
+
 #root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+
+  @include media(">phone") {
+    padding: 0 20rem;
+  }
 }
 
 main {
   display: flex;
-  flex: 1;
   justify-content: center;
   align-items: center;
+  flex: 1;
 }
 
 // .page-content {

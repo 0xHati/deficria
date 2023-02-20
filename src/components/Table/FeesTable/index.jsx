@@ -55,5 +55,10 @@ export const FeesTable = ({ data, isExpanded, timeFrame }) => {
     getPaginationRowModel: !isExpanded ? getPaginationRowModel() : "",
   });
 
-  return <Table tableInstance={tableInstance} />;
+  return (
+    <Table
+      tableInstance={tableInstance}
+      linkTo={"/fees"}
+    />
+  );
 };

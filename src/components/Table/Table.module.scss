@@ -38,6 +38,7 @@
 
   & tr {
     border-bottom: var(--divider);
+    cursor: pointer;
   }
 
   & tr:last-child {

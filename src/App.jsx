@@ -24,6 +24,12 @@ const router = createBrowserRouter([
           {
             path: "/fees",
             element: <Fees />,
+            children: [
+              {
+                path: "/fees/:protocol",
+                element: <Fees />,
+              },
+            ],
           },
         ],
       },

@@ -1,27 +1,30 @@
 @use "../../styles/index" as *;
 
 .navbar {
-  display: none;
   position: fixed;
-  width: 100%;
+  opacity: 0;
   top: 5rem;
   right: 0;
   z-index: 100;
   background-color: var(--color-primary-dark);
-  height: 100vh;
-  // transform-origin: top;
-  // transition: all 1s ease-in;
+  height: 0;
+  width: 100%;
+
+  transition: height 0.25s ease-out;
 
   @include media(">phone") {
     display: flex;
     position: static;
     width: auto;
     height: auto;
+    opacity: 1;
     background-color: unset;
   }
 
   &--open {
     display: block;
+    height: 100vh;
+    opacity: 1;
   }
 }
 

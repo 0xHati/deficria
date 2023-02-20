@@ -1,8 +1,15 @@
 import styles from "./Table.module.scss";
 import { flexRender } from "@tanstack/react-table";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export const Table = ({ tableInstance }) => {
+export const Table = ({ tableInstance, linkTo }) => {
   const { getRowModel, getHeaderGroups } = tableInstance;
+  const navigate = useNavigate();
+
+  const handleClick = (name) => {
+    navigate(`${linkTo}/${name}`);
+  };
 
   return (
     <div className={styles["table-container"]}>
@@ -12,7 +19,6 @@ export const Table = ({ tableInstance }) => {
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 const value = flexRender(header.column.columnDef.header, header.getContext());
-
                 return (
                   <th key={header.id}>
                     {header.isPlaceholder ? null : (
@@ -37,7 +43,9 @@ export const Table = ({ tableInstance }) => {
         </thead>
         <tbody>
           {getRowModel().rows.map((row) => (
-            <tr key={row.id}>
+            <tr
+              key={row.id}
+              onClick={handleClick.bind(null, row.original.name)}>
               {row.getVisibleCells().map((cell) => {
                 const meta = cell.column.columnDef?.meta;
 

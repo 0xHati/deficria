@@ -1,4 +1,4 @@
-import { FEEDATA } from "../../constants/api";
+import { FEE_DATA } from "../../constants/api";
 import { FeesTable } from "../Table/FeesTable";
 import { useFetcher } from "../../hooks/useFetcher";
 import styles from "./FeeLeaderBoard.module.scss";
@@ -7,7 +7,7 @@ import { TIMEFRAMES } from "../../constants/timeframes";
 import { TimeFrameSelector } from "./TimeFrameSelector";
 
 export const FeeLeaderBoard = () => {
-  const { isLoading, isError, data, error } = useFetcher(FEEDATA);
+  const { isLoading, isError, data, error } = useFetcher(FEE_DATA);
   const [timeFrame, setTimeFrame] = useState(TIMEFRAMES.totalDay);
 
   const handleChangeTimeFrame = (timeFrame) => {
@@ -25,6 +25,7 @@ export const FeeLeaderBoard = () => {
       </div>
 
       {isLoading && <span>Loading...</span>}
+      {isError && <span>{error.message}</span>}
       {!isLoading && !isError && (
         <FeesTable
           data={data.protocols}

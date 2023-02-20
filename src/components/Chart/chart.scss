@@ -1,0 +1,20 @@
+// @import "https://code.highcharts.com/css/highcharts.css";
+
+$background-color: var(--color-secondary-dark) !default;
+$neutral-color-80: var(--color-text-primary);
+$neutral-color-60: var(--color-text-primary);
+
+.chart :global {
+  width: 100%;
+  height: 100%;
+
+  // .highcharts-background {
+  //   // fill: transparent;
+  // }
+}
+
+.highcharts-grid-line {
+  display: none;
+}
+
+@import "../../styles/highcharts.scss";
