@@ -1,5 +1,5 @@
 import Card from "../../components/Card";
-import styles from "./Fees.module.scss";
+import styles from "./FeesDetail.module.scss";
 import { formatNumberToLocale, styleNumber } from "../../utils/helpers";
 import { TimeFrameSelector } from "../../components/TimeFrameSelector/TimeFrameSelector";
 import { TIMEFRAMES, TIMEFRAMES_DISPLAY_SHORT } from "../../constants/timeframes";

@@ -12,7 +12,7 @@
     table-layout: auto;
 
     @include media(">phone") {
-      table-layout: fixed;
+      // table-layout: fixed;
       width: 100%;
     }
   }

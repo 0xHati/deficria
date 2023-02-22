@@ -5,17 +5,17 @@
   display: flex;
   flex-direction: column;
 
-  @include media(">phone") {
+  @include media(">big-desktop") {
     padding: 0 20rem;
   }
 }
 
-main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-}
+// main {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   flex: 1;
+// }
 
 // .page-content {
 //   display: flex;

@@ -1,25 +1,13 @@
 import { useReactTable, getCoreRowModel, getSortedRowModel, getPaginationRowModel } from "@tanstack/react-table";
 import { Table } from "..";
 import { useState, useEffect, Suspense } from "react";
-import { feesColumns as columns } from "./Columns";
+import { getColumns } from "./Columns";
 
 /*
 The table can be expanded with all the data showing next to each other or collapsed with the option to toggle fees
 */
-const updateHeaders = () => {
-  const accessors = ["total24h", "total7d", "total30d", "totalAllTime"];
 
-  columns.forEach((column) => {
-    if (accessors.includes(column.accessorKey)) {
-      column.header = "Fees";
-    }
-  });
-};
-
-export const FeesTable = ({ data, isExpanded, timeFrame, feeStats }) => {
-  const [sorting, setSorting] = useState();
-  const [columnVisibility, setColumnVisibility] = useState();
-
+export const FeesTable = ({ data, isSimplyfied, timeFrame, feeStats }) => {
   useEffect(() => {
     setSorting([
       {
@@ -28,23 +16,33 @@ export const FeesTable = ({ data, isExpanded, timeFrame, feeStats }) => {
       },
     ]);
     setColumnVisibility(
-      isExpanded
-        ? {}
-        : { change_7d: false, change_1m: false, total24h: false, total7d: false, total30d: false, totalAllTime: false, [timeFrame]: true }
+      isSimplyfied
+        ? { change_7d: false, change_1m: false, total24h: false, total7d: false, total30d: false, totalAllTime: false, [timeFrame]: true }
+        : {}
     );
   }, [timeFrame]);
 
+  const [sorting, setSorting] = useState([
+    {
+      id: timeFrame,
+      desc: true,
+    },
+  ]);
+  const [columnVisibility, setColumnVisibility] = useState(
+    isSimplyfied
+      ? { change_7d: false, change_1m: false, total24h: false, total7d: false, total30d: false, totalAllTime: false, [timeFrame]: true }
+      : {}
+  );
+
   // since the column is not expanded all column names will be 'fees' and visibility change depending on selection
-  if (!isExpanded) {
-    updateHeaders();
-  }
 
   const tableInstance = useReactTable({
-    columns,
+    columns: getColumns(isSimplyfied),
     data,
-
     state: {
-      columnOrder: isExpanded ? [] : ["name", "category", "total24h", "total7d", "total30d", "totalAllTime", "change_1d", "change_7d", "change_1m"],
+      columnOrder: isSimplyfied
+        ? ["name", "category", "total24h", "total7d", "total30d", "change_1d"]
+        : ["name", "category", "total24h", "total7d", "total30d", "totalAllTime", "change_1d", "change_7d", "change_1m"],
       sorting,
       columnVisibility,
     },
@@ -52,16 +50,14 @@ export const FeesTable = ({ data, isExpanded, timeFrame, feeStats }) => {
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     disableSortRemove: true,
-    getPaginationRowModel: !isExpanded ? getPaginationRowModel() : "",
+    getPaginationRowModel: isSimplyfied ? getPaginationRowModel() : "",
   });
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <Table
-        tableInstance={tableInstance}
-        linkTo={"/fees"}
-        feeStats={feeStats}
-      />
-    </Suspense>
+    <Table
+      tableInstance={tableInstance}
+      linkTo={"/fees"}
+      feeStats={feeStats}
+    />
   );
 };

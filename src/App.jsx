@@ -1,10 +1,10 @@
 import "./styles/index.scss";
 import Home from "./pages/Home/Home";
 import Layout from "./pages/Layout/Layout";
-import Fees from "./pages/Fees/Fees";
+import FeesDetail from "./pages/FeesDetail/FeesDetail";
 import NotFound from "./pages/Error/Error";
 import { QueryClient, QueryClientProvider } from "react-query";
-
+import Fees from "./pages/Fees/Fees";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const queryClient = new QueryClient({
@@ -30,12 +30,10 @@ const router = createBrowserRouter([
           {
             path: "/fees",
             element: <Fees />,
-            children: [
-              {
-                path: "/fees/:protocol",
-                element: <Fees />,
-              },
-            ],
+          },
+          {
+            path: "/fees/:protocol",
+            element: <FeesDetail />,
           },
         ],
       },
