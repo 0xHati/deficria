@@ -1,4 +1,5 @@
 import { getISOWeek, endOfWeek, endOfMonth } from "date-fns";
+import { TIMEFRAMES } from "../constants/timeframes";
 
 export const formatNumberToLocale = function (number) {
   return number.toLocaleString(navigator.language, { style: "currency", currency: "USD" });
@@ -57,4 +58,13 @@ export const groupDatesByMonth = (data) => {
     }
     return acc;
   }, []);
+};
+
+export const groupDatesByPeriod = (data, period) => {
+  if (period === TIMEFRAMES.week) {
+    return groupDatesByWeek(data);
+  }
+  if (period === TIMEFRAMES.month) {
+    return groupDatesByMonth(data);
+  }
 };

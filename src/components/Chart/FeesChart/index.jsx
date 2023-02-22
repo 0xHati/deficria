@@ -5,31 +5,23 @@ import Card from "../../Card";
 import { TimeFrameSelector } from "../../TimeFrameSelector/TimeFrameSelector";
 import { TIMEFRAMES, TIMEFRAMES_DISPLAY_LONG } from "../../../constants/timeframes";
 import { useState, useEffect } from "react";
-import { groupDatesByMonth, groupDatesByWeek } from "../../../utils/helpers";
+import { groupDatesByPeriod } from "../../../utils/helpers";
 import styles from "../chart.scss";
 
-const groupDatesByPeriod = (data, period) => {
-  if (period === TIMEFRAMES.day) {
-    return data;
-  }
-  if (period === TIMEFRAMES.week) {
-    return groupDatesByWeek(data);
-  }
-  if (period === TIMEFRAMES.month) {
-    return groupDatesByMonth(data);
-  }
-};
-
-export const FeesChart = ({ dataFees, dataRevenue }) => {
+export const FeesChart = ({ dataSets }) => {
+  console.log(dataSets);
+  const [dataFees, dataRevenue] = dataSets;
   const [selectedTimeFrame, setSelectedTimeFrame] = useState(TIMEFRAMES.day);
-  const [dataFeesDay, setDataFeesDay] = useState(dataFees);
+  const [dataFeesDay, setDataFeesDay] = useState(dataFees.data);
   const [dataRevenueDay, setDataRevenueDay] = useState(dataRevenue);
-  // const [dataFeesWeek, setDataFeesWeek] = useState(groupDatesByWeek(dataFeesDay));
-  // const [dataRevenueWeek, setDataRevenueWeek] = useState(groupDatesByWeek(dataRevenueDay));
-  // const [dataFeesMonth, setDataFeesMonth] = useState(groupDatesByMonth(dataFeesDay));
-  // const [dataRevenueMonth, setDataRevenueMonth] = useState(groupDatesByMonth(dataRevenueDay));
 
-  const [activeData, setActiveData] = useState({ activeDataFees: [...dataFees], activeDataRevenue: [...dataRevenueDay] });
+  const activeStateInitial = {};
+
+  dataSets.forEach((element) => {
+    activeStateInitial[element.name] = element.data;
+  });
+
+  const [activeData, setActiveData] = useState({ activeDataFees: [...dataFees.data], activeDataRevenue: [...dataRevenueDay.data] });
 
   const timeFrames = {
     [TIMEFRAMES.day]: TIMEFRAMES_DISPLAY_LONG.day,
@@ -53,12 +45,20 @@ export const FeesChart = ({ dataFees, dataRevenue }) => {
       {
         name: "Fees",
         data: activeData.activeDataFees,
+        showInLegend: Boolean(activeData.activeDataFees.length !== 0),
       },
       {
         name: "Revenue",
         data: activeData.activeDataRevenue,
+        showInLegend: Boolean(activeData.activeDataRevenue.length !== 0),
       },
     ],
+    // plotOptions: {
+    //   series: {
+    //     showEmpty: false, // hide series if there is no data
+    //     showInLegend: true, // show series in legend
+    //   },
+    // },
     xAxis: {
       type: "datetime",
     },

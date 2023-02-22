@@ -14,9 +14,7 @@ export const FeeLeaderBoard = () => {
   const [timeFrame, setTimeFrame] = useState(TIMEFRAMES.day);
   const [feeStats, setFeeStats] = useState(calculateFeeStats(data));
   const handleChangeTimeFrame = (timeFrame) => {
-    startTransition(() => {
-      setTimeFrame(timeFrame);
-    });
+    setTimeFrame(timeFrame);
   };
 
   const timeFrames = {
