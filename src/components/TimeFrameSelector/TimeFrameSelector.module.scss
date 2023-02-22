@@ -1,0 +1,27 @@
+@use "../../styles/index" as *;
+
+.timeFrameSelector {
+  display: flex;
+  width: 30%;
+  justify-content: space-evenly;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  background-color: var(--color-primary-dark);
+  padding: 1px;
+
+  @include media(">phone") {
+    margin-left: 7rem;
+  }
+
+  .timeFrame {
+    padding: 2px 5px;
+    cursor: pointer;
+
+    &--active {
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius);
+      background-color: var(--color-secondary);
+      transition: background-color 0.25s ease-out;
+    }
+  }
+}

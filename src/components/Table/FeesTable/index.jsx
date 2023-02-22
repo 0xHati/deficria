@@ -16,7 +16,7 @@ const updateHeaders = () => {
   });
 };
 
-export const FeesTable = ({ data, isExpanded, timeFrame }) => {
+export const FeesTable = ({ data, isExpanded, timeFrame, feeStats }) => {
   const [sorting, setSorting] = useState();
   const [columnVisibility, setColumnVisibility] = useState();
 
@@ -34,7 +34,7 @@ export const FeesTable = ({ data, isExpanded, timeFrame }) => {
     );
   }, [timeFrame]);
 
-  // since the column is note expanded all column names will be 'fees' and visibility change depending on selection
+  // since the column is not expanded all column names will be 'fees' and visibility change depending on selection
   if (!isExpanded) {
     updateHeaders();
   }
@@ -59,6 +59,7 @@ export const FeesTable = ({ data, isExpanded, timeFrame }) => {
     <Table
       tableInstance={tableInstance}
       linkTo={"/fees"}
+      feeStats={feeStats}
     />
   );
 };

@@ -1,6 +1,7 @@
 import styles from "../Table.module.scss";
 import { formatNumberToLocale } from "../../../utils/helpers";
 import { LogoName } from "../LogoName";
+import { TIMEFRAMES } from "../../../constants/timeframes";
 
 export const feesColumns = [
   {

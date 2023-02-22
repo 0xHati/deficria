@@ -2,13 +2,16 @@ import styles from "./Table.module.scss";
 import { flexRender } from "@tanstack/react-table";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { slug } from "../../utils/helpers";
+import { styleNumber } from "../../utils/helpers";
 
-export const Table = ({ tableInstance, linkTo }) => {
+export const Table = ({ tableInstance, linkTo, feeStats }) => {
   const { getRowModel, getHeaderGroups } = tableInstance;
   const navigate = useNavigate();
 
   const handleClick = (name) => {
-    navigate(`${linkTo}/${name}`);
+    const nameSlug = slug(name);
+    navigate(`${linkTo}/${nameSlug}`, { state: { protocol: nameSlug, feeStats: feeStats } });
   };
 
   return (
@@ -63,10 +66,4 @@ export const Table = ({ tableInstance, linkTo }) => {
       </table>
     </div>
   );
-};
-
-const styleNumber = (value) => {
-  if (value > 0) return styles.positive;
-  if (value < 0) return styles.negative;
-  else return "";
 };
