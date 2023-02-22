@@ -7,21 +7,22 @@ import { TIMEFRAMES, TIMEFRAMES_DISPLAY_LONG } from "../../../constants/timefram
 import { useState, useEffect } from "react";
 import { groupDatesByPeriod } from "../../../utils/helpers";
 import styles from "../chart.scss";
+import { ColumnSizing } from "@tanstack/react-table";
 
 export const FeesChart = ({ dataSets }) => {
-  console.log(dataSets);
   const [dataFees, dataRevenue] = dataSets;
   const [selectedTimeFrame, setSelectedTimeFrame] = useState(TIMEFRAMES.day);
   const [dataFeesDay, setDataFeesDay] = useState(dataFees.data);
-  const [dataRevenueDay, setDataRevenueDay] = useState(dataRevenue);
+  const [dataRevenueDay, setDataRevenueDay] = useState(dataRevenue.data);
 
   const activeStateInitial = {};
 
   dataSets.forEach((element) => {
-    activeStateInitial[element.name] = element.data;
+    activeStateInitial[element.name] = [...element.data];
   });
+  console.log(activeStateInitial);
 
-  const [activeData, setActiveData] = useState({ activeDataFees: [...dataFees.data], activeDataRevenue: [...dataRevenueDay.data] });
+  const [activeData, setActiveData] = useState(activeStateInitial);
 
   const timeFrames = {
     [TIMEFRAMES.day]: TIMEFRAMES_DISPLAY_LONG.day,
@@ -44,13 +45,13 @@ export const FeesChart = ({ dataSets }) => {
     series: [
       {
         name: "Fees",
-        data: activeData.activeDataFees,
-        showInLegend: Boolean(activeData.activeDataFees.length !== 0),
+        data: activeData.fees,
+        showInLegend: Boolean(activeData.fees.length !== 0),
       },
       {
         name: "Revenue",
-        data: activeData.activeDataRevenue,
-        showInLegend: Boolean(activeData.activeDataRevenue.length !== 0),
+        data: activeData.revenue,
+        showInLegend: Boolean(activeData.revenue.length !== 0),
       },
     ],
     // plotOptions: {
@@ -82,21 +83,20 @@ export const FeesChart = ({ dataSets }) => {
   const handleChangeTimeFrame = (timeFrame) => {
     if (timeFrame === TIMEFRAMES.day) {
       setSelectedTimeFrame(TIMEFRAMES.day);
-      console.log(dataFeesDay);
-      setActiveData({ activeDataFees: dataFeesDay, activeDataRevenue: dataRevenueDay });
+      setActiveData({ fees: dataFeesDay, revenue: dataRevenueDay });
     }
     if (timeFrame === TIMEFRAMES.week) {
       setSelectedTimeFrame(TIMEFRAMES.week);
       setActiveData({
-        activeDataFees: groupDatesByPeriod(dataFeesDay, TIMEFRAMES.week),
-        activeDataRevenue: groupDatesByPeriod(dataRevenueDay, TIMEFRAMES.week),
+        fees: groupDatesByPeriod(dataFeesDay, TIMEFRAMES.week),
+        revenue: groupDatesByPeriod(dataRevenueDay, TIMEFRAMES.week),
       });
     }
     if (timeFrame === TIMEFRAMES.month) {
       setSelectedTimeFrame(TIMEFRAMES.month);
       setActiveData({
-        activeDataFees: groupDatesByPeriod(dataFeesDay, TIMEFRAMES.month),
-        activeDataRevenue: groupDatesByPeriod(dataRevenueDay, TIMEFRAMES.month),
+        fees: groupDatesByPeriod(dataFeesDay, TIMEFRAMES.month),
+        revenue: groupDatesByPeriod(dataRevenueDay, TIMEFRAMES.month),
       });
     }
   };

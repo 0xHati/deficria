@@ -44,6 +44,7 @@ export const groupDatesByWeek = (data) => {
 };
 
 export const groupDatesByMonth = (data) => {
+  if (data.length === 0) return [];
   return data.reduce((acc, [date, value]) => {
     const fullDate = new Date(date);
     const endMonth = endOfMonth(fullDate);
