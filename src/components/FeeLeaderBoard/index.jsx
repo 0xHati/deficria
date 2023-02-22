@@ -36,6 +36,7 @@ export const FeeLeaderBoard = () => {
             onClick={handleChangeTimeFrame}
           />
         </div>
+
         <FeesTable
           data={data.protocols}
           isExpanded={false}
@@ -49,19 +50,35 @@ export const FeeLeaderBoard = () => {
 
 const calculateFeeStats = (data) => {
   const { total7d, total24h, total30d, protocols } = data;
-  const sorted24h = protocols.sort((a, b) => b.total24h - a.total24h);
-  const sorted7d = protocols.sort((a, b) => b.total7d - a.total7d);
-  const sorted30d = protocols.sort((a, b) => b.total30d - a.total30d);
+  const sorted24h = [...protocols].sort((a, b) => b.total24h - a.total24h);
+  const sorted7d = [...protocols].sort((a, b) => b.total7d - a.total7d);
+  const sorted30d = [...protocols].sort((a, b) => b.total30d - a.total30d);
+
+  console.log(sorted24h);
 
   return protocols.map((protocol) => {
     return {
       name: protocol.name,
-      total24hPercentage: protocol.total24h / total24h,
-      total7dPercentage: protocol.total7d / total7d,
-      total30dPercentage: protocol.total30d / total30d,
-      total24hRank: sorted24h.indexOf(protocol) + 1,
-      total7dRank: sorted7d.indexOf(protocol) + 1,
-      total30dRank: sorted30d.indexOf(protocol) + 1,
+      day: {
+        percentage: protocol.total24h / total24h,
+        rank: sorted24h.indexOf(protocol) + 1,
+        change: protocol.change_1d,
+        fees: protocol.total24h,
+      },
+      week: {
+        percentage: protocol.total7d / total7d,
+        rank: sorted7d.indexOf(protocol) + 1,
+        change: protocol.change_7d,
+        fees: protocol.total7d,
+      },
+      month: {
+        percentage: protocol.total30d / total30d,
+        rank: sorted30d.indexOf(protocol) + 1,
+        change: protocol.change_1m,
+        fees: protocol.total30d,
+      },
+
+      totalProjects: protocols.length,
     };
   });
 };

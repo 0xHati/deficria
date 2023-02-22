@@ -1,6 +1,6 @@
 import { useReactTable, getCoreRowModel, getSortedRowModel, getPaginationRowModel } from "@tanstack/react-table";
 import { Table } from "..";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { feesColumns as columns } from "./Columns";
 
 /*
@@ -56,10 +56,12 @@ export const FeesTable = ({ data, isExpanded, timeFrame, feeStats }) => {
   });
 
   return (
-    <Table
-      tableInstance={tableInstance}
-      linkTo={"/fees"}
-      feeStats={feeStats}
-    />
+    <Suspense fallback={<div>Loading...</div>}>
+      <Table
+        tableInstance={tableInstance}
+        linkTo={"/fees"}
+        feeStats={feeStats}
+      />
+    </Suspense>
   );
 };

@@ -36,10 +36,13 @@ const Fees = () => {
 
   const dataSets = prepareDataSets({ name: "fees", data: dataFee }, { name: "revenue", data: dataRev });
 
-  console.log(dataSets);
   return (
     <div className={styles.wrapper}>
-      {!isLoading && !isError && <ProtocolFeeInfo data={dataFee}></ProtocolFeeInfo>}
+      {!isLoading && !isError && (
+        <ProtocolFeeInfo
+          data={dataFee}
+          feeStats={feeStats}></ProtocolFeeInfo>
+      )}
       {!isLoading && !isError && <FeesChart dataSets={dataSets} />}
     </div>
   );
@@ -49,7 +52,6 @@ const prepareDataSets = (...data) => {
   const dataSets = [];
   data.forEach((item) => {
     const transformedData = item.data?.totalDataChart?.map(([date, value]) => [date * 1000, value]);
-    console.log(transformedData);
     dataSets.push({ ...item, data: transformedData ? transformedData : [] });
   });
   return dataSets;

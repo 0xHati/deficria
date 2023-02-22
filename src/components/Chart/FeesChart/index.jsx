@@ -20,7 +20,6 @@ export const FeesChart = ({ dataSets }) => {
   dataSets.forEach((element) => {
     activeStateInitial[element.name] = [...element.data];
   });
-  console.log(activeStateInitial);
 
   const [activeData, setActiveData] = useState(activeStateInitial);
 
@@ -34,6 +33,7 @@ export const FeesChart = ({ dataSets }) => {
     chart: {
       zoomType: "x",
       styledMode: true,
+      type: "column",
     },
     credits: {
       enabled: false,
@@ -54,30 +54,20 @@ export const FeesChart = ({ dataSets }) => {
         showInLegend: Boolean(activeData.revenue.length !== 0),
       },
     ],
-    // plotOptions: {
-    //   series: {
-    //     showEmpty: false, // hide series if there is no data
-    //     showInLegend: true, // show series in legend
-    //   },
-    // },
+
     xAxis: {
       type: "datetime",
     },
-    yAxis: {},
-    // tooltip: {
-    //   formatter: function () {
-    //     return (
-    //       "X value: " +
-    //       this.x +
-    //       "<br>" + // Add the x value to the tooltip
-    //       "Y value: " +
-    //       this.y +
-    //       "<br>" + // Add the y value to the tooltip
-    //       "Series name: " +
-    //       this.series.name
-    //     ); // Add the series name to the tooltip
-    //   },
-    // },
+    yAxis: {
+      title: {
+        text: "Amount in usd",
+      },
+    },
+    plotOptions: {
+      column: {
+        stacking: "normal",
+      },
+    },
   };
 
   const handleChangeTimeFrame = (timeFrame) => {

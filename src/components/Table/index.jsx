@@ -11,7 +11,8 @@ export const Table = ({ tableInstance, linkTo, feeStats }) => {
 
   const handleClick = (name) => {
     const nameSlug = slug(name);
-    navigate(`${linkTo}/${nameSlug}`, { state: { protocol: nameSlug, feeStats: feeStats } });
+    const feeStat = feeStats.find((item) => slug(item.name) === nameSlug);
+    navigate(`${linkTo}/${nameSlug}`, { state: { protocol: nameSlug, feeStats: feeStat } });
   };
 
   return (

@@ -2,10 +2,13 @@ import styles from "./TimeFrameSelector.module.scss";
 
 const Item = ({ isActive, children, onClick }) => {
   return (
-    <li
-      onClick={onClick}
-      className={`${styles.timeFrame} ${isActive ? styles["timeFrame--active"] : ""}`}>
-      {children}
+    <li>
+      <button
+        onClick={onClick}
+        className={`${styles.timeFrame} ${isActive ? styles["timeFrame--active"] : ""}`}>
+        {" "}
+        {children}
+      </button>
     </li>
   );
 };
