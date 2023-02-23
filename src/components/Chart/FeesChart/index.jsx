@@ -7,8 +7,8 @@ import { TIMEFRAMES, TIMEFRAMES_DISPLAY_LONG } from "../../../constants/timefram
 import { useState, useEffect } from "react";
 import { groupDatesByPeriod } from "../../../utils/helpers";
 import styles from "../chart.scss";
-import { ColumnSizing } from "@tanstack/react-table";
 
+//refactor
 export const FeesChart = ({ dataSets }) => {
   const [dataFees, dataRevenue] = dataSets;
   const [selectedTimeFrame, setSelectedTimeFrame] = useState(TIMEFRAMES.day);

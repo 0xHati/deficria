@@ -1,12 +1,9 @@
-import { FEE_DATA } from "../../constants/api";
 import { FeesTable } from "../Table/FeesTable";
-import { useFetcher } from "../../hooks/useFetcher";
 import styles from "./FeeLeaderBoard.module.scss";
 import { useState } from "react";
 import { TIMEFRAMES } from "../../constants/timeframes";
 import { TimeFrameSelector } from "../TimeFrameSelector/TimeFrameSelector";
 import { Suspense } from "react";
-import { startTransition } from "react";
 import { TIMEFRAMES_DISPLAY_SHORT } from "../../constants/timeframes";
 import { useFees } from "../../hooks/useFees";
 import { calculateFeeStats } from "../../utils/helpers";

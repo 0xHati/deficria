@@ -2,6 +2,7 @@ import { useReactTable, getCoreRowModel, getSortedRowModel, getPaginationRowMode
 import { Table } from "..";
 import { useState, useEffect, Suspense } from "react";
 import { getColumns } from "./Columns";
+import Card from "../../Card";
 
 /*
 The table can be expanded with all the data showing next to each other or collapsed with the option to toggle fees
@@ -54,10 +55,12 @@ export const FeesTable = ({ data, isSimplyfied, timeFrame, feeStats }) => {
   });
 
   return (
-    <Table
-      tableInstance={tableInstance}
-      linkTo={"/fees"}
-      feeStats={feeStats}
-    />
+    <Card>
+      <Table
+        tableInstance={tableInstance}
+        linkTo={"/fees"}
+        feeStats={feeStats}
+      />
+    </Card>
   );
 };
