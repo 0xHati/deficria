@@ -4,10 +4,26 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { slug } from "../../utils/helpers";
 import { styleNumber } from "../../utils/helpers";
+import { useWindowVirtualizer, defaultRangeExtractor } from "@tanstack/react-virtual";
+import { useRef, useCallback, useState, useEffect } from "react";
 
 export const Table = ({ tableInstance, linkTo, feeStats }) => {
   const { getRowModel, getHeaderGroups } = tableInstance;
   const navigate = useNavigate();
+
+  const { rows } = getRowModel();
+
+  const rowVirtualizer = useWindowVirtualizer({
+    count: rows.length,
+    overscan: 20,
+    estimateSize: () => 40,
+  });
+
+  const virtualItems = rowVirtualizer.getVirtualItems();
+
+  const paddingTop = virtualItems.length > 0 ? virtualItems?.[0]?.start || 0 : 0;
+  console.log(paddingTop);
+  const paddingBottom = virtualItems.length > 0 ? rowVirtualizer.getTotalSize() - (virtualItems?.[virtualItems.length - 1]?.end || 0) : 0;
 
   const handleClick = (name) => {
     const nameSlug = slug(name);
@@ -23,8 +39,10 @@ export const Table = ({ tableInstance, linkTo, feeStats }) => {
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 const value = flexRender(header.column.columnDef.header, header.getContext());
-                return (
-                  <th key={header.id}>
+                return header.isPlaceholder ? null : (
+                  <th
+                    key={header.id}
+                    style={{ width: header.getSize() }}>
                     {header.isPlaceholder ? null : (
                       <>
                         {header.column.getCanSort() ? (
@@ -46,23 +64,37 @@ export const Table = ({ tableInstance, linkTo, feeStats }) => {
           ))}
         </thead>
         <tbody>
-          {getRowModel().rows.map((row) => (
-            <tr
-              key={row.id}
-              onClick={handleClick.bind(null, row.original.name)}>
-              {row.getVisibleCells().map((cell) => {
-                const meta = cell.column.columnDef?.meta;
-
-                return (
-                  <td
-                    key={cell.id}
-                    className={meta?.color ? styleNumber(cell.getValue()) : ""}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                );
-              })}
+          {paddingTop > 0 && (
+            <tr>
+              <td style={{ height: `${paddingTop}px` }} />
             </tr>
-          ))}
+          )}
+          {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+            const row = rows[virtualRow.index];
+            return (
+              <tr
+                key={row.id}
+                onClick={handleClick.bind(null, row.original.name)}>
+                {row.getVisibleCells().map((cell) => {
+                  const meta = cell.column.columnDef?.meta;
+
+                  return (
+                    <td
+                      key={cell.id}
+                      className={meta?.color ? styleNumber(cell.getValue()) : ""}
+                      style={{ width: cell.column.getSize() }}>
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </td>
+                  );
+                })}
+              </tr>
+            );
+          })}
+          {paddingBottom > 0 && (
+            <tr>
+              <td style={{ height: `${paddingBottom}px` }} />
+            </tr>
+          )}
         </tbody>
       </table>
     </div>

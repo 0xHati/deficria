@@ -9,7 +9,7 @@
 
   & table {
     border-collapse: collapse;
-    table-layout: auto;
+    table-layout: fixed;
 
     @include media(">phone") {
       // table-layout: fixed;

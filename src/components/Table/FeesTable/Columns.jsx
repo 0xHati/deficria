@@ -17,10 +17,12 @@ export const getColumns = (isSimplyfied) => {
           />
         );
       },
+      size: 150,
     },
     {
       header: "Category",
       accessorKey: "category",
+      size: 75,
     },
     {
       header: "1d change",
@@ -29,16 +31,25 @@ export const getColumns = (isSimplyfied) => {
       meta: {
         color: true,
       },
+      size: 100,
     },
     {
       header: "7d change",
       accessorKey: "change_7d",
       cell: ({ getValue }) => (getValue() ? getValue() + "%" : "-"),
+      meta: {
+        color: true,
+      },
+      size: 100,
     },
     {
       header: "1m change",
       accessorKey: "change_1m",
       cell: ({ getValue }) => (getValue() ? getValue() + "%" : "-"),
+      meta: {
+        color: true,
+      },
+      size: 100,
     },
     {
       header: isSimplyfied ? "Fees" : "24h fees",
@@ -46,21 +57,25 @@ export const getColumns = (isSimplyfied) => {
       cell: ({ getValue }) => {
         return getValue() ? formatNumberToLocale(getValue()) : "-";
       },
+      size: 150,
     },
     {
       header: isSimplyfied ? "Fees" : "7d fees",
       accessorKey: "total7d",
       cell: ({ getValue }) => (getValue() ? formatNumberToLocale(getValue()) : "-"),
+      size: 150,
     },
     {
       header: isSimplyfied ? "Fees" : "30d fees",
       accessorKey: "total30d",
       cell: ({ getValue }) => (getValue() ? formatNumberToLocale(getValue()) : "-"),
+      size: 150,
     },
     {
       header: isSimplyfied ? "Fees" : "Total Fees",
       accessorKey: "totalAllTime",
       cell: ({ getValue }) => (getValue() ? formatNumberToLocale(getValue()) : "-"),
+      size: 150,
     },
   ];
 };

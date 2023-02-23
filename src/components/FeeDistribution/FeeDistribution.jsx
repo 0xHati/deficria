@@ -1,17 +1,20 @@
 import FeesPieChart from "../Chart/FeesPieChart/FeesPieChart";
 import Card from "../Card";
 import { TimeFrameSelectorCompact } from "../TimeFrameSelector/TimeFrameSelector";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const FeeDistribution = ({ feeStats }) => {
-  const [selectedTimeFrame, setSelectedTimeFrame] = useState("day");
-
   const prepareData = (timeFrame) => {
     return feeStats.map((protocol) => {
       return { name: protocol.name, y: protocol[timeFrame].percentage * 100 };
     });
   };
-  const data = prepareData(selectedTimeFrame);
+  const [selectedTimeFrame, setSelectedTimeFrame] = useState("day");
+  const [chartData, setChartData] = useState(prepareData(selectedTimeFrame));
+
+  // useEffect(() => {
+  //   setChartData(prepareData(selectedTimeFrame));
+  // }, [selectedTimeFrame]);
 
   return (
     <Card>
@@ -19,7 +22,7 @@ const FeeDistribution = ({ feeStats }) => {
         selected={selectedTimeFrame}
         setSelected={setSelectedTimeFrame}
       />
-      <FeesPieChart data={data} />
+      <FeesPieChart data={chartData} />
     </Card>
   );
 };
