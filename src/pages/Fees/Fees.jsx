@@ -5,6 +5,8 @@ import { calculateFeeStats } from "../../utils/helpers";
 import FeeDistribution from "../../components/FeeDistribution/FeeDistribution";
 import { FEEDATA_PROTOCOL } from "../../constants/api";
 import { useFees } from "../../hooks/useFees";
+import styles from "./Fees.module.scss";
+import FeeHistoryChart from "../../components/Chart/Fees/FeeHistoryChart";
 
 const Fees = () => {
   const { data, isLoading, isError } = useFees();
@@ -12,10 +14,17 @@ const Fees = () => {
   const feeStats = calculateFeeStats(data);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <>
       {!isLoading && !isError && (
         <>
-          <FeeDistribution feeStats={feeStats} />
+          <div className={styles.charts}>
+            <FeeDistribution
+              feeStats={feeStats}
+              className={styles.feeDistribution}
+            />
+            <FeeHistoryChart data={data.totalDataChart} />
+          </div>
+
           <FeesTable
             isSimplyfied={false}
             data={data.protocols}
@@ -24,7 +33,7 @@ const Fees = () => {
           />
         </>
       )}
-    </Suspense>
+    </>
   );
 };
 

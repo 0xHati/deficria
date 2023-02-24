@@ -22,7 +22,7 @@ export const getColumns = (isSimplyfied) => {
     {
       header: "Category",
       accessorKey: "category",
-      size: 75,
+      size: 100,
     },
     {
       header: "1d change",

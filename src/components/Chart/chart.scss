@@ -1,12 +1,5 @@
 // @import "https://code.highcharts.com/css/highcharts.css";
 
-$background-color: var(--color-secondary-dark) !default;
-$neutral-color-80: var(--color-text-primary);
-$neutral-color-60: var(--color-text-primary);
-$neutral-color-3: var(--color-primary-dark);
-
-$colors: var(--color-primary) var(--color-tertiary) #90ed7d #f7a35c #8085e9 #f15c80 #e4d354 #2b908f #f45b5b #91e8e1 !default;
-
 .wrapper {
   width: 100%;
 }
@@ -18,9 +11,3 @@ $colors: var(--color-primary) var(--color-tertiary) #90ed7d #f7a35c #8085e9 #f15
   //   // fill: transparent;
   // }
 }
-
-.highcharts-grid-line {
-  display: none;
-}
-
-@import "../../styles/highcharts.scss";

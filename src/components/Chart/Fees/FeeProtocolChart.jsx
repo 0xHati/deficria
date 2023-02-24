@@ -1,15 +1,14 @@
 import HighchartsReact from "highcharts-react-official";
-import Highcharts from "highcharts";
+import Highcharts from "../highChartsTheme";
 
 import Card from "../../Card";
 import { TimeFrameSelector } from "../../TimeFrameSelector/TimeFrameSelector";
 import { TIMEFRAMES, TIMEFRAMES_DISPLAY_LONG } from "../../../constants/timeframes";
 import { useState, useEffect } from "react";
 import { groupDatesByPeriod } from "../../../utils/helpers";
-import styles from "../chart.scss";
 
-//refactor
-export const FeesChart = ({ dataSets }) => {
+//TODO: refactor also a bug where sometimes chart doesn't go back to day data.
+export const FeeProtocolChart = ({ dataSets }) => {
   const [dataFees, dataRevenue] = dataSets;
   const [selectedTimeFrame, setSelectedTimeFrame] = useState(TIMEFRAMES.day);
   const [dataFeesDay, setDataFeesDay] = useState(dataFees.data);
@@ -32,13 +31,8 @@ export const FeesChart = ({ dataSets }) => {
   const options = {
     chart: {
       zoomType: "x",
-      styledMode: true,
       type: "column",
     },
-    credits: {
-      enabled: false,
-    },
-
     title: {
       text: "",
     },

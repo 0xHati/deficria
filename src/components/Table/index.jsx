@@ -22,7 +22,6 @@ export const Table = ({ tableInstance, linkTo, feeStats }) => {
   const virtualItems = rowVirtualizer.getVirtualItems();
 
   const paddingTop = virtualItems.length > 0 ? virtualItems?.[0]?.start || 0 : 0;
-  console.log(paddingTop);
   const paddingBottom = virtualItems.length > 0 ? rowVirtualizer.getTotalSize() - (virtualItems?.[virtualItems.length - 1]?.end || 0) : 0;
 
   const handleClick = (name) => {

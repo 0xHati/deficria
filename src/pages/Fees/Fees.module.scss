@@ -1,0 +1,11 @@
+.feeDistribution {
+  @extend .card !optional;
+}
+
+.feeDistribution {
+  width: 50%;
+}
+
+.charts {
+  display: flex;
+}

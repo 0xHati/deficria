@@ -6,6 +6,6 @@ export const FEEDATA_PROTOCOL = {
 
 export const FEE_DATA = {
   key: "FEE_DATA",
-  endpoint: "https://api.llama.fi/overview/fees?excludeTotalDataChart=true&excludeTotalDataChartBreakdown=true&dataType=dailyFees",
+  endpoint: "https://api.llama.fi/overview/fees?excludeTotalDataChart=false&excludeTotalDataChartBreakdown=true&dataType=dailyFees",
 };
 // export const FEEDATA_PROTOCOL = (protocol, dataType = "dailyFees") => `https://api.llama.fi/summary/fees/${protocol}?dataType=${dataType}`;
