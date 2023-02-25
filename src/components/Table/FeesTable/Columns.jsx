@@ -1,8 +1,7 @@
-import styles from "../Table.module.scss";
 import { formatNumberToLocale } from "../../../utils/helpers";
 import { LogoName } from "../LogoName";
 
-export const getColumns = (isSimplyfied) => {
+export const getColumns = (isExpanded) => {
   return [
     {
       header: "Name",
@@ -52,7 +51,7 @@ export const getColumns = (isSimplyfied) => {
       size: 100,
     },
     {
-      header: isSimplyfied ? "Fees" : "24h fees",
+      header: isExpanded ? "Fees" : "24h fees",
       accessorKey: "total24h",
       cell: ({ getValue }) => {
         return getValue() ? formatNumberToLocale(getValue()) : "-";
@@ -60,19 +59,19 @@ export const getColumns = (isSimplyfied) => {
       size: 150,
     },
     {
-      header: isSimplyfied ? "Fees" : "7d fees",
+      header: isExpanded ? "Fees" : "7d fees",
       accessorKey: "total7d",
       cell: ({ getValue }) => (getValue() ? formatNumberToLocale(getValue()) : "-"),
       size: 150,
     },
     {
-      header: isSimplyfied ? "Fees" : "30d fees",
+      header: isExpanded ? "Fees" : "30d fees",
       accessorKey: "total30d",
       cell: ({ getValue }) => (getValue() ? formatNumberToLocale(getValue()) : "-"),
       size: 150,
     },
     {
-      header: isSimplyfied ? "Fees" : "Total Fees",
+      header: isExpanded ? "Fees" : "Total Fees",
       accessorKey: "totalAllTime",
       cell: ({ getValue }) => (getValue() ? formatNumberToLocale(getValue()) : "-"),
       size: 150,

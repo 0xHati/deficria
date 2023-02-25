@@ -1,51 +1,61 @@
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "../highChartsTheme";
-
 import Card from "../../Card";
 import { TimeFrameSelector } from "../../TimeFrameSelector/TimeFrameSelector";
-import { TIMEFRAMES, TIMEFRAMES_DISPLAY_LONG } from "../../../constants/timeframes";
-import { useState, useEffect } from "react";
+import { TIMEFRAMES_LIMITED } from "../../../constants/timeframes";
+import { useReducer } from "react";
 import { groupDatesByPeriod } from "../../../utils/helpers";
 
-//TODO: refactor also a bug where sometimes chart doesn't go back to day data.
+const reducer = (state, action) => {
+  if (action.type === "total24h") {
+    return {
+      initial: state.initial,
+      fees: state.initial.fees,
+      revenue: state.initial.revenue,
+      timeFrame: "total24h",
+    };
+  }
+  if (action.type === "total7d") {
+    return {
+      initial: state.initial,
+      fees: groupDatesByPeriod(state.initial.fees, "total7d"),
+      revenue: groupDatesByPeriod(state.initial.revenue, "total7d"),
+      timeFrame: "total7d",
+    };
+  }
+  if (action.type === "total30d") {
+    return {
+      initial: state.initial,
+      fees: groupDatesByPeriod(state.initial.fees, "total30d"),
+      revenue: groupDatesByPeriod(state.initial.revenue, "total30d"),
+      timeFrame: "total30d",
+    };
+  }
+};
+
 export const FeeProtocolChart = ({ dataSets }) => {
-  const [dataFees, dataRevenue] = dataSets;
-  const [selectedTimeFrame, setSelectedTimeFrame] = useState(TIMEFRAMES.day);
-  const [dataFeesDay, setDataFeesDay] = useState(dataFees.data);
-  const [dataRevenueDay, setDataRevenueDay] = useState(dataRevenue.data);
-
-  const activeStateInitial = {};
-
-  dataSets.forEach((element) => {
-    activeStateInitial[element.name] = [...element.data];
+  const [state, dispatch] = useReducer(reducer, {
+    initial: dataSets,
+    fees: groupDatesByPeriod([...dataSets.fees], "total7d"),
+    revenue: groupDatesByPeriod([...dataSets.revenue], "total7d"),
+    timeFrame: "total7d",
   });
-
-  const [activeData, setActiveData] = useState(activeStateInitial);
-
-  const timeFrames = {
-    [TIMEFRAMES.day]: TIMEFRAMES_DISPLAY_LONG.day,
-    [TIMEFRAMES.week]: TIMEFRAMES_DISPLAY_LONG.week,
-    [TIMEFRAMES.month]: TIMEFRAMES_DISPLAY_LONG.month,
-  };
 
   const options = {
     chart: {
       zoomType: "x",
       type: "column",
     },
-    title: {
-      text: "",
-    },
     series: [
       {
         name: "Fees",
-        data: activeData.fees,
-        showInLegend: Boolean(activeData.fees.length !== 0),
+        data: state.fees,
+        showInLegend: Boolean(!state.fees.every(([y, value]) => value === 0)),
       },
       {
         name: "Revenue",
-        data: activeData.revenue,
-        showInLegend: Boolean(activeData.revenue.length !== 0),
+        data: state.revenue,
+        showInLegend: Boolean(!state.revenue.every(([y, value]) => value === 0)),
       },
     ],
 
@@ -65,32 +75,16 @@ export const FeeProtocolChart = ({ dataSets }) => {
   };
 
   const handleChangeTimeFrame = (timeFrame) => {
-    if (timeFrame === TIMEFRAMES.day) {
-      setSelectedTimeFrame(TIMEFRAMES.day);
-      setActiveData({ fees: dataFeesDay, revenue: dataRevenueDay });
-    }
-    if (timeFrame === TIMEFRAMES.week) {
-      setSelectedTimeFrame(TIMEFRAMES.week);
-      setActiveData({
-        fees: groupDatesByPeriod(dataFeesDay, TIMEFRAMES.week),
-        revenue: groupDatesByPeriod(dataRevenueDay, TIMEFRAMES.week),
-      });
-    }
-    if (timeFrame === TIMEFRAMES.month) {
-      setSelectedTimeFrame(TIMEFRAMES.month);
-      setActiveData({
-        fees: groupDatesByPeriod(dataFeesDay, TIMEFRAMES.month),
-        revenue: groupDatesByPeriod(dataRevenueDay, TIMEFRAMES.month),
-      });
-    }
+    dispatch({ type: timeFrame });
   };
 
   return (
     <Card>
       <TimeFrameSelector
-        timeFrames={Object.entries(timeFrames)}
-        selectedTimeFrame={selectedTimeFrame}
-        onClick={handleChangeTimeFrame}
+        timeFrames={TIMEFRAMES_LIMITED}
+        timeFrame={state.timeFrame}
+        onSetTimeFrame={handleChangeTimeFrame}
+        displayShort={false}
       />
       <HighchartsReact
         highcharts={Highcharts}

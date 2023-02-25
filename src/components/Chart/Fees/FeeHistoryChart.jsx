@@ -8,25 +8,11 @@ const FeeHistoryChart = ({ data }) => {
     return [new Date(time * 1000).getTime(), value];
   });
 
-  console.log(getOptions());
   const options = {
     chart: {
       zoomType: "x",
       type: "area",
     },
-
-    plotOptions: {
-      series: {
-        fillColor: {
-          linearGradient: [0, 0, 0, 300],
-          stops: [
-            [0, getOptions().colors[0]],
-            [1, color(getOptions().colors[0]).setOpacity(0).get("rgba")],
-          ],
-        },
-      },
-    },
-
     title: {
       text: "Combined Fee History",
     },

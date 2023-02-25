@@ -1,26 +1,19 @@
 import { FeesTable } from "../Table/FeesTable";
 import styles from "./FeeLeaderBoard.module.scss";
 import { useState } from "react";
-import { TIMEFRAMES } from "../../constants/timeframes";
 import { TimeFrameSelector } from "../TimeFrameSelector/TimeFrameSelector";
 import { Suspense } from "react";
-import { TIMEFRAMES_DISPLAY_SHORT } from "../../constants/timeframes";
+import { TIMEFRAMES } from "../../constants/timeframes";
 import { useFees } from "../../hooks/useFees";
 import { calculateFeeStats } from "../../utils/helpers";
 
 export const FeeLeaderBoard = () => {
   const { data } = useFees();
-  const [timeFrame, setTimeFrame] = useState(TIMEFRAMES.day);
+  const [timeFrame, setTimeFrame] = useState("total24h");
   const [feeStats, setFeeStats] = useState(calculateFeeStats(data));
+
   const handleChangeTimeFrame = (timeFrame) => {
     setTimeFrame(timeFrame);
-  };
-
-  const timeFrames = {
-    [TIMEFRAMES.day]: TIMEFRAMES_DISPLAY_SHORT.day,
-    [TIMEFRAMES.week]: TIMEFRAMES_DISPLAY_SHORT.week,
-    [TIMEFRAMES.month]: TIMEFRAMES_DISPLAY_SHORT.month,
-    [TIMEFRAMES.all]: TIMEFRAMES_DISPLAY_SHORT.all,
   };
 
   return (
@@ -29,16 +22,14 @@ export const FeeLeaderBoard = () => {
         <div className={styles["leaderboard-fees__header"]}>
           <h2>Leaderboard Fees</h2>
           <TimeFrameSelector
-            timeFrames={Object.entries(timeFrames)}
+            timeFrames={TIMEFRAMES}
             timeFrame={timeFrame}
-            selectedTimeFrame={timeFrame}
-            onClick={handleChangeTimeFrame}
+            onSetTimeFrame={handleChangeTimeFrame}
           />
         </div>
-
         <FeesTable
           data={data.protocols}
-          isSimplyfied={true}
+          isExpanded={true}
           feeStats={feeStats}
           timeFrame={timeFrame}
         />

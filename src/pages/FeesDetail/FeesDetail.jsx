@@ -10,6 +10,7 @@ const FeesDetail = () => {
   const { state } = useLocation();
   const { protocol, feeStats } = state;
 
+  //TODO: refactor
   const feeQuery = {
     key: FEEDATA_PROTOCOL.key + protocol + "fees",
     url: FEEDATA_PROTOCOL.endpoint,
@@ -29,11 +30,9 @@ const FeesDetail = () => {
 
   const { isLoading: isLoadingFee, isError: isErrorFee, data: dataFee, error: errorFee } = useFetcher(feeQuery);
   const { isLoading: isLoadingRev, isError: isErrorRev, data: dataRev, error: errorRev } = useFetcher(revenueQuery);
-  // datasets[{name: data}]
   const isLoading = isLoadingFee || isLoadingRev;
   const isError = isErrorFee || isErrorRev;
-
-  const dataSets = prepareDataSets({ name: "fees", data: dataFee }, { name: "revenue", data: dataRev });
+  const dataSets = prepareDataSets({ fees: dataFee, revenue: dataRev });
 
   return (
     <div className={styles.wrapper}>
@@ -47,13 +46,12 @@ const FeesDetail = () => {
   );
 };
 
-const prepareDataSets = (...data) => {
-  const dataSets = [];
-  data.forEach((item) => {
-    const transformedData = item.data?.totalDataChart?.map(([date, value]) => [date * 1000, value]);
-    dataSets.push({ ...item, data: transformedData ? transformedData : [] });
+// adjust to js timestamp
+const prepareDataSets = (data) => {
+  Object.entries(data).forEach(([key, value]) => {
+    data[key] = data[key] === undefined ? [] : value.totalDataChart?.map(([date, value]) => [date * 1000, value]);
   });
-  return dataSets;
+  return data;
 };
 
 export default FeesDetail;

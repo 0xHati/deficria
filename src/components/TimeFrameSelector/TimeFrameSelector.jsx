@@ -1,62 +1,34 @@
 import styles from "./TimeFrameSelector.module.scss";
-import { useState } from "react";
+import { TIMEFRAMES_DISPLAY_LONG, TIMEFRAMES_DISPLAY_SHORT } from "../../constants/timeframes";
 
-const Item = ({ isActive, children, onClick }) => {
-  return (
-    <li>
-      <button
-        onClick={onClick}
-        className={`${styles.timeFrame} ${isActive ? styles["timeFrame--active"] : ""}`}>
-        {children}
-      </button>
-    </li>
-  );
-};
-
-export const TimeFrameSelector = ({ timeFrames, selectedTimeFrame, onClick }) => {
-  const isActive = (itemTimeFrame) => itemTimeFrame === selectedTimeFrame;
+export const TimeFrameSelector = ({ timeFrames, timeFrame, onSetTimeFrame, displayShort = true }) => {
+  const isActive = (itemTimeFrame) => itemTimeFrame === timeFrame;
 
   return (
     <ul className={styles.timeFrameSelector}>
-      {timeFrames.map(([key, value]) => {
+      {timeFrames.map((timeFrame) => {
         return (
-          <Item
-            key={key}
-            isActive={isActive(key)}
-            onClick={onClick.bind(null, key)}>
-            {value}
-          </Item>
+          <li key={timeFrame}>
+            <button
+              onClick={() => onSetTimeFrame(timeFrame)}
+              className={`${styles.timeFrame} ${isActive(timeFrame) ? styles["timeFrame--active"] : ""}`}>
+              {displayShort ? TIMEFRAMES_DISPLAY_SHORT[timeFrame] : TIMEFRAMES_DISPLAY_LONG[timeFrame]}
+            </button>
+          </li>
         );
       })}
     </ul>
   );
 };
 
-export const TimeFrameSelectorCompact = ({ selected, setSelected }) => {
-  const timeFrames = {
-    day: "day",
-    week: "week",
-    month: "month",
-  };
-  const handleChangeTimeFrame = () => {
-    const newSelectedTimeFrame = getNextTimeFrame(timeFrames, selected);
-    setSelected(newSelectedTimeFrame);
-  };
-
-  function getNextTimeFrame(timeFrames, currentTimeFrame) {
-    const keys = Object.keys(timeFrames);
-    const currentIndex = keys.indexOf(currentTimeFrame);
-    const nextIndex = (currentIndex + 1) % keys.length;
-    return keys[nextIndex];
-  }
-
+export const TimeFrameSelectorCompact = ({ timeFrame, onSetTimeFrame, className }) => {
   return (
-    <div className={styles["timeframe-compact"]}>
+    <div className={`${styles["timeframe-compact"]} ${className}`}>
       <span>time frame:</span>
       <button
         className={styles["timeframe-button"]}
-        onClick={handleChangeTimeFrame}>
-        {selected}
+        onClick={() => onSetTimeFrame(timeFrame)}>
+        {TIMEFRAMES_DISPLAY_SHORT[timeFrame]}
       </button>
     </div>
   );

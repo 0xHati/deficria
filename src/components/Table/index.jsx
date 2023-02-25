@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { slug } from "../../utils/helpers";
 import { styleNumber } from "../../utils/helpers";
 import { useWindowVirtualizer, defaultRangeExtractor } from "@tanstack/react-virtual";
-import { useRef, useCallback, useState, useEffect } from "react";
 
 export const Table = ({ tableInstance, linkTo, feeStats }) => {
   const { getRowModel, getHeaderGroups } = tableInstance;
@@ -24,6 +23,7 @@ export const Table = ({ tableInstance, linkTo, feeStats }) => {
   const paddingTop = virtualItems.length > 0 ? virtualItems?.[0]?.start || 0 : 0;
   const paddingBottom = virtualItems.length > 0 ? rowVirtualizer.getTotalSize() - (virtualItems?.[virtualItems.length - 1]?.end || 0) : 0;
 
+  //TODO: table can have other info and not feestats, eg tvl table
   const handleClick = (name) => {
     const nameSlug = slug(name);
     const feeStat = feeStats.find((item) => slug(item.name) === nameSlug);

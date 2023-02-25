@@ -70,6 +70,10 @@ Highcharts.theme = {
         },
       },
     },
+    series: {
+      stacking: "normal",
+      borderColor: "none",
+    },
     stacking: "normal",
   },
 };

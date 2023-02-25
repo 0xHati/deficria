@@ -26,9 +26,8 @@ const Fees = () => {
           </div>
 
           <FeesTable
-            isSimplyfied={false}
+            isExpanded={false}
             data={data.protocols}
-            timeFrame={TIMEFRAMES.day}
             feeStats={feeStats}
           />
         </>

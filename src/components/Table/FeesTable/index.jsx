@@ -8,41 +8,47 @@ import Card from "../../Card";
 The table can be expanded with all the data showing next to each other or collapsed with the option to toggle fees
 */
 
-export const FeesTable = ({ data, isSimplyfied, timeFrame, feeStats }) => {
+export const FeesTable = ({ data, isExpanded, feeStats, timeFrame = "total24h" }) => {
+  const columnSorting = [
+    {
+      id: timeFrame,
+      desc: true,
+    },
+  ];
+
   useEffect(() => {
-    setSorting([
-      {
-        id: timeFrame,
-        desc: true,
-      },
-    ]);
+    setSorting(columnSorting);
     setColumnVisibility(
-      isSimplyfied
+      isExpanded
         ? { change_7d: false, change_1m: false, total24h: false, total7d: false, total30d: false, totalAllTime: false, [timeFrame]: true }
         : {}
     );
   }, [timeFrame]);
 
-  const [sorting, setSorting] = useState([
-    {
-      id: timeFrame,
-      desc: true,
-    },
-  ]);
+  const [sorting, setSorting] = useState(columnSorting);
   const [columnVisibility, setColumnVisibility] = useState(
-    isSimplyfied
-      ? { change_7d: false, change_1m: false, total24h: false, total7d: false, total30d: false, totalAllTime: false, [timeFrame]: true }
+    isExpanded
+      ? {
+          change_1d: false,
+          change_7d: false,
+          change_1m: false,
+          total24h: false,
+          total7d: false,
+          total30d: false,
+          totalAllTime: false,
+          [timeFrame]: true,
+        }
       : {}
   );
 
   // since the column is not expanded all column names will be 'fees' and visibility change depending on selection
 
   const tableInstance = useReactTable({
-    columns: getColumns(isSimplyfied),
+    columns: getColumns(isExpanded),
     data,
     state: {
-      columnOrder: isSimplyfied
-        ? ["name", "category", "total24h", "total7d", "total30d", "change_1d"]
+      columnOrder: isExpanded
+        ? ["name", "category", "total24h", "total7d", "total30d", "totalAllTime", "change_1d"]
         : ["name", "category", "total24h", "total7d", "total30d", "totalAllTime", "change_1d", "change_7d", "change_1m"],
       sorting,
       columnVisibility,
@@ -51,7 +57,7 @@ export const FeesTable = ({ data, isSimplyfied, timeFrame, feeStats }) => {
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     disableSortRemove: true,
-    getPaginationRowModel: isSimplyfied ? getPaginationRowModel() : "",
+    getPaginationRowModel: isExpanded ? getPaginationRowModel() : "",
   });
 
   return (

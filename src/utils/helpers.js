@@ -5,10 +5,6 @@ export const formatNumberToLocale = function (number) {
   return number.toLocaleString(navigator.language, { style: "currency", currency: "USD" });
 };
 
-// export const getLogo = function (name) {
-//   return `https://icons.llama.fi/chains/${name}.png`;
-// };
-
 export const slug = (string) => {
   return string
     .split(" ")
@@ -24,7 +20,7 @@ export const styleNumber = (value) => {
 
 // expects and array of arrays [date, value]
 export const groupDatesByWeek = (data) => {
-  const t = data.reduce((acc, [date, value]) => {
+  return data.reduce((acc, [date, value]) => {
     const fullDate = new Date(date);
     const endWeek = endOfWeek(fullDate, { weekStartsOn: 1 });
     const index = acc.findIndex((week) => week[0] === endWeek.getTime());
@@ -39,12 +35,9 @@ export const groupDatesByWeek = (data) => {
 
     return acc;
   }, []);
-  console.log(t);
-  return t;
 };
 
 export const groupDatesByMonth = (data) => {
-  console.log(1);
   if (data.length === 0) return [];
   return data.reduce((acc, [date, value]) => {
     const fullDate = new Date(date);
@@ -63,10 +56,10 @@ export const groupDatesByMonth = (data) => {
 };
 
 export const groupDatesByPeriod = (data, period) => {
-  if (period === TIMEFRAMES.week) {
+  if (period === "total7d") {
     return groupDatesByWeek(data);
   }
-  if (period === TIMEFRAMES.month) {
+  if (period === "total30d") {
     return groupDatesByMonth(data);
   }
 };
@@ -80,19 +73,19 @@ export const calculateFeeStats = (data) => {
   return protocols.map((protocol) => {
     return {
       name: protocol.name,
-      day: {
+      total24h: {
         percentage: protocol.total24h / total24h,
         rank: sorted24h.indexOf(protocol) + 1,
         change: protocol.change_1d,
         fees: protocol.total24h,
       },
-      week: {
+      total7d: {
         percentage: protocol.total7d / total7d,
         rank: sorted7d.indexOf(protocol) + 1,
         change: protocol.change_7d,
         fees: protocol.total7d,
       },
-      month: {
+      total30d: {
         percentage: protocol.total30d / total30d,
         rank: sorted30d.indexOf(protocol) + 1,
         change: protocol.change_1m,
@@ -102,4 +95,10 @@ export const calculateFeeStats = (data) => {
       totalProjects: protocols.length,
     };
   });
+};
+
+export const getNextTimeFrame = (timeFrames, currentTimeFrame) => {
+  const currentIndex = timeFrames.indexOf(currentTimeFrame);
+  const nextIndex = (currentIndex + 1) % timeFrames.length;
+  return timeFrames[nextIndex];
 };
