@@ -20,6 +20,8 @@ export const styleNumber = (value) => {
 
 // expects and array of arrays [date, value]
 export const groupDatesByWeek = (data) => {
+  if (!data) return [];
+
   return data.reduce((acc, [date, value]) => {
     const fullDate = new Date(date);
     const endWeek = endOfWeek(fullDate, { weekStartsOn: 1 });
@@ -38,7 +40,7 @@ export const groupDatesByWeek = (data) => {
 };
 
 export const groupDatesByMonth = (data) => {
-  if (data.length === 0) return [];
+  if (!data) return [];
   return data.reduce((acc, [date, value]) => {
     const fullDate = new Date(date);
     const endMonth = endOfMonth(fullDate);
@@ -56,6 +58,9 @@ export const groupDatesByMonth = (data) => {
 };
 
 export const groupDatesByPeriod = (data, period) => {
+  if (period === "total24h") {
+    return data;
+  }
   if (period === "total7d") {
     return groupDatesByWeek(data);
   }

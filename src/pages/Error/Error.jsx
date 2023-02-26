@@ -6,11 +6,11 @@ const NotFound = () => {
   const error = useRouteError();
   console.log(error);
   return (
-    <>
+    <div className={styles.container}>
       <p>
         {error.status} {error.statusText}
       </p>
-    </>
+    </div>
   );
 };
 

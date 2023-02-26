@@ -2,8 +2,12 @@ import Card from "../../components/Card";
 import styles from "./FeesDetail.module.scss";
 import { formatNumberToLocale, getNextTimeFrame, styleNumber } from "../../utils/helpers";
 import { TimeFrameSelectorCompact } from "../../components/TimeFrameSelector/TimeFrameSelector";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { TIMEFRAMES_LIMITED } from "../../constants/timeframes";
+import { calculateFeeStats } from "../../utils/helpers";
+import { fetchFeeData } from "../../api/defillama";
+import { useQuery } from "react-query";
+import { slug } from "../../utils/helpers";
 
 const Stat = ({ title, value, className }) => {
   return (
@@ -15,8 +19,11 @@ const Stat = ({ title, value, className }) => {
 };
 
 //idea show rank on list
-export const ProtocolFeeInfo = ({ data, feeStats }) => {
+export const ProtocolFeeInfo = ({ data, protocol }) => {
   const [selectedTimeFrame, setSelectedTimeFrame] = useState("total24h");
+  const { data: overallFeeData } = useQuery(["fees"], () => fetchFeeData());
+
+  const feeStats = calculateFeeStats(overallFeeData).find((item) => slug(item.name) === slug(protocol));
 
   const handleChangeTimeFrame = (timeFrame) => {
     const nextTimeFrame = getNextTimeFrame(TIMEFRAMES_LIMITED, timeFrame);
@@ -25,11 +32,16 @@ export const ProtocolFeeInfo = ({ data, feeStats }) => {
 
   return (
     <Card className={styles.card}>
-      <TimeFrameSelectorCompact
-        timeFrame={selectedTimeFrame}
-        onSetTimeFrame={handleChangeTimeFrame}
-        className={styles["timeframe-compact"]}
-      />
+      <div className={styles.top}>
+        <p className={styles.rank}>#{feeStats[selectedTimeFrame].rank}</p>
+
+        <TimeFrameSelectorCompact
+          timeFrame={selectedTimeFrame}
+          onSetTimeFrame={handleChangeTimeFrame}
+          className={styles["timeframe-compact"]}
+        />
+      </div>
+
       <div className={styles["fee-info"]}>
         <p className={styles["fee-info__title"]}>
           <img
@@ -38,9 +50,6 @@ export const ProtocolFeeInfo = ({ data, feeStats }) => {
           />
 
           <span className={styles["fee-info__name"]}>{data.displayName}</span>
-        </p>
-        <p className={`${styles.rank} ${styles["fee-info__stat"]}`}>
-          <span>#{feeStats[selectedTimeFrame].rank}</span>
         </p>
         <div className={styles["fee-info__stats"]}>
           <Stat

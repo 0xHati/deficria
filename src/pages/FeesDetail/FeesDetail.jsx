@@ -1,57 +1,39 @@
 import styles from "./FeesDetail.module.scss";
 import { ProtocolFeeInfo } from "./ProtocolFeeInfo";
-import { useFetcher } from "../../hooks/useFetcher";
-import { FEEDATA_PROTOCOL } from "../../constants/api";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { FeeProtocolChart } from "../../components/Chart/Fees/FeeProtocolChart";
+import { Suspense, useTransition } from "react";
+import { useQuery } from "react-query";
+import { fetchFeeDataProtocol } from "../../api/defillama";
 
-//TODO: add info about average fees, highest fee date, change starting date to 2019
+//TODO: add info about average fees, highest fee date, change starting date to 2019, show total revenue
 const FeesDetail = () => {
-  const { state } = useLocation();
-  const { protocol, feeStats } = state;
+  const { protocol } = useParams();
 
-  //TODO: refactor
-  const feeQuery = {
-    key: FEEDATA_PROTOCOL.key + protocol + "fees",
-    url: FEEDATA_PROTOCOL.endpoint,
-    path: protocol,
-    params: {
-      dataType: "dailyFees",
-    },
-  };
-  const revenueQuery = {
-    key: FEEDATA_PROTOCOL.key + protocol + "rev",
-    url: FEEDATA_PROTOCOL.endpoint,
-    path: protocol,
-    params: {
-      dataType: "dailyRevenue",
-    },
-  };
-
-  const { isLoading: isLoadingFee, isError: isErrorFee, data: dataFee, error: errorFee } = useFetcher(feeQuery);
-  const { isLoading: isLoadingRev, isError: isErrorRev, data: dataRev, error: errorRev } = useFetcher(revenueQuery);
-  const isLoading = isLoadingFee || isLoadingRev;
-  const isError = isErrorFee || isErrorRev;
-  const dataSets = prepareDataSets({ fees: dataFee, revenue: dataRev });
+  const { data: dataFees } = useQuery(["fees", protocol], () => fetchFeeDataProtocol(protocol));
+  const { data: dataRevenue } = useQuery(["revenue", protocol], () => fetchFeeDataProtocol(protocol, { dataType: "dailyRevenue" }));
 
   return (
-    <div className={styles.wrapper}>
-      {!isLoading && !isError && (
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className={styles.wrapper}>
         <ProtocolFeeInfo
-          data={dataFee}
-          feeStats={feeStats}></ProtocolFeeInfo>
-      )}
-      {!isLoading && !isError && <FeeProtocolChart dataSets={dataSets} />}
-    </div>
+          data={dataFees}
+          protocol={protocol}></ProtocolFeeInfo>
+        <FeeProtocolChart dataSets={{ fees: prepareData(dataFees), revenue: prepareData(dataRevenue) }} />
+      </div>
+    </Suspense>
   );
 };
 
-// adjust to js timestamp
-const prepareDataSets = (data) => {
-  Object.entries(data).forEach(([key, value]) => {
-    data[key] = data[key] === undefined ? [] : value.totalDataChart?.map(([date, value]) => [date * 1000, value]);
-  });
-  return data;
+//sometimes there's no data so return empty array instead of 'undefined'
+const prepareData = (data) => {
+  console.log(data);
+
+  return data.totalDataChart
+    ? data.totalDataChart.map(([date, value]) => {
+        return [date * 1000, value];
+      })
+    : [];
 };
 
 export default FeesDetail;

@@ -4,13 +4,12 @@ import { useState } from "react";
 import { TimeFrameSelector } from "../TimeFrameSelector/TimeFrameSelector";
 import { Suspense } from "react";
 import { TIMEFRAMES } from "../../constants/timeframes";
-import { useFees } from "../../hooks/useFees";
-import { calculateFeeStats } from "../../utils/helpers";
+import { useQuery } from "react-query";
+import { fetchFeeData } from "../../api/defillama";
 
 export const FeeLeaderBoard = () => {
-  const { data } = useFees();
+  const { data } = useQuery(["fees"], () => fetchFeeData());
   const [timeFrame, setTimeFrame] = useState("total24h");
-  const [feeStats, setFeeStats] = useState(calculateFeeStats(data));
 
   const handleChangeTimeFrame = (timeFrame) => {
     setTimeFrame(timeFrame);
@@ -30,7 +29,6 @@ export const FeeLeaderBoard = () => {
         <FeesTable
           data={data.protocols}
           isExpanded={true}
-          feeStats={feeStats}
           timeFrame={timeFrame}
         />
       </div>

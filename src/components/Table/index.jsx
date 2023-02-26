@@ -4,10 +4,13 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { slug } from "../../utils/helpers";
 import { styleNumber } from "../../utils/helpers";
-import { useWindowVirtualizer, defaultRangeExtractor } from "@tanstack/react-virtual";
+import { useWindowVirtualizer } from "@tanstack/react-virtual";
+import { useTransition } from "react";
 
-export const Table = ({ tableInstance, linkTo, feeStats }) => {
+export const Table = ({ tableInstance, linkTo }) => {
   const { getRowModel, getHeaderGroups } = tableInstance;
+  const [isPending, startTransition] = useTransition();
+
   const navigate = useNavigate();
 
   const { rows } = getRowModel();
@@ -26,8 +29,7 @@ export const Table = ({ tableInstance, linkTo, feeStats }) => {
   //TODO: table can have other info and not feestats, eg tvl table
   const handleClick = (name) => {
     const nameSlug = slug(name);
-    const feeStat = feeStats.find((item) => slug(item.name) === nameSlug);
-    navigate(`${linkTo}/${nameSlug}`, { state: { protocol: nameSlug, feeStats: feeStat } });
+    startTransition(() => navigate(`${linkTo}/${nameSlug}`, { state: { protocol: nameSlug } }));
   };
 
   return (

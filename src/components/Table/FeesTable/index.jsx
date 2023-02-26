@@ -8,7 +8,7 @@ import Card from "../../Card";
 The table can be expanded with all the data showing next to each other or collapsed with the option to toggle fees
 */
 
-export const FeesTable = ({ data, isExpanded, feeStats, timeFrame = "total24h" }) => {
+export const FeesTable = ({ data, isExpanded, timeFrame = "total24h" }) => {
   const columnSorting = [
     {
       id: timeFrame,
@@ -65,7 +65,6 @@ export const FeesTable = ({ data, isExpanded, feeStats, timeFrame = "total24h" }
       <Table
         tableInstance={tableInstance}
         linkTo={"/fees"}
-        feeStats={feeStats}
       />
     </Card>
   );

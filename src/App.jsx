@@ -6,11 +6,12 @@ import NotFound from "./pages/Error/Error";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Fees from "./pages/Fees/Fees";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Suspense } from "react";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      // suspense: true,
+      suspense: true,
     },
   },
 });
@@ -33,7 +34,11 @@ const router = createBrowserRouter([
           },
           {
             path: "/fees/:protocol",
-            element: <FeesDetail />,
+            element: (
+              // <Suspense fallback={<div>Loading...</div>}>
+              <FeesDetail />
+              // </Suspense>
+            ),
           },
         ],
       },

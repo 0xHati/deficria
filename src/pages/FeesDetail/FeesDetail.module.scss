@@ -1,15 +1,18 @@
 .card {
   width: fit-content;
+  position: relative;
 }
 
-.timeframe-compact {
-  text-align: right;
-}
 .wrapper {
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
 }
 
 .fee-info {
@@ -28,7 +31,6 @@
     font-size: 2.5rem;
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 1rem;
   }
 
@@ -48,11 +50,7 @@
 }
 
 .rank {
-  font-size: 6rem;
-  grid-row: 1/3;
-  grid-column: 1;
-  // align-self: start;
-  align-content: stretch;
+  font-size: 3rem;
 }
 
 .logo {

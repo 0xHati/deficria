@@ -2,13 +2,13 @@ import Card from "../Card";
 import { TimeFrameSelectorCompact } from "../TimeFrameSelector/TimeFrameSelector";
 import { useState } from "react";
 import FeeDistributionChart from "../Chart/Fees/FeeDistributionChart";
-import { getNextTimeFrame } from "../../utils/helpers";
+import { calculateFeeStats, getNextTimeFrame } from "../../utils/helpers";
 import { TIMEFRAMES_LIMITED } from "../../constants/timeframes";
 import styles from "./FeeDistribution.module.scss";
 
-const FeeDistribution = ({ feeStats, ...props }) => {
+const FeeDistribution = ({ feeData, ...props }) => {
   const prepareData = (timeFrame) => {
-    return feeStats.map((protocol) => {
+    return calculateFeeStats(feeData).map((protocol) => {
       return { name: protocol.name, y: protocol[timeFrame].percentage * 100 };
     });
   };

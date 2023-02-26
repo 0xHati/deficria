@@ -23,6 +23,7 @@ Highcharts.theme = {
     style: {
       color: COLORS.TEXT,
     },
+    text: undefined,
   },
   legend: {
     itemStyle: {

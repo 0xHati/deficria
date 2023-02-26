@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 import { Header } from "../../components/Header";
 import styles from "./Layout.scss";
@@ -9,7 +10,9 @@ const Layout = ({ outlet }) => {
     <>
       {/* add other elements such as navigation and footer */}
       <Header />
-      <main>{outlet ? outlet : <Outlet />}</main>
+      <main>
+        <Suspense fallback={null}>{outlet ? outlet : <Outlet />}</Suspense>
+      </main>
     </>
   );
 };
