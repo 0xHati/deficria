@@ -28,7 +28,7 @@ export const FeeLeaderBoard = () => {
         </div>
         <FeesTable
           data={data.protocols}
-          isExpanded={true}
+          isExpanded={false}
           timeFrame={timeFrame}
         />
       </div>

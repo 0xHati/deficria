@@ -1,6 +1,7 @@
 const FEE_DATA = "https://api.llama.fi/overview/fees/";
 const FEE_DATA_PROTOCOL = "https://api.llama.fi/summary/fees/";
 const TVL = "https://api.llama.fi/protocols/";
+const DEX = "https://api.llama.fi/overview/dexs/";
 
 export const fetchData = async (endpoint) => {
   const result = await fetch(endpoint);
@@ -21,4 +22,9 @@ export const fetchFeeDataProtocol = (protocol, params = { dataType: "dailyFees" 
 
 export const fetchTVL = () => {
   return fetchData(TVL);
+};
+
+export const fetchDexVolume = (params = { excludeTotalDataChart: false, excludeTotalDataChartBreakdown: true, dataType: "dailyVolume" }) => {
+  const query = DEX + "?" + new URLSearchParams(params);
+  return fetchData(query);
 };

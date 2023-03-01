@@ -26,7 +26,11 @@ export const Menu = () => {
           className={({ isActive }) => (isActive ? styles.active : "undefined")}>
           TVL
         </NavLink>
-        <NavLink>Volumes</NavLink>
+        <NavLink
+          to="volumes"
+          className={({ isActive }) => (isActive ? styles.active : "undefined")}>
+          Volumes
+        </NavLink>
       </ul>
     </>
   );

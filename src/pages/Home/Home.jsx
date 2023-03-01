@@ -1,9 +1,11 @@
 import { FeeLeaderBoard } from "../../components/FeeLeaderBoard";
 
+import TablesTab from "../../components/TablesTab";
+
 const Home = () => {
   return (
     <>
-      <FeeLeaderBoard />
+      <TablesTab />
     </>
   );
 };

@@ -1,104 +1,85 @@
-import { SortedHeader } from "../HeaderSort";
-import styles from "../Table.module.scss";
 import { formatNumberToLocale } from "../../../utils/helpers";
+import { LogoName } from "../LogoName";
+import { Logos } from "../../Logos";
 
-export const dexColumns = [
-  {
-    Header: (table) => {
-      return (
-        <SortedHeader
-          headerName="Name"
-          isSorted={table.column.isSortedDesc}
-        />
-      );
-    },
-
-    accessor: "name",
-    Cell: ({ value, row, data }) => {
-      const logo = data[row.index].logo;
-
-      return (
-        <span className={styles.info}>
-          <img
-            src={logo}
-            alt={value + " image"}
-            className={styles.logo}
+export const getColumns = (isExpanded) => {
+  return [
+    {
+      header: "Name",
+      accessorKey: "name",
+      cell: ({ getValue, row }) => {
+        const logo = row.original.logo;
+        const value = getValue();
+        return (
+          <LogoName
+            logoSrc={logo}
+            value={value}
           />
-          <span>{value}</span>
-        </span>
-      );
+        );
+      },
+      size: 150,
     },
-  },
-  {
-    Header: (table) => {
-      return (
-        <SortedHeader
-          headerName="1d change"
-          isSorted={table.column.isSortedDesc}
-        />
-      );
+    {
+      header: "Chains",
+      accessorKey: "chains",
+      size: 150,
+      cell: ({ getValue }) => {
+        const chains = getValue();
+        return <Logos protocolNames={chains.split(",")} />;
+      },
     },
-    accessor: "change_1d",
-    Cell: ({ value }) => (value ? value + "%" : "-"),
-  },
-  {
-    Header: (table) => (
-      <SortedHeader
-        headerName="7d change"
-        isSorted={table.column.isSortedDesc}
-      />
-    ),
-    accessor: "change_7d",
-    Cell: ({ value }) => (value ? value + "%" : "-"),
-  },
-  {
-    Header: (table) => (
-      <SortedHeader
-        headerName="1m change"
-        isSorted={table.column.isSortedDesc}
-      />
-    ),
-    accessor: "change_1m",
-    Cell: ({ value }) => (value ? value + "%" : "-"),
-  },
-  {
-    Header: (table) => (
-      <SortedHeader
-        headerName="24h fees"
-        isSorted={table.column.isSortedDesc}
-      />
-    ),
-    accessor: "total24h",
-    Cell: ({ value }) => (value ? formatNumberToLocale(value) : "-"),
-  },
-  {
-    Header: (table) => (
-      <SortedHeader
-        headerName="7d fees"
-        isSorted={table.column.isSortedDesc}
-      />
-    ),
-    accessor: "total7d",
-    Cell: ({ value }) => (value ? formatNumberToLocale(value) : "-"),
-  },
-  {
-    Header: (table) => (
-      <SortedHeader
-        headerName="30d fees"
-        isSorted={table.column.isSortedDesc}
-      />
-    ),
-    accessor: "total30d",
-    Cell: ({ value }) => (value ? formatNumberToLocale(value) : "-"),
-  },
-  {
-    Header: (table) => (
-      <SortedHeader
-        headerName="Total Fees"
-        isSorted={table.column.isSortedDesc}
-      />
-    ),
-    accessor: "totalAllTime",
-    Cell: ({ value }) => (value ? formatNumberToLocale(value) : "-"),
-  },
-];
+    {
+      header: "1d change",
+      accessorKey: "change_1d",
+      cell: ({ getValue }) => (getValue() ? getValue() + "%" : "-"),
+      meta: {
+        color: true,
+      },
+      size: 100,
+    },
+    {
+      header: "7d change",
+      accessorKey: "change_7d",
+      cell: ({ getValue }) => (getValue() ? getValue() + "%" : "-"),
+      meta: {
+        color: true,
+      },
+      size: 100,
+    },
+    {
+      header: "1m change",
+      accessorKey: "change_1m",
+      cell: ({ getValue }) => (getValue() ? getValue() + "%" : "-"),
+      meta: {
+        color: true,
+      },
+      size: 100,
+    },
+    {
+      header: isExpanded ? "24h" : "Volume",
+      accessorKey: "total24h",
+      cell: ({ getValue }) => {
+        return getValue() ? formatNumberToLocale(getValue()) : "-";
+      },
+      size: 150,
+    },
+    {
+      header: isExpanded ? "7d" : "Volume",
+      accessorKey: "total7d",
+      cell: ({ getValue }) => (getValue() ? formatNumberToLocale(getValue()) : "-"),
+      size: 150,
+    },
+    {
+      header: isExpanded ? "30d" : "Volume",
+      accessorKey: "total30d",
+      cell: ({ getValue }) => (getValue() ? formatNumberToLocale(getValue()) : "-"),
+      size: 150,
+    },
+    {
+      header: isExpanded ? "All time" : "Volume",
+      accessorKey: "totalAllTime",
+      cell: ({ getValue }) => (getValue() ? formatNumberToLocale(getValue()) : "-"),
+      size: 150,
+    },
+  ];
+};

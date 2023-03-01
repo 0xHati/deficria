@@ -5,14 +5,15 @@ import {
   useReactTable,
   getFacetedRowModel,
   getFacetedUniqueValues,
+  getPaginationRowModel,
 } from "@tanstack/react-table";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Table } from "..";
-import Card from "../../Card";
 import { columns } from "./columns";
-import Filter from "../../Filter";
 
-export const TotalValueLockedTable = ({ data }) => {
+export const TotalValueLockedTable = ({ data, isExpanded = true }) => {
+  data.forEach((item, index) => (data[index].chains = data[index].chains.toString()));
+
   const columnSorting = [
     {
       id: "tvl",
@@ -23,6 +24,12 @@ export const TotalValueLockedTable = ({ data }) => {
   const [sorting, setSorting] = useState(columnSorting);
   const [columnFilters, setColumnFilters] = useState([]);
   const [globalFilter, setGlobalFilter] = useState("");
+  const [columnVisibility, setColumnVisibility] = useState();
+
+  useEffect(() => {
+    setSorting(columnSorting);
+    setColumnVisibility(!isExpanded ? { change_1h: false, change_1d: true, change_7d: false } : {});
+  }, []);
 
   const tableInstance = useReactTable({
     columns: columns,
@@ -39,6 +46,7 @@ export const TotalValueLockedTable = ({ data }) => {
       sorting,
       globalFilter,
       columnFilters,
+      columnVisibility,
     },
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
@@ -49,6 +57,7 @@ export const TotalValueLockedTable = ({ data }) => {
     getFilteredRowModel: getFilteredRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
+    getPaginationRowModel: !isExpanded ? getPaginationRowModel() : "",
   });
 
   //
@@ -56,16 +65,9 @@ export const TotalValueLockedTable = ({ data }) => {
   // console.log(tableInstance);
 
   return (
-    <Card>
-      <Filter
-        column={tableInstance.getColumn("category")}
-        table={tableInstance}
-      />
-
-      <Table
-        tableInstance={tableInstance}
-        linkTo={"/tvl"}
-      />
-    </Card>
+    <Table
+      tableInstance={tableInstance}
+      linkTo={"/tvl"}
+    />
   );
 };

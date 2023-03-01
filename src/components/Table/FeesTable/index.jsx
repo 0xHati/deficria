@@ -2,46 +2,31 @@ import { useReactTable, getCoreRowModel, getSortedRowModel, getPaginationRowMode
 import { Table } from "..";
 import { useState, useEffect } from "react";
 import { getColumns } from "./columns";
-import Card from "../../Card";
 
 /*
 The table can be expanded with all the data showing next to each other or collapsed with the option to toggle fees
 */
 
-export const FeesTable = ({ data, isExpanded, timeFrame = "total24h" }) => {
+export const FeesTable = ({ data, isExpanded = true, timeFrame = "total24h" }) => {
   const columnSorting = [
     {
       id: timeFrame,
       desc: true,
     },
   ];
+  const [sorting, setSorting] = useState(columnSorting);
+  const [columnVisibility, setColumnVisibility] = useState();
+
+  // since the column is not expanded all column names will be 'fees' and visibility change depending on selection
 
   useEffect(() => {
     setSorting(columnSorting);
     setColumnVisibility(
-      isExpanded
+      !isExpanded
         ? { change_7d: false, change_1m: false, total24h: false, total7d: false, total30d: false, totalAllTime: false, [timeFrame]: true }
         : {}
     );
   }, [timeFrame]);
-
-  const [sorting, setSorting] = useState(columnSorting);
-  const [columnVisibility, setColumnVisibility] = useState(
-    isExpanded
-      ? {
-          change_1d: false,
-          change_7d: false,
-          change_1m: false,
-          total24h: false,
-          total7d: false,
-          total30d: false,
-          totalAllTime: false,
-          [timeFrame]: true,
-        }
-      : {}
-  );
-
-  // since the column is not expanded all column names will be 'fees' and visibility change depending on selection
 
   const tableInstance = useReactTable({
     columns: getColumns(isExpanded),
@@ -57,15 +42,13 @@ export const FeesTable = ({ data, isExpanded, timeFrame = "total24h" }) => {
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     disableSortRemove: true,
-    getPaginationRowModel: isExpanded ? getPaginationRowModel() : "",
+    getPaginationRowModel: !isExpanded ? getPaginationRowModel() : "",
   });
 
   return (
-    <Card>
-      <Table
-        tableInstance={tableInstance}
-        linkTo={"/fees"}
-      />
-    </Card>
+    <Table
+      tableInstance={tableInstance}
+      linkTo={"/fees"}
+    />
   );
 };

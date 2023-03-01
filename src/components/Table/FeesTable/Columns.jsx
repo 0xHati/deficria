@@ -51,7 +51,7 @@ export const getColumns = (isExpanded) => {
       size: 100,
     },
     {
-      header: isExpanded ? "Fees" : "24h fees",
+      header: isExpanded ? "24h fees" : "Fees",
       accessorKey: "total24h",
       cell: ({ getValue }) => {
         return getValue() ? formatNumberToLocale(getValue()) : "-";
@@ -59,19 +59,19 @@ export const getColumns = (isExpanded) => {
       size: 150,
     },
     {
-      header: isExpanded ? "Fees" : "7d fees",
+      header: isExpanded ? "7d fees" : "Fees",
       accessorKey: "total7d",
       cell: ({ getValue }) => (getValue() ? formatNumberToLocale(getValue()) : "-"),
       size: 150,
     },
     {
-      header: isExpanded ? "Fees" : "30d fees",
+      header: isExpanded ? "30d fees" : "Fees",
       accessorKey: "total30d",
       cell: ({ getValue }) => (getValue() ? formatNumberToLocale(getValue()) : "-"),
       size: 150,
     },
     {
-      header: isExpanded ? "Fees" : "Total Fees",
+      header: isExpanded ? "Total Fees" : "Fees",
       accessorKey: "totalAllTime",
       cell: ({ getValue }) => (getValue() ? formatNumberToLocale(getValue()) : "-"),
       size: 150,
