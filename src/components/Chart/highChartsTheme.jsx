@@ -3,11 +3,11 @@
 import Highcharts from "highcharts";
 
 const COLORS = {
-  BG: "#162725",
+  BG: "#12182b",
   TEXT: "#d8e4ff",
   GRID: "#aebbc11a",
   TOOLTIP_BG: "#6b818c",
-  SERIES: ["#e0cf15", "#72902b", "#f45b5b", "#91e8e1"],
+  SERIES: ["#e0be00", "#72902b", "#1ecb2a", "#0bcdbd"],
 };
 
 Highcharts.theme = {

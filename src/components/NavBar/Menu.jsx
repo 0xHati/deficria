@@ -7,28 +7,28 @@ export const Menu = () => {
       <ul className={styles.menu}>
         <NavLink
           to="/"
-          className={({ isActive }) => (isActive ? styles.active : "undefined")}>
+          className={({ isActive }) => (isActive ? styles.active : "")}>
           Home
         </NavLink>
         <NavLink
           to="protocols"
-          className={({ isActive }) => (isActive ? styles.active : "undefined")}>
+          className={({ isActive }) => (isActive ? styles.active : "")}>
           Protocols
         </NavLink>
         <NavLink
           to="fees"
-          className={({ isActive }) => (isActive ? styles.active : "undefined")}>
+          className={({ isActive }) => (isActive ? styles.active : "")}>
           Fees
         </NavLink>
 
         <NavLink
           to="tvl"
-          className={({ isActive }) => (isActive ? styles.active : "undefined")}>
+          className={({ isActive }) => (isActive ? styles.active : "")}>
           TVL
         </NavLink>
         <NavLink
           to="volumes"
-          className={({ isActive }) => (isActive ? styles.active : "undefined")}>
+          className={({ isActive }) => (isActive ? styles.active : "")}>
           Volumes
         </NavLink>
       </ul>

@@ -45,13 +45,25 @@
 
   & a {
     color: var(--color-text-primary-transparent);
+    padding: 0.5rem 2rem;
+
+    border-radius: var(--border-radius);
+    border: 1px solid transparent;
+    position: relative;
     @include media(">phone") {
       margin: 1rem 1rem;
       font-size: 1.8rem;
     }
+
+    &:hover {
+      color: #e0ff4f;
+    }
   }
 
   & a.active {
-    color: var(--color-text-primary);
+    color: white;
+    background-color: #dfff4f00;
+    border: 2px solid #e0ff4f;
+    border-radius: var(--border-radius);
   }
 }

@@ -26,6 +26,46 @@ Variables
   --divider: 1px solid var(--color-grey-light);
 
   --border-radius: 1.5rem;
+
+  --lime1: #e5ff70;
+  --lime2: #ddff47;
+  --lime3: #d0ff00;
+  --lime4: #b7e000;
+  --lime5: #96b800;
+  --lime6: #758f00;
+  --lime7: #536600;
+  --lime8: #323d00;
+  --lime9: #212900;
+
+  --green1: #0aff50;
+  --green2: #00ce3c;
+  --green3: #00b834;
+  --green4: #008f28;
+  --green5: #00661d;
+  --green6: #00290c;
+
+  --blue1: #a2bee2;
+  --blue2: #739dd3;
+  --blue3: #457cc4;
+  --blue4: #315f9b;
+  --blue5: #22426d;
+  --blue6: #182f4e;
+  --blue7: #1d395d;
+  --blue8: #12182b;
+  --blue9: #0b1523;
+
+  --slate1: hsl(206, 30%, 98.8%);
+  --slate2: hsl(210, 16.7%, 97.6%);
+  --slate3: hsl(209, 13.3%, 95.3%);
+  --slate4: hsl(209, 12.2%, 93.2%);
+  --slate5: hsl(208, 11.7%, 91.1%);
+  --slate6: hsl(208, 11.3%, 88.9%);
+  --slate7: hsl(207, 11.1%, 85.9%);
+  --slate8: hsl(205, 10.7%, 78%);
+  --slate9: hsl(206, 6%, 56.1%);
+  --slate10: hsl(206, 5.8%, 52.3%);
+  --slate11: hsl(206, 6%, 43.5%);
+  --slate12: hsl(206, 24%, 9%);
 }
 
 * {
@@ -50,7 +90,19 @@ html {
 }
 
 body {
-  background: radial-gradient(var(--color-secondary), var(--color-primary-dark));
+  // background: radial-gradient(var(--color-secondary), var(--color-primary-dark));
+  background: radial-gradient(circle farthest-corner at 12.3% 19.3%, var(--blue9) 0%, var(--blue9) 50.2%);
+  // background: radial-gradient(circle farthest-corner at 10% 20%, #171d30 0%, #36298e 90%);
+  // background-image: radial-gradient(circle 621px at 10% 20%, #273153 13.4%, #14192a 90%);
+  // background-image: radial-gradient(circle 800px at 10% 50%, #1d2f6f 13.4%, #14192a 90%);
+  // background-image: radial-gradient(circle 800px at 10% 50%, #1d2f6f 13.4%, #14192a 90%);
+  // background-image: radial-gradient(circle 600px at 10% 20%, var(--lime3) 40%, var(--blue9) 90%);
+  background-size: 100%;
+
+  // #111b41 #E0FF4F
+  background-repeat: no-repeat;
+  // background-size: 50% 100%;
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-weight: 400;
   color: var(--color-text-primary);
@@ -94,3 +146,5 @@ button {
     padding: 0 20rem;
   }
 }
+// background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(14, 174, 87, 1) 0%, rgba(12, 116, 117, 1) 90%);
+// background-image: linear-gradient(112.1deg, rgba(32, 38, 57, 1) 11.4%, rgba(63, 76, 119, 1) 70.2%);
