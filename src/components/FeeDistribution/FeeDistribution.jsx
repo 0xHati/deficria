@@ -1,7 +1,7 @@
 import Card from "../Card";
 import { TimeFrameSelectorCompact } from "../TimeFrameSelector/TimeFrameSelector";
 import { useState } from "react";
-import FeeDistributionChart from "../Chart/Fees/FeeDistributionChart";
+import DistributionChart from "../Chart/DistributionChart";
 import { calculateFeeStats, getNextTimeFrame } from "../../utils/helpers";
 import { TIMEFRAMES_LIMITED } from "../../constants/timeframes";
 import styles from "./FeeDistribution.module.scss";
@@ -28,7 +28,10 @@ const FeeDistribution = ({ feeData, ...props }) => {
         onSetTimeFrame={handleChangeTimeFrame}
         className={styles["timeframe-compact"]}
       />
-      <FeeDistributionChart data={chartData} />
+      <DistributionChart
+        data={chartData}
+        title={"Fee Distribution"}
+      />
     </Card>
   );
 };

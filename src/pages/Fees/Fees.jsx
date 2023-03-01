@@ -3,7 +3,6 @@ import FeeDistribution from "../../components/FeeDistribution/FeeDistribution";
 import styles from "./Fees.module.scss";
 import FeeHistoryChart from "../../components/Chart/Fees/FeeHistoryChart";
 import { useQuery } from "react-query";
-import { Suspense } from "react";
 import { fetchFeeData } from "../../api/defillama";
 
 const Fees = () => {

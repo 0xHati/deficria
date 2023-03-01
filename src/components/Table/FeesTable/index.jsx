@@ -1,7 +1,7 @@
 import { useReactTable, getCoreRowModel, getSortedRowModel, getPaginationRowModel } from "@tanstack/react-table";
 import { Table } from "..";
-import { useState, useEffect, Suspense } from "react";
-import { getColumns } from "./Columns";
+import { useState, useEffect } from "react";
+import { getColumns } from "./columns";
 import Card from "../../Card";
 
 /*

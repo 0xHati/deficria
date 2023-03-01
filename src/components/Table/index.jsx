@@ -9,7 +9,6 @@ import { useTransition } from "react";
 
 export const Table = ({ tableInstance, linkTo }) => {
   const { getRowModel, getHeaderGroups } = tableInstance;
-  const [isPending, startTransition] = useTransition();
 
   const navigate = useNavigate();
 
@@ -22,14 +21,13 @@ export const Table = ({ tableInstance, linkTo }) => {
   });
 
   const virtualItems = rowVirtualizer.getVirtualItems();
-
   const paddingTop = virtualItems.length > 0 ? virtualItems?.[0]?.start || 0 : 0;
   const paddingBottom = virtualItems.length > 0 ? rowVirtualizer.getTotalSize() - (virtualItems?.[virtualItems.length - 1]?.end || 0) : 0;
 
   //TODO: table can have other info and not feestats, eg tvl table
   const handleClick = (name) => {
     const nameSlug = slug(name);
-    startTransition(() => navigate(`${linkTo}/${nameSlug}`, { state: { protocol: nameSlug } }));
+    navigate(`${linkTo}/${nameSlug}`, { state: { protocol: nameSlug } });
   };
 
   return (

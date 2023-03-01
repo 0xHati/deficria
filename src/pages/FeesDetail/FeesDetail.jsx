@@ -2,7 +2,7 @@ import styles from "./FeesDetail.module.scss";
 import { ProtocolFeeInfo } from "./ProtocolFeeInfo";
 import { useParams } from "react-router-dom";
 import { FeeProtocolChart } from "../../components/Chart/Fees/FeeProtocolChart";
-import { Suspense, useTransition } from "react";
+import { Suspense } from "react";
 import { useQuery } from "react-query";
 import { fetchFeeDataProtocol } from "../../api/defillama";
 
@@ -27,8 +27,6 @@ const FeesDetail = () => {
 
 //sometimes there's no data so return empty array instead of 'undefined'
 const prepareData = (data) => {
-  console.log(data);
-
   return data.totalDataChart
     ? data.totalDataChart.map(([date, value]) => {
         return [date * 1000, value];

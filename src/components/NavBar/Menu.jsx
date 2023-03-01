@@ -21,7 +21,11 @@ export const Menu = () => {
           Fees
         </NavLink>
 
-        <NavLink to="test">TVL</NavLink>
+        <NavLink
+          to="tvl"
+          className={({ isActive }) => (isActive ? styles.active : "undefined")}>
+          TVL
+        </NavLink>
         <NavLink>Volumes</NavLink>
       </ul>
     </>

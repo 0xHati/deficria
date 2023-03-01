@@ -1,6 +1,6 @@
 import HighchartsReact from "highcharts-react-official";
-import Highcharts from "../highChartsTheme";
-import { useEffect, useState, useRef } from "react";
+import Highcharts from "./highChartsTheme";
+import { useEffect, useState } from "react";
 
 const createThreshold = (data, threshold) => {
   const filteredData = data.filter((item) => item.y > threshold);
@@ -11,7 +11,8 @@ const createThreshold = (data, threshold) => {
   return filteredData;
 };
 
-const FeeDistributionChart = ({ data }) => {
+const DistributionChart = ({ data, title }) => {
+  console.log(data);
   const FEES_PIECHART_THRESHOLD = 1;
   const filteredData = createThreshold(data, FEES_PIECHART_THRESHOLD);
 
@@ -20,7 +21,7 @@ const FeeDistributionChart = ({ data }) => {
       type: "pie",
     },
     title: {
-      text: "Fee distribution",
+      text: title,
     },
 
     series: [
@@ -45,4 +46,4 @@ const FeeDistributionChart = ({ data }) => {
   );
 };
 
-export default FeeDistributionChart;
+export default DistributionChart;

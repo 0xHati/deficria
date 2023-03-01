@@ -5,8 +5,9 @@ import FeesDetail from "./pages/FeesDetail/FeesDetail";
 import NotFound from "./pages/Error/Error";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Fees from "./pages/Fees/Fees";
+import TotalValueLocked from "./pages/TotalValueLocked";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { Suspense } from "react";
+import TotalValueLockedDetail from "./pages/TotalValueLockedDetail";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -34,11 +35,15 @@ const router = createBrowserRouter([
           },
           {
             path: "/fees/:protocol",
-            element: (
-              // <Suspense fallback={<div>Loading...</div>}>
-              <FeesDetail />
-              // </Suspense>
-            ),
+            element: <FeesDetail />,
+          },
+          {
+            path: "/tvl",
+            element: <TotalValueLocked />,
+          },
+          {
+            path: "/tvl/:protocol",
+            element: <TotalValueLockedDetail />,
           },
         ],
       },

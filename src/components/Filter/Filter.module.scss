@@ -1,0 +1,39 @@
+.filter {
+  margin-bottom: 1rem;
+  display: flex;
+}
+
+.search {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  border: 1px solid transparent;
+  border-radius: var(--border-radius);
+  font-size: 1.8rem;
+  background-color: white;
+  padding: 1rem 2rem;
+
+  &:focus-within {
+    border-color: var(--color-primary);
+  }
+
+  &__input {
+    outline: none;
+    background-color: transparent;
+    border: none;
+    font-size: 1.6rem;
+
+    &::placeholder {
+      color: currentColor;
+      opacity: 50%;
+    }
+  }
+
+  &__icon {
+    cursor: pointer;
+    position: relative;
+    right: -1rem;
+    color: var(--color-secondary-dark);
+  }
+}

@@ -1,0 +1,35 @@
+.logos {
+  display: flex;
+  align-items: center;
+
+  & > *:not(:first-child) {
+    margin-left: -4px;
+  }
+}
+
+.logo {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: block;
+
+  &__dots {
+    margin-left: 4px !important;
+    margin-right: 4px;
+  }
+
+  &--extra {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    background-color: var(--color-secondary);
+    padding: 3px;
+    font-size: 1.2rem;
+    margin-left: 0 !important;
+    text-align: center;
+  }
+}

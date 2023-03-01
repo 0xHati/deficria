@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 import { Header } from "../../components/Header";
-import styles from "./Layout.scss";
+import styles from "./Layout.module.scss";
 
 // wrapper for everything, add things to be common accross all pages.
 

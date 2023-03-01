@@ -3,8 +3,9 @@ import Highcharts from "../highChartsTheme";
 import Card from "../../Card";
 import { TimeFrameSelector } from "../../TimeFrameSelector/TimeFrameSelector";
 import { TIMEFRAMES_LIMITED } from "../../../constants/timeframes";
-import { useReducer, useState } from "react";
+import { useState } from "react";
 import { groupDatesByPeriod } from "../../../utils/helpers";
+import { time } from "highcharts";
 
 export const FeeProtocolChart = ({ dataSets }) => {
   // need to spread the datasets since we don't want to reference the original since we need it to go back to dates,
@@ -25,6 +26,12 @@ export const FeeProtocolChart = ({ dataSets }) => {
         name: "Revenue",
         data: [...dataSets.revenue],
         showInLegend: Boolean(!dataSets.revenue.every(([y, value]) => value === 0)),
+      },
+      {
+        name: "Moving average fees (90d)",
+        type: "spline",
+        data: calculateSMA(dataSets.fees),
+        showInLegend: true,
       },
     ],
 
@@ -47,13 +54,18 @@ export const FeeProtocolChart = ({ dataSets }) => {
   const [timeFrame, setTimeFrame] = useState("total24h");
 
   const handleChangeTimeFrame = (timeFrame) => {
+    const window = timeFrame === "total24?" ? 90 : timeFrame === "total7d" ? 13 : 3;
+    const feeData = groupDatesByPeriod(dataSets.fees, timeFrame);
     setChartOptions({
       series: [
         {
-          data: groupDatesByPeriod(dataSets.fees, timeFrame),
+          data: feeData,
         },
         {
           data: groupDatesByPeriod(dataSets.revenue, timeFrame),
+        },
+        {
+          data: calculateSMA(feeData, window),
         },
       ],
     });
@@ -74,4 +86,16 @@ export const FeeProtocolChart = ({ dataSets }) => {
       />
     </Card>
   );
+};
+
+const calculateSMA = (data, windowSize = 90) => {
+  const movingAverages = [];
+
+  for (let i = 0; i < data.length; i++) {
+    const window = data.slice(Math.max(0, i - windowSize + 1), i + 1);
+    const sum = window.reduce((acc, curr) => acc + curr[1], 0);
+    const average = sum / windowSize;
+    movingAverages.push([data[i][0], average]);
+  }
+  return movingAverages;
 };

@@ -1,5 +1,4 @@
-import { getISOWeek, endOfWeek, endOfMonth } from "date-fns";
-import { TIMEFRAMES } from "../constants/timeframes";
+import { endOfWeek, endOfMonth } from "date-fns";
 
 export const formatNumberToLocale = function (number) {
   return number.toLocaleString(navigator.language, { style: "currency", currency: "USD" });
