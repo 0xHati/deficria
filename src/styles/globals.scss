@@ -4,7 +4,7 @@ Variables
 
 @use "./include-media.scss" as *;
 :root {
-  --color-text-primary: #d8e4ff;
+  --color-text-primary: #fff;
   --color-text-primary-transparent: rgb(216, 228, 255, 50%);
 
   --color-primary: #31e981;
@@ -26,6 +26,8 @@ Variables
   --divider: 1px solid var(--color-grey-light);
 
   --border-radius: 1.5rem;
+
+  --white: #fff;
 
   --lime1: #e5ff70;
   --lime2: #ddff47;
@@ -137,7 +139,7 @@ button {
   color: var(--color-red);
 }
 
-#root {
+main {
   min-height: 100vh;
   display: flex;
   flex-direction: column;

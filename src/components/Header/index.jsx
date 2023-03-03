@@ -2,10 +2,10 @@ import { NavBar } from "../NavBar";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { AiOutlineClose } from "react-icons/ai";
 import { useState, useRef, useEffect } from "react";
-
 import styles from "./Header.module.scss";
+import { Hero } from "../Hero";
 
-export const Header = () => {
+export const Header = ({ isHome }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const header = useRef(null);

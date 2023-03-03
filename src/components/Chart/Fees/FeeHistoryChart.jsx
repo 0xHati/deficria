@@ -33,12 +33,10 @@ const FeeHistoryChart = ({ data }) => {
     },
   };
   return (
-    <Card>
-      <HighchartsReact
-        highcharts={Highcharts}
-        options={options}
-      />
-    </Card>
+    <HighchartsReact
+      highcharts={Highcharts}
+      options={options}
+    />
   );
 };
 

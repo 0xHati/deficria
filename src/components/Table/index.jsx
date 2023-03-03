@@ -41,7 +41,7 @@ export const Table = ({ tableInstance, linkTo }) => {
                 return header.isPlaceholder ? null : (
                   <th
                     key={header.id}
-                    style={{ width: header.getSize() }}>
+                    style={{ width: header.getSize(), textAlign: header.column.columnDef.meta?.align }}>
                     {header.isPlaceholder ? null : (
                       <>
                         {header.column.getCanSort() ? (

@@ -44,7 +44,7 @@
   }
 
   & a {
-    color: var(--color-text-primary-transparent);
+    color: var(--white);
     padding: 0.5rem 2rem;
 
     border-radius: var(--border-radius);
@@ -61,7 +61,7 @@
   }
 
   & a.active {
-    color: white;
+    color: var(--white);
     background-color: #dfff4f00;
     border: 2px solid #e0ff4f;
     border-radius: var(--border-radius);

@@ -2,6 +2,7 @@ import { useReactTable, getCoreRowModel, getSortedRowModel, getPaginationRowMode
 import { Table } from "..";
 import { useState, useEffect } from "react";
 import { getColumns } from "./columns";
+import Filter from "../../Filter";
 
 /*
 The table can be expanded with all the data showing next to each other or collapsed with the option to toggle fees
@@ -46,9 +47,11 @@ export const FeesTable = ({ data, isExpanded = true, timeFrame = "total24h" }) =
   });
 
   return (
-    <Table
-      tableInstance={tableInstance}
-      linkTo={"/fees"}
-    />
+    <>
+      <Table
+        tableInstance={tableInstance}
+        linkTo={"/fees"}
+      />
+    </>
   );
 };

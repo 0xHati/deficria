@@ -2,12 +2,13 @@
 
 import Highcharts from "highcharts";
 
-const COLORS = {
+export const COLORS = {
   BG: "#12182b",
-  TEXT: "#d8e4ff",
+  TEXT: "#fff",
   GRID: "#aebbc11a",
-  TOOLTIP_BG: "#6b818c",
-  SERIES: ["#e0be00", "#72902b", "#1ecb2a", "#0bcdbd"],
+  TOOLTIP_BG: "#1d395d",
+  PIE: ["#a2bee2", "#739dd3", "#457cc4", "#2962b1", "#09b4f7", "#3521bb", "#0fc9da", "#2f297c", "#141acb", "#880de7"],
+  SERIES: ["#a2bee2", "#22426d", "#739dd3", "#e89907"],
 };
 
 Highcharts.theme = {
@@ -49,6 +50,7 @@ Highcharts.theme = {
         color: COLORS.TEXT,
       },
     },
+
     title: {
       style: {
         color: COLORS.TEXT,
@@ -56,24 +58,44 @@ Highcharts.theme = {
     },
     gridLineColor: COLORS.GRID,
   },
+
   tooltip: {
     style: {
       color: COLORS.TEXT,
+      borderColor: "blue",
     },
-    borderColor: "none",
-    backgroundColor: COLORS.GRID,
+    // borderColor: "none",
+    borderRadius: "10",
+
+    backgroundColor: COLORS.TOOLTIP_BG,
   },
   plotOptions: {
     pie: {
+      colors: COLORS.PIE,
       dataLabels: {
         style: {
           color: COLORS.TEXT,
         },
       },
     },
+
+    area: {
+      lineColor: "#457cc4",
+    },
     series: {
       stacking: "normal",
       borderColor: "none",
+      color: {
+        linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
+        stops: [
+          [0, "transparent"],
+          [1, "#22426d"],
+        ],
+      },
+      marker: {
+        lineColor: "#d0ff00",
+        radius: 6,
+      },
     },
     stacking: "normal",
   },

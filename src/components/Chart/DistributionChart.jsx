@@ -12,7 +12,6 @@ const createThreshold = (data, threshold) => {
 };
 
 const DistributionChart = ({ data, title }) => {
-  console.log(data);
   const FEES_PIECHART_THRESHOLD = 1;
   const filteredData = createThreshold(data, FEES_PIECHART_THRESHOLD);
 

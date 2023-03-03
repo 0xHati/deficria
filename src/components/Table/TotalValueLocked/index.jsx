@@ -28,7 +28,7 @@ export const TotalValueLockedTable = ({ data, isExpanded = true }) => {
 
   useEffect(() => {
     setSorting(columnSorting);
-    setColumnVisibility(!isExpanded ? { change_1h: false, change_1d: true, change_7d: false } : {});
+    setColumnVisibility(!isExpanded ? { change_1h: false, change_1d: true, change_7d: false, chains: false } : {});
   }, []);
 
   const tableInstance = useReactTable({

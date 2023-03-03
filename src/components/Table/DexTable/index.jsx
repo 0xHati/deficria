@@ -24,7 +24,16 @@ export const DexTable = ({ data, isExpanded = true, timeFrame = "total24h" }) =>
     setSorting(columnSorting);
     setColumnVisibility(
       !isExpanded
-        ? { change_7d: false, change_1m: false, total24h: false, total7d: false, total30d: false, totalAllTime: false, [timeFrame]: true }
+        ? {
+            change_7d: false,
+            change_1m: false,
+            chains: false,
+            total24h: false,
+            total7d: false,
+            total30d: false,
+            totalAllTime: false,
+            [timeFrame]: true,
+          }
         : {}
     );
   }, [timeFrame]);

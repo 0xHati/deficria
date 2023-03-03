@@ -1,5 +1,6 @@
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "../highChartsTheme";
+import { COLORS } from "../highChartsTheme";
 import Card from "../../Card";
 import { TimeFrameSelector } from "../../TimeFrameSelector/TimeFrameSelector";
 import { TIMEFRAMES_LIMITED } from "../../../constants/timeframes";
@@ -21,16 +22,20 @@ export const FeeProtocolChart = ({ dataSets }) => {
         name: "Fees",
         data: [...dataSets.fees],
         showInLegend: Boolean(!dataSets.fees.every(([y, value]) => value === 0)),
+        color: Highcharts.theme.colors[0],
       },
       {
         name: "Revenue",
         data: [...dataSets.revenue],
         showInLegend: Boolean(!dataSets.revenue.every(([y, value]) => value === 0)),
+        color: Highcharts.theme.colors[1],
       },
       {
         name: "Moving average fees (90d)",
         type: "spline",
         data: calculateSMA(dataSets.fees),
+        color: Highcharts.theme.colors[3],
+
         showInLegend: true,
       },
     ],

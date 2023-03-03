@@ -32,6 +32,9 @@ export const columns = [
       const chains = getValue();
       return <Logos protocolNames={chains.split(",")} />;
     },
+    meta: {
+      align: "left",
+    },
   },
   {
     header: "TVL",

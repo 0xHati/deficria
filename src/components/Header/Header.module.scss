@@ -3,7 +3,7 @@
 .header {
   display: flex;
   justify-content: space-between;
-  padding: 1.5rem;
+  padding: 1.5rem 10rem;
   position: sticky;
   align-items: center;
   backdrop-filter: blur(5px);
@@ -14,8 +14,8 @@
   width: 100%;
 
   &--sticky {
-    // background-color: #092019;
-    background-color: #092019d8;
+    border-bottom: 1px solid var(--blue5);
+    background-color: #0b15237d;
   }
 }
 

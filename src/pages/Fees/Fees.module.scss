@@ -1,13 +1,16 @@
 .feeDistribution {
-  @extend .card !optional;
+  flex: 1;
 }
 
-.feeDistribution {
-  width: 50%;
+.feeHistory {
+  flex: 1;
 }
 
 .charts {
   display: flex;
+  // justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2rem;
 }
 
 // .wrapper {

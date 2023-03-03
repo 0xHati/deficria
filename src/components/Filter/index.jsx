@@ -8,7 +8,6 @@ import { Checkbox } from "ariakit/checkbox";
 const Filter = ({ column, table }) => {
   //   const values = useMemo(() => Array.from(column.getFacetedUniqueValues(table, "name")), [column.getFacetedUniqueValues()]);
   //   const values = Array.from(column.getFacetedUniqueValues());
-  console.log(column.getFacetedUniqueValues());
 
   const [value, setValue] = useState(table.getState().globalFilter);
   const combobox = useComboboxState({ gutter: 4, sameWidth: true });

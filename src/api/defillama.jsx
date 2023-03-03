@@ -2,6 +2,7 @@ const FEE_DATA = "https://api.llama.fi/overview/fees/";
 const FEE_DATA_PROTOCOL = "https://api.llama.fi/summary/fees/";
 const TVL = "https://api.llama.fi/protocols/";
 const DEX = "https://api.llama.fi/overview/dexs/";
+const TVL_HISTORY = "https://api.llama.fi/v2/historicalChainTvl";
 
 export const fetchData = async (endpoint) => {
   const result = await fetch(endpoint);
@@ -27,4 +28,8 @@ export const fetchTVL = () => {
 export const fetchDexVolume = (params = { excludeTotalDataChart: false, excludeTotalDataChartBreakdown: true, dataType: "dailyVolume" }) => {
   const query = DEX + "?" + new URLSearchParams(params);
   return fetchData(query);
+};
+
+export const fetchTVLHistory = () => {
+  return fetchData(TVL_HISTORY);
 };

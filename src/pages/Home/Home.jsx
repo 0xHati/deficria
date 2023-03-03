@@ -1,9 +1,15 @@
 import { FeeLeaderBoard } from "../../components/FeeLeaderBoard";
+import { Hero } from "../../components/Hero";
 
 import TablesTab from "../../components/TablesTab";
 
 const Home = () => {
-  return <>{<TablesTab />}</>;
+  return (
+    <>
+      <Hero />
+      {<TablesTab />}
+    </>
+  );
 };
 
 export default Home;

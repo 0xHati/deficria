@@ -19,6 +19,10 @@
     white-space: nowrap;
   }
 
+  & thead tr:hover {
+    background-color: initial;
+  }
+
   & thead tr > :first-child {
     position: sticky;
     left: 0;

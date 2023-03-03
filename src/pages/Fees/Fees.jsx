@@ -4,6 +4,7 @@ import styles from "./Fees.module.scss";
 import FeeHistoryChart from "../../components/Chart/Fees/FeeHistoryChart";
 import { useQuery } from "react-query";
 import { fetchFeeData } from "../../api/defillama";
+import Card from "../../components/Card";
 
 const Fees = () => {
   const { data, isLoading, isError } = useQuery(["fees"], () => fetchFeeData(), { suspense: false });
@@ -16,10 +17,13 @@ const Fees = () => {
               feeData={data}
               className={styles.feeDistribution}
             />
-            <FeeHistoryChart data={data.totalDataChart} />
+            <Card className={styles.feeHistory}>
+              <FeeHistoryChart data={data.totalDataChart} />
+            </Card>
           </div>
+
           <FeesTable
-            isExpanded={false}
+            isExpanded={true}
             data={data.protocols}
           />
         </>

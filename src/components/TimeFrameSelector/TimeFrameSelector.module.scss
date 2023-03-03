@@ -20,7 +20,8 @@
     &--active {
       border: 1px solid var(--color-border);
       border-radius: var(--border-radius);
-      background-color: var(--blue3);
+      background-color: var(--blue4);
+
       transition: background-color 0.25s ease-out;
     }
   }

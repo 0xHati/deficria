@@ -27,6 +27,9 @@ export const getColumns = (isExpanded) => {
         const chains = getValue();
         return <Logos protocolNames={chains.split(",")} />;
       },
+      meta: {
+        align: "left",
+      },
     },
     {
       header: "1d change",
