@@ -17,6 +17,16 @@
   & th {
     border-bottom: var(--divider);
     white-space: nowrap;
+    background-color: var(--blue6);
+    color: var(--blue1);
+  }
+
+  & th:first-of-type {
+    border-top-left-radius: var(--border-radius);
+  }
+
+  & th:last-of-type {
+    border-top-right-radius: var(--border-radius);
   }
 
   & thead tr:hover {
@@ -33,6 +43,14 @@
     position: sticky;
     left: 0;
     z-index: 2;
+  }
+
+  & tbody tr:last-of-type td:first-of-type {
+    border-bottom-left-radius: var(--border-radius);
+  }
+
+  & tbody tr:last-of-type td:last-of-type {
+    border-bottom-right-radius: var(--border-radius);
   }
 
   & tr {
@@ -76,4 +94,16 @@
   display: inline-flex;
   gap: 3px;
   align-items: center;
+}
+
+.sortBtn {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  & span {
+    display: inline-flex;
+    align-self: flex-end;
+    color: var(--lime4);
+  }
 }

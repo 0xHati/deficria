@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { slug } from "../../utils/helpers";
 import { styleNumber } from "../../utils/helpers";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
-import { useTransition } from "react";
+import { HiOutlineArrowDown, HiOutlineArrowUp } from "react-icons/hi";
 
 export const Table = ({ tableInstance, linkTo }) => {
   const { getRowModel, getHeaderGroups } = tableInstance;
@@ -38,24 +38,32 @@ export const Table = ({ tableInstance, linkTo }) => {
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 const value = flexRender(header.column.columnDef.header, header.getContext());
+                const canSort = header.column.getCanSort();
+                const sortDir = header.column.getIsSorted();
+                console.log(header.column);
+
+                console.log(sortDir);
                 return header.isPlaceholder ? null : (
                   <th
                     key={header.id}
                     style={{ width: header.getSize(), textAlign: header.column.columnDef.meta?.align }}>
                     {header.isPlaceholder ? null : (
                       <>
-                        {header.column.getCanSort() ? (
+                        {canSort ? (
                           <button
                             onClick={() => header.column.toggleSorting()}
-                            style={{ cursor: "pointer" }}>
+                            className={styles.sortBtn}>
                             {value}
+                            <span className={styles.sortIcon}>
+                              {canSort && sortDir ? sortDir === "asc" ? <HiOutlineArrowUp /> : <HiOutlineArrowDown /> : null}
+                            </span>
                           </button>
                         ) : (
                           value
                         )}
                       </>
                     )}
-                    {/* {header.column.getCanSort() && <SortIcon dir={header.column.getIsSorted()} />} */}
+                    {/* {header.column.getCanSort() && <SortIcon dir={header.column.getIsSorted()} />}  */}
                   </th>
                 );
               })}
