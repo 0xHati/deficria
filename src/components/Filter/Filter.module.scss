@@ -1,6 +1,8 @@
 .filter {
-  margin-bottom: 1rem;
   display: flex;
+  gap: 2rem;
+  margin: 1rem;
+  flex: 1;
 }
 
 .search {
@@ -23,10 +25,15 @@
     background-color: transparent;
     border: none;
     font-size: 1.6rem;
+    display: none;
 
     &::placeholder {
       color: currentColor;
       opacity: 50%;
+    }
+
+    &--active {
+      display: initial;
     }
   }
 
@@ -35,5 +42,79 @@
     position: relative;
     right: -1rem;
     color: var(--color-secondary-dark);
+  }
+}
+
+.searchBtn {
+  background-color: transparent;
+  color: var(--blue5);
+  margin-left: auto;
+
+  & > * {
+    color: var(--color-text-primary);
+  }
+}
+
+.filterBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--color-text-primary);
+  border: 1px solid var(--blue4);
+  border-radius: var(--border-radius-sm);
+  padding: 0.5rem 1rem;
+}
+
+.icons {
+  color: var(--color-text-primary);
+  position: relative;
+  top: 1px;
+  // width: 1.2rem;
+  // height: 1.2rem;
+}
+
+.columns {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1rem;
+  border: 1px solid var(--blue4);
+  overflow-y: auto;
+  // height: 15rem;
+
+  &__column {
+    display: flex;
+    align-items: center;
+  }
+
+  &__column:not(:first-of-type) {
+    padding-top: 1rem;
+  }
+
+  &__checkbox-container {
+    display: flex;
+    align-items: center;
+    margin-right: 2rem;
+  }
+
+  &__checkbox {
+    border-radius: 0.25rem;
+    border-width: 1px;
+    border-color: var(--blue1);
+    background-color: var(--blue5);
+    color: var(--blue1);
+    margin-right: 1rem;
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+
+  &__drag {
+    margin-left: auto;
+    cursor: pointer;
+  }
+
+  &__checkbox:focus-visible,
+  &__checkbox[data-focus-visible] {
+    outline: 2px solid var(--blue1);
+    outline-offset: 2px;
   }
 }

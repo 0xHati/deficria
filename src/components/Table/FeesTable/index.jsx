@@ -15,8 +15,13 @@ export const FeesTable = ({ data, isExpanded = true, timeFrame = "total24h" }) =
       desc: true,
     },
   ];
+
+  const inititalColumnOrder = isExpanded
+    ? ["name", "category", "total24h", "total7d", "total30d", "totalAllTime", "change_1d"]
+    : ["name", "category", "total24h", "total7d", "total30d", "totalAllTime", "change_1d", "change_7d", "change_1m"];
   const [sorting, setSorting] = useState(columnSorting);
   const [columnVisibility, setColumnVisibility] = useState();
+  const [columnOrder, setColumnOrder] = useState(inititalColumnOrder);
 
   // since the column is not expanded all column names will be 'fees' and visibility change depending on selection
 
@@ -33,9 +38,7 @@ export const FeesTable = ({ data, isExpanded = true, timeFrame = "total24h" }) =
     columns: getColumns(isExpanded),
     data,
     state: {
-      columnOrder: isExpanded
-        ? ["name", "category", "total24h", "total7d", "total30d", "totalAllTime", "change_1d"]
-        : ["name", "category", "total24h", "total7d", "total30d", "totalAllTime", "change_1d", "change_7d", "change_1m"],
+      columnOrder,
       sorting,
       columnVisibility,
     },
@@ -44,6 +47,8 @@ export const FeesTable = ({ data, isExpanded = true, timeFrame = "total24h" }) =
     getSortedRowModel: getSortedRowModel(),
     disableSortRemove: true,
     getPaginationRowModel: !isExpanded ? getPaginationRowModel() : "",
+    onColumnVisibilityChange: setColumnVisibility,
+    onColumnOrderChange: setColumnOrder,
   });
 
   return (

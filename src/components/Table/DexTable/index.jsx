@@ -53,6 +53,7 @@ export const DexTable = ({ data, isExpanded = true, timeFrame = "total24h" }) =>
     getSortedRowModel: getSortedRowModel(),
     disableSortRemove: true,
     getPaginationRowModel: !isExpanded ? getPaginationRowModel() : "",
+    onColumnVisibilityChange: setColumnVisibility,
   });
 
   return (

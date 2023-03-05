@@ -58,6 +58,7 @@ export const TotalValueLockedTable = ({ data, isExpanded = true }) => {
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
     getPaginationRowModel: !isExpanded ? getPaginationRowModel() : "",
+    onColumnVisibilityChange: setColumnVisibility,
   });
 
   //

@@ -6,6 +6,7 @@ import { slug } from "../../utils/helpers";
 import { styleNumber } from "../../utils/helpers";
 import { useWindowVirtualizer } from "@tanstack/react-virtual";
 import { HiOutlineArrowDown, HiOutlineArrowUp } from "react-icons/hi";
+import Filter from "../../components/Filter";
 
 export const Table = ({ tableInstance, linkTo }) => {
   const { getRowModel, getHeaderGroups } = tableInstance;
@@ -32,6 +33,11 @@ export const Table = ({ tableInstance, linkTo }) => {
 
   return (
     <div className={styles["table-container"]}>
+      <Filter
+        table={tableInstance}
+        column={tableInstance.getColumn("name")}
+      />
+
       <table>
         <thead>
           {getHeaderGroups().map((headerGroup) => (
@@ -40,9 +46,7 @@ export const Table = ({ tableInstance, linkTo }) => {
                 const value = flexRender(header.column.columnDef.header, header.getContext());
                 const canSort = header.column.getCanSort();
                 const sortDir = header.column.getIsSorted();
-                console.log(header.column);
 
-                console.log(sortDir);
                 return header.isPlaceholder ? null : (
                   <th
                     key={header.id}

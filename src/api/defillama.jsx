@@ -4,9 +4,9 @@ const TVL = "https://api.llama.fi/protocols/";
 const DEX = "https://api.llama.fi/overview/dexs/";
 const TVL_HISTORY = "https://api.llama.fi/v2/historicalChainTvl";
 
-export const fetchData = async (endpoint) => {
-  const result = await fetch(endpoint);
-  const data = await result.json();
+export const fetchData = async (request) => {
+  const response = await request;
+  const data = await response.json();
   return data;
 };
 

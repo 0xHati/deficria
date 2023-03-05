@@ -6,14 +6,18 @@ import { fetchTVL, fetchFeeData, fetchDexVolume } from "../../api/defillama";
 import styles from "./TablesTab.module.scss";
 import { FeesTable } from "../Table/FeesTable";
 import { DexTable } from "../Table/DexTable";
+import defillama from "defillama-api";
+
+import { fetchData } from "../../api/defillama";
 
 const TablesTab = ({}) => {
   const defaultSelectedId = "default";
   const tab = useTabState({ defaultSelectedId });
 
-  const { data: dataTVL } = useQuery(["TVL"], () => fetchTVL());
-  const { data: dataFees } = useQuery(["fees"], () => fetchFeeData());
-  const { data: dataDex } = useQuery(["dex"], () => fetchDexVolume());
+  const { data: dataTVL } = useQuery(["TVL"], () => fetchData(defillama.tvl.protocols()));
+  const { data: dataFees } = useQuery(["fees"], () => fetchData(defillama.feesRevenue.all()));
+
+  const { data: dataDex } = useQuery(["dex"], () => fetchData(defillama.volumes.dexsAll()));
 
   // dataTVL.forEach((item, index) => (dataFees[index].chains = data[index].chains.toString()));
 
