@@ -73,17 +73,31 @@
   // height: 1.2rem;
 }
 
-.columns {
-  display: flex;
-  flex-direction: column;
-  padding: 1rem 1rem;
+.popover {
+  background-color: var(--blue8);
+  padding: 1rem;
+  margin: 1rem;
   border: 1px solid var(--blue4);
-  overflow-y: auto;
-  // height: 15rem;
+  z-index: 50;
+
+  &:focus-visible,
+  &[data-focus-visible],
+  & button:focus-visible,
+  & button[data-focus-visible] {
+    outline: 2px solid hsl(204 100% 40%);
+    outline-offset: 2px;
+  }
+}
+
+.columns {
+  padding: 0rem 1rem;
+  background-color: var(--blue8);
 
   &__column {
     display: flex;
     align-items: center;
+    top: auto !important;
+    left: auto !important;
   }
 
   &__column:not(:first-of-type) {
