@@ -1,5 +1,6 @@
 .filter {
   display: flex;
+  align-items: center;
   gap: 2rem;
   margin: 1rem;
   flex: 1;
@@ -7,17 +8,17 @@
 
 .search {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  position: relative;
-  border: 1px solid transparent;
-  border-radius: var(--border-radius);
+  border: 1px solid var(--blue4);
+  border-radius: var(--border-radius-sm);
   font-size: 1.8rem;
-  background-color: white;
-  padding: 1rem 2rem;
+  background-color: var(--slate5);
+  padding: 0rem 1rem;
+  margin-left: auto;
 
   &:focus-within {
-    border-color: var(--color-primary);
+    border-color: var(--blue1);
+    background-color: #fff;
   }
 
   &__input {
@@ -25,7 +26,7 @@
     background-color: transparent;
     border: none;
     font-size: 1.6rem;
-    display: none;
+    padding: 0.5rem;
 
     &::placeholder {
       color: currentColor;
@@ -36,19 +37,20 @@
       display: initial;
     }
   }
-
-  &__icon {
-    cursor: pointer;
-    position: relative;
-    right: -1rem;
-    color: var(--color-secondary-dark);
-  }
 }
 
 .searchBtn {
-  background-color: transparent;
   color: var(--blue5);
   margin-left: auto;
+
+  & .icons {
+    color: var(--blue4);
+
+    &:hover,
+    &:active {
+      color: var(--blue3);
+    }
+  }
 
   & > * {
     color: var(--color-text-primary);
@@ -96,6 +98,8 @@
   &__column {
     display: flex;
     align-items: center;
+
+    //needed for drag n drop otherwise weird things happen when positioned inside a modal
     top: auto !important;
     left: auto !important;
   }

@@ -25,7 +25,6 @@ const FilterColumnsControl = ({ table }) => {
       <PopoverDisclosure
         state={popover}
         className={styles.filterBtn}>
-        {" "}
         Columns
         <HiOutlineViewColumns className={styles.icons} />
       </PopoverDisclosure>

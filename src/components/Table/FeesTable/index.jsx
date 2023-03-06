@@ -1,4 +1,4 @@
-import { useReactTable, getCoreRowModel, getSortedRowModel, getPaginationRowModel } from "@tanstack/react-table";
+import { useReactTable, getCoreRowModel, getSortedRowModel, getPaginationRowModel, getFilteredRowModel } from "@tanstack/react-table";
 import { Table } from "..";
 import { useState, useEffect, Suspense } from "react";
 import { getColumns } from "./columns";
@@ -15,6 +15,15 @@ The table can be expanded with all the data showing next to each other or collap
 export const FeesTable = ({ isExpanded = true, timeFrame = "total24h" }) => {
   const { data } = useQuery(["fees"], () => fetchData(defillama.feesRevenue.all()));
 
+  const globalFilterFn = (row, columnId, filterValue) => {
+    const search = filterValue.toLowerCase();
+
+    let value = row.getValue(columnId);
+    if (typeof value === "number") value = String(value);
+
+    return value?.toLowerCase().includes(search);
+  };
+
   const columnSorting = [
     {
       id: timeFrame,
@@ -28,6 +37,7 @@ export const FeesTable = ({ isExpanded = true, timeFrame = "total24h" }) => {
   const [sorting, setSorting] = useState(columnSorting);
   const [columnVisibility, setColumnVisibility] = useState();
   const [columnOrder, setColumnOrder] = useState(inititalColumnOrder);
+  const [globalFilter, setGlobalFilter] = useState("");
 
   // since the column is not expanded all column names will be 'fees' and visibility change depending on selection
 
@@ -47,18 +57,27 @@ export const FeesTable = ({ isExpanded = true, timeFrame = "total24h" }) => {
       columnOrder,
       sorting,
       columnVisibility,
+      globalFilter,
     },
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     disableSortRemove: true,
+
     getPaginationRowModel: !isExpanded ? getPaginationRowModel() : "",
     onColumnVisibilityChange: setColumnVisibility,
     onColumnOrderChange: setColumnOrder,
+    globalFilterFn: globalFilterFn,
+    onGlobalFilterChange: setGlobalFilter,
+    getFilteredRowModel: getFilteredRowModel(),
   });
 
   return (
     <Suspense>
+      <Filter
+        table={tableInstance}
+        column={tableInstance.getColumn("name")}
+      />
       <Table
         tableInstance={tableInstance}
         linkTo={"/fees"}
