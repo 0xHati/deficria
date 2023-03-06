@@ -110,3 +110,9 @@ export const getNextTimeFrame = (timeFrames, currentTimeFrame) => {
   const nextIndex = (currentIndex + 1) % timeFrames.length;
   return timeFrames[nextIndex];
 };
+
+export const fetchData = async (request) => {
+  const response = await request;
+  const data = await response.json();
+  return data;
+};

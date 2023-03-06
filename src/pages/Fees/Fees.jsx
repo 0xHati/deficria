@@ -3,11 +3,12 @@ import FeeDistribution from "../../components/FeeDistribution/FeeDistribution";
 import styles from "./Fees.module.scss";
 import FeeHistoryChart from "../../components/Chart/Fees/FeeHistoryChart";
 import { useQuery } from "react-query";
-import { fetchFeeData } from "../../api/defillama";
 import Card from "../../components/Card";
+import { fetchData } from "../../utils/helpers";
+import defillama from "defillama-api";
 
 const Fees = () => {
-  const { data, isLoading, isError } = useQuery(["fees"], () => fetchFeeData(), { suspense: false });
+  const { data, isLoading, isError } = useQuery(["fees"], () => fetchData(defillama.feesRevenue.all()), { suspense: false });
   return (
     <>
       {!isLoading && !isError && (

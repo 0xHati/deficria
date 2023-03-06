@@ -5,9 +5,10 @@ import { TimeFrameSelectorCompact } from "../../components/TimeFrameSelector/Tim
 import { Suspense, useState } from "react";
 import { TIMEFRAMES_LIMITED } from "../../constants/timeframes";
 import { calculateFeeStats } from "../../utils/helpers";
-import { fetchFeeData } from "../../api/defillama";
+import { fetchData } from "../../utils/helpers";
 import { useQuery } from "react-query";
 import { slug } from "../../utils/helpers";
+import defillama from "defillama-api";
 
 const Stat = ({ title, value, className }) => {
   return (
@@ -21,7 +22,7 @@ const Stat = ({ title, value, className }) => {
 //idea show rank on list
 export const ProtocolFeeInfo = ({ data, protocol }) => {
   const [selectedTimeFrame, setSelectedTimeFrame] = useState("total24h");
-  const { data: overallFeeData } = useQuery(["fees"], () => fetchFeeData());
+  const { data: overallFeeData } = useQuery(["fees"], () => fetchData(defillama.feesRevenue.all()));
 
   const feeStats = calculateFeeStats(overallFeeData).find((item) => slug(item.name) === slug(protocol));
 

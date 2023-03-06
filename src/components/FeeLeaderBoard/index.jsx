@@ -5,10 +5,11 @@ import { TimeFrameSelector } from "../TimeFrameSelector/TimeFrameSelector";
 import { Suspense } from "react";
 import { TIMEFRAMES } from "../../constants/timeframes";
 import { useQuery } from "react-query";
-import { fetchFeeData } from "../../api/defillama";
+import defillama from "defillama-api";
+import { fetchData } from "../../utils/helpers";
 
 export const FeeLeaderBoard = () => {
-  const { data } = useQuery(["fees"], () => fetchFeeData());
+  const { data } = useQuery(["fees"], () => fetchData(defillama.feesRevenue.all()));
   const [timeFrame, setTimeFrame] = useState("total24h");
 
   const handleChangeTimeFrame = (timeFrame) => {

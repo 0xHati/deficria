@@ -1,9 +1,10 @@
 import { DexTable } from "../../components/Table/DexTable";
 import { useQuery } from "react-query";
-import { fetchDexVolume } from "../../api/defillama";
+import { fetchData } from "../../utils/helpers";
+import defillama from "defillama-api";
 
 const Volumes = () => {
-  const { data } = useQuery(["dex"], () => fetchDexVolume());
+  const { data } = useQuery(["dex"], () => fetchData(defillama.volumes.dexsAll()));
 
   return <DexTable data={data.protocols} />;
 };

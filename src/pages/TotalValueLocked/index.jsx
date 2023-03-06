@@ -1,14 +1,15 @@
 import { Suspense } from "react";
 import { useQuery } from "react-query";
-import { fetchTVL, fetchTVLHistory } from "../../api/defillama";
 import Filter from "../../components/Filter";
 import HistoricalChainTVL from "../../components/Chart/TVL/HistoricalChainTVL";
 import { TotalValueLockedTable } from "../../components/Table/TotalValueLocked";
 import Card from "../../components/Card";
+import { fetchData } from "../../utils/helpers";
+import defillama from "defillama-api";
 
 const TotalValueLocked = () => {
-  const { data: dataTVL } = useQuery(["TVL"], () => fetchTVL());
-  const { data: dataTVLHistory } = useQuery(["TVL", "history"], () => fetchTVLHistory());
+  const { data: dataTVL } = useQuery(["TVL"], () => fetchData(defillama.tvl.protocols()));
+  const { data: dataTVLHistory } = useQuery(["TVL", "history"], () => ffetchData(defillama.tvl.chainsHistorical()));
 
   return (
     <>

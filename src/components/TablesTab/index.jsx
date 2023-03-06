@@ -2,13 +2,12 @@ import { Tab, TabList, TabPanel, useTabState } from "ariakit";
 import Card from "../Card";
 import { TotalValueLockedTable } from "../Table/TotalValueLocked";
 import { useQuery } from "react-query";
-import { fetchTVL, fetchFeeData, fetchDexVolume } from "../../api/defillama";
 import styles from "./TablesTab.module.scss";
 import { FeesTable } from "../Table/FeesTable";
 import { DexTable } from "../Table/DexTable";
 import defillama from "defillama-api";
 
-import { fetchData } from "../../api/defillama";
+import { fetchData } from "../../utils/helpers";
 
 const TablesTab = ({}) => {
   const defaultSelectedId = "default";
