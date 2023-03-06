@@ -9,7 +9,7 @@ import defillama from "defillama-api";
 
 const TotalValueLocked = () => {
   const { data: dataTVL } = useQuery(["TVL"], () => fetchData(defillama.tvl.protocols()));
-  const { data: dataTVLHistory } = useQuery(["TVL", "history"], () => ffetchData(defillama.tvl.chainsHistorical()));
+  const { data: dataTVLHistory } = useQuery(["TVL", "history"], () => fetchData(defillama.tvl.chainsHistorical()));
 
   return (
     <>

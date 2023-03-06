@@ -1,13 +1,18 @@
 import { Table } from "..";
 import { getColumns } from "./columns";
 import { useReactTable, getCoreRowModel, getSortedRowModel, getPaginationRowModel } from "@tanstack/react-table";
+import { useQuery } from "react-query";
 
+import defillama from "defillama-api";
+
+import { fetchData } from "../../../utils/helpers";
 import { useState, useEffect } from "react";
 
 //is exactly the same as FeesTable, so not sure if could reuse.
 // Kept it seperate to easily customize things if needed per table
-export const DexTable = ({ data, isExpanded = true, timeFrame = "total24h" }) => {
-  data.forEach((item, index) => (data[index].chains = data[index].chains.toString()));
+export const DexTable = ({ isExpanded = true, timeFrame = "total24h" }) => {
+  const { data } = useQuery(["dex"], () => fetchData(defillama.volumes.dexsAll()));
+  data.protocols.forEach((item, index) => (data.protocols[index].chains = data.protocols[index].chains.toString()));
 
   const columnSorting = [
     {
@@ -40,7 +45,7 @@ export const DexTable = ({ data, isExpanded = true, timeFrame = "total24h" }) =>
 
   const tableInstance = useReactTable({
     columns: getColumns(isExpanded),
-    data,
+    data: data.protocols,
     state: {
       columnOrder: isExpanded
         ? ["name", "chains", "total24h", "total7d", "total30d", "totalAllTime", "change_1d"]

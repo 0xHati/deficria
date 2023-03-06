@@ -10,8 +10,14 @@ import {
 import { useState, useEffect } from "react";
 import { Table } from "..";
 import { columns } from "./columns";
+import defillama from "defillama-api";
+import { useQuery } from "react-query";
 
-export const TotalValueLockedTable = ({ data, isExpanded = true }) => {
+import { fetchData } from "../../../utils/helpers";
+
+export const TotalValueLockedTable = ({ isExpanded = true }) => {
+  const { data } = useQuery(["TVL"], () => fetchData(defillama.tvl.protocols()));
+
   data.forEach((item, index) => (data[index].chains = data[index].chains.toString()));
 
   const columnSorting = [

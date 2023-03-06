@@ -1,14 +1,20 @@
 import { useReactTable, getCoreRowModel, getSortedRowModel, getPaginationRowModel } from "@tanstack/react-table";
 import { Table } from "..";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { getColumns } from "./columns";
 import Filter from "../../Filter";
+import defillama from "defillama-api";
+import { useQuery } from "react-query";
+
+import { fetchData } from "../../../utils/helpers";
 
 /*
 The table can be expanded with all the data showing next to each other or collapsed with the option to toggle fees
 */
 
-export const FeesTable = ({ data, isExpanded = true, timeFrame = "total24h" }) => {
+export const FeesTable = ({ isExpanded = true, timeFrame = "total24h" }) => {
+  const { data } = useQuery(["fees"], () => fetchData(defillama.feesRevenue.all()));
+
   const columnSorting = [
     {
       id: timeFrame,
@@ -36,7 +42,7 @@ export const FeesTable = ({ data, isExpanded = true, timeFrame = "total24h" }) =
 
   const tableInstance = useReactTable({
     columns: getColumns(isExpanded),
-    data,
+    data: data.protocols,
     state: {
       columnOrder,
       sorting,
@@ -52,11 +58,11 @@ export const FeesTable = ({ data, isExpanded = true, timeFrame = "total24h" }) =
   });
 
   return (
-    <>
+    <Suspense>
       <Table
         tableInstance={tableInstance}
         linkTo={"/fees"}
       />
-    </>
+    </Suspense>
   );
 };

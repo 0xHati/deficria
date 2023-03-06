@@ -1,22 +1,15 @@
+import { lazy } from "react";
+
 import { Tab, TabList, TabPanel, useTabState } from "ariakit";
 import Card from "../Card";
-import { TotalValueLockedTable } from "../Table/TotalValueLocked";
-import { useQuery } from "react-query";
 import styles from "./TablesTab.module.scss";
 import { FeesTable } from "../Table/FeesTable";
 import { DexTable } from "../Table/DexTable";
-import defillama from "defillama-api";
-
-import { fetchData } from "../../utils/helpers";
+import { TotalValueLockedTable } from "../Table/TotalValueLocked";
 
 const TablesTab = ({}) => {
   const defaultSelectedId = "default";
   const tab = useTabState({ defaultSelectedId });
-
-  const { data: dataTVL } = useQuery(["TVL"], () => fetchData(defillama.tvl.protocols()));
-  const { data: dataFees } = useQuery(["fees"], () => fetchData(defillama.feesRevenue.all()));
-
-  const { data: dataDex } = useQuery(["dex"], () => fetchData(defillama.volumes.dexsAll()));
 
   // dataTVL.forEach((item, index) => (dataFees[index].chains = data[index].chains.toString()));
 
@@ -38,22 +31,13 @@ const TablesTab = ({}) => {
       <TabPanel
         state={tab}
         tabId={defaultSelectedId}>
-        <FeesTable
-          data={dataFees.protocols}
-          isExpanded={false}
-        />
+        <FeesTable isExpanded={false} />
       </TabPanel>
       <TabPanel state={tab}>
-        <TotalValueLockedTable
-          data={dataTVL}
-          isExpanded={false}
-        />
+        <TotalValueLockedTable isExpanded={false} />
       </TabPanel>
       <TabPanel state={tab}>
-        <DexTable
-          data={dataDex.protocols}
-          isExpanded={false}
-        />
+        <DexTable isExpanded={false} />
       </TabPanel>
     </Card>
   );
