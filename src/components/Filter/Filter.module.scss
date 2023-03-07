@@ -3,7 +3,6 @@
   align-items: center;
   gap: 2rem;
   margin: 1rem;
-  flex: 1;
 }
 
 .search {
@@ -89,6 +88,12 @@
     outline: 2px solid hsl(204 100% 40%);
     outline-offset: 2px;
   }
+
+  & .filter-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
 
 .columns {
@@ -134,5 +139,20 @@
   &__checkbox[data-focus-visible] {
     outline: 2px solid var(--blue1);
     outline-offset: 2px;
+  }
+}
+
+.slider {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  &__input {
+    font-size: 1.6rem;
+    // padding: 0.5rem 1rem;
+    width: 6rem;
+    height: 3rem;
+    width: fit-content;
+    border-radius: var(--border-radius-sm);
   }
 }

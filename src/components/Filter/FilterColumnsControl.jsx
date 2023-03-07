@@ -1,11 +1,10 @@
 import { Checkbox, CheckboxCheck } from "ariakit/checkbox";
-import { HiOutlineViewColumns } from "react-icons/hi2";
-import { Group } from "ariakit";
+import { IoFilter } from "react-icons/io5";
 import { useState } from "react";
 import styles from "./Filter.module.scss";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
-import { Popover, PopoverArrow, PopoverDescription, PopoverDisclosure, PopoverHeading, usePopoverState } from "ariakit/popover";
 import { MdOutlineDragIndicator } from "react-icons/md";
+import { Popover, PopoverDisclosure, usePopoverState } from "ariakit/popover";
 
 import { VisuallyHidden } from "ariakit/visually-hidden";
 
@@ -23,10 +22,10 @@ const FilterColumnsControl = ({ table }) => {
   return (
     <>
       <PopoverDisclosure
-        state={popover}
-        className={styles.filterBtn}>
+        className={styles.filterBtn}
+        state={popover}>
         Columns
-        <HiOutlineViewColumns className={styles.icons} />
+        <IoFilter className={styles.icons} />
       </PopoverDisclosure>
       <Popover
         state={popover}

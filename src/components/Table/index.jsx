@@ -11,8 +11,6 @@ import Filter from "../../components/Filter";
 export const Table = ({ tableInstance, linkTo }) => {
   const { getRowModel, getHeaderGroups } = tableInstance;
 
-  console.log(tableInstance.getState().globalFilter);
-
   const navigate = useNavigate();
 
   const { rows } = getRowModel();

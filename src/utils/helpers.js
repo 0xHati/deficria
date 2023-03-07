@@ -4,10 +4,6 @@ export const formatNumberToLocale = function (number, isCompact = false) {
   return number.toLocaleString(navigator.language, { style: "currency", currency: "USD", ...(isCompact && { notation: "compact" }) });
 };
 
-export const formatNumberToLocaleShort = function () {
-  Intl.NumberFormat("en", { notation: "compact" });
-};
-
 export const slug = (string) => {
   return string
     .split(" ")

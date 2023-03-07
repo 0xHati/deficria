@@ -1,0 +1,27 @@
+.slider {
+  width: 100%;
+  margin: auto;
+  width: 20rem;
+
+  &__thumb,
+  &__thumb-1 {
+    cursor: pointer;
+    border: 8px solid var(--blue3);
+    border-radius: 100%;
+    position: absolute;
+    top: -6px;
+    display: block;
+  }
+
+  &__track {
+    background: white;
+    height: 2px;
+    position: relative;
+    &-0 {
+      background: var(--blue2);
+    }
+    &-2 {
+      background: var(--blue2);
+    }
+  }
+}

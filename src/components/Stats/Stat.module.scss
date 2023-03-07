@@ -1,0 +1,35 @@
+.container {
+  width: fit-content;
+  margin-bottom: 2rem;
+  display: flex;
+}
+
+.title {
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
+  color: var(--slate8);
+}
+
+.number {
+  font-size: 2rem;
+  margin-right: 2rem;
+  font-weight: 600;
+}
+
+.percentage {
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: var(--slate8);
+
+  & svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+.stat {
+  padding: 0rem 2rem;
+  &:not(:last-of-type) {
+    border-right: 1px solid var(--blue6);
+  }
+}

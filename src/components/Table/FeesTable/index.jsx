@@ -1,4 +1,13 @@
-import { useReactTable, getCoreRowModel, getSortedRowModel, getPaginationRowModel, getFilteredRowModel } from "@tanstack/react-table";
+import {
+  useReactTable,
+  getCoreRowModel,
+  getSortedRowModel,
+  getPaginationRowModel,
+  getFilteredRowModel,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
+  getFacetedMinMaxValues,
+} from "@tanstack/react-table";
 import { Table } from "..";
 import { useState, useEffect, Suspense } from "react";
 import { getColumns } from "./columns";
@@ -14,6 +23,7 @@ The table can be expanded with all the data showing next to each other or collap
 
 export const FeesTable = ({ isExpanded = true, timeFrame = "total24h" }) => {
   const { data } = useQuery(["fees"], () => fetchData(defillama.feesRevenue.all()));
+  console.log(data);
 
   const globalFilterFn = (row, columnId, filterValue) => {
     const search = filterValue.toLowerCase();
@@ -63,7 +73,9 @@ export const FeesTable = ({ isExpanded = true, timeFrame = "total24h" }) => {
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     disableSortRemove: true,
-
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
+    getFacetedMinMaxValues: getFacetedMinMaxValues(),
     getPaginationRowModel: !isExpanded ? getPaginationRowModel() : "",
     onColumnVisibilityChange: setColumnVisibility,
     onColumnOrderChange: setColumnOrder,

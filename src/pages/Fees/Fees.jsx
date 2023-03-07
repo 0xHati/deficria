@@ -6,13 +6,20 @@ import { useQuery } from "react-query";
 import Card from "../../components/Card";
 import { fetchData } from "../../utils/helpers";
 import defillama from "defillama-api";
+import FeeStats from "../../components/Stats/FeeStats";
 
 const Fees = () => {
-  const { data, isLoading, isError } = useQuery(["fees"], () => fetchData(defillama.feesRevenue.all()), { suspense: false });
+  const { data, isLoading, isError } = useQuery(
+    ["fees"],
+    () => fetchData(defillama.feesRevenue.all({ exludeTotalDataChart: false, exludeTotalDataChartBreakdown: false })),
+    { suspense: false }
+  );
+
   return (
     <>
       {!isLoading && !isError && (
         <>
+          <FeeStats data={data} />
           <div className={styles.charts}>
             <FeeDistribution
               feeData={data}
