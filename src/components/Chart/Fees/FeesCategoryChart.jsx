@@ -3,38 +3,53 @@ import Highcharts from "../highChartsTheme";
 import { COLORS } from "../highChartsTheme";
 import Card from "../../Card";
 
+//we apply the threshold on the totalFees, first filter all the values > threshold,
+// calculate the sum of the them and to get the others amount we do the total - the sum
+const createThreshold = (data, totalFees, totalRevenue, threshold) => {
+  const filteredData = data.filter(([category, { dailyFees }]) => {
+    console.log((dailyFees / totalFees) * 100);
+    return (dailyFees / totalFees) * 100 > threshold;
+  });
+  const sum = filteredData.reduce(
+    (acc, [category, { dailyFees, dailyRevenue }]) => {
+      acc[0] += dailyFees;
+      acc[1] += dailyRevenue;
+      return acc;
+    },
+    [0, 0]
+  );
+  filteredData.push(["Other", { dailyFees: totalFees - sum[0], dailyRevenue: totalRevenue - sum[1] }]);
+  return filteredData;
+};
+
 const FeesCategoryChart = ({ data }) => {
-  //dailyrev, dailyfees, category,
+  const totalFees = data.total24h;
+  const totalRevenue = data.dailyRevenue;
+  const chartData = {};
 
-  //create groups
-
-  const dailyFees = {};
-  const dailyRevenue = {};
-
-  data.protocols.forEach((protocol) => {
-    if (!dailyFees[protocol.category]) {
-      dailyFees[protocol.category] = protocol.dailyFees || 0;
+  //the idea is to have a treshold on the data so we have a category 'others'
+  //here we aggregate the data and create groups with their dailyfees and rev
+  data.protocols.map(({ category, dailyRevenue, total24h }) => {
+    if (!chartData[category]) {
+      chartData[category] = { dailyFees: total24h, dailyRevenue: dailyRevenue };
     } else {
-      dailyFees[protocol.category] += protocol.dailyFees || 0;
-    }
-    //could be added to the other if/else, but just to be sure for edge cases
-    if (!dailyRevenue[protocol.category]) {
-      dailyRevenue[protocol.category] = protocol.dailyRevenue || 0;
-    } else {
-      dailyRevenue[protocol.category] += protocol.dailyRevenue || 0;
+      chartData[category].dailyFees += total24h;
+      chartData[category].dailyRevenue += dailyRevenue;
     }
   });
 
+  const transformedData = createThreshold(Object.entries(chartData), totalFees, totalRevenue, 1);
+
   const options = {
     chart: {
-      type: "column",
+      type: "bar",
     },
 
     title: {
       text: "Fees/Revenue per category",
     },
     xAxis: {
-      categories: Object.keys(dailyFees),
+      categories: transformedData.map(([category]) => category),
       // crosshair: true,
     },
     yAxis: {
@@ -59,20 +74,19 @@ const FeesCategoryChart = ({ data }) => {
     series: [
       {
         name: "Fees",
-        data: Object.values(dailyFees),
+        data: transformedData.map((item) => item[1].dailyFees),
         color: COLORS.SERIES[3],
         stacking: undefined,
       },
       {
         name: "Revenue",
-        data: Object.values(dailyRevenue),
+        data: transformedData.map((item) => item[1].dailyRevenue),
         color: COLORS.SERIES[0],
       },
     ],
   };
   return (
     <Card>
-      {" "}
       <HighchartsReact
         highcharts={Highcharts}
         options={options}

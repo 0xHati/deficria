@@ -9,8 +9,7 @@ import { groupDatesByPeriod } from "../../../utils/helpers";
 import { time } from "highcharts";
 
 export const FeeProtocolChart = ({ dataSets }) => {
-  // need to spread the datasets since we don't want to reference the original since we need it to go back to dates,
-  // if not we dillute everytime we group the data by week/month
+  console.log(dataSets);
   const options = {
     chart: {
       zoomType: "x",
