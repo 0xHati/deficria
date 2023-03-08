@@ -1,7 +1,5 @@
-import Card from "../../Card";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "../highChartsTheme";
-import { getOptions, color } from "highcharts";
 
 const FeeHistoryChart = ({ data }) => {
   const transformedData = data.map(([time, value]) => {

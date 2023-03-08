@@ -1,12 +1,14 @@
 import styles from "./FeesDetail.module.scss";
-import { ProtocolFeeInfo } from "./ProtocolFeeInfo";
 import { useParams } from "react-router-dom";
 import { FeeProtocolChart } from "../../components/Chart/Fees/FeeProtocolChart";
 import { Suspense } from "react";
 import { useQuery } from "react-query";
 import defillama from "defillama-api";
 
+import ProtocolFeeStats from "../../components/Stats/ProtocolFeeStats";
+
 import { fetchData } from "../../utils/helpers";
+import { ProtocolFeeInfo } from "./ProtocolFeeInfo";
 
 //TODO: add info about average fees, highest fee date, change starting date to 2019, show total revenue
 const FeesDetail = () => {

@@ -5,7 +5,6 @@ import { FiArrowUpRight, FiArrowDownRight } from "react-icons/fi";
 import { styleNumber } from "../../utils/helpers";
 
 const Stat = ({ title, number, percentage }) => {
-  console.log(percentage);
   const className = styleNumber(percentage);
   return (
     <div className={styles.stat}>

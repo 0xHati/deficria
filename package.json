@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@hello-pangea/dnd": "^16.2.0",
+    "@react-spring/web": "^9.7.1",
     "@tanstack/react-table": "^8.7.9",
     "@tanstack/react-virtual": "^3.0.0-beta.49",
     "ariakit": "^2.0.0-next.43",

@@ -8,8 +8,12 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   padding: 0;
-  & span {
+  & .accent {
     color: var(--green1);
+  }
+
+  & .underline {
+    border-bottom: 3px solid var(--green1);
   }
 
   & h1 {
@@ -18,6 +22,7 @@
 
   @include media(">phone") {
     margin: 8rem 4rem;
+    margin-bottom: 4rem;
   }
 }
 

@@ -6,6 +6,7 @@ import { TotalValueLockedTable } from "../../components/Table/TotalValueLocked";
 import Card from "../../components/Card";
 import { fetchData } from "../../utils/helpers";
 import defillama from "defillama-api";
+import styles from "./TotalValueLocked.module.scss";
 
 const TotalValueLocked = () => {
   const { data: dataTVL } = useQuery(["TVL"], () => fetchData(defillama.tvl.protocols()));
@@ -14,7 +15,7 @@ const TotalValueLocked = () => {
   return (
     <>
       <Suspense fallback={<>Loading...</>}>
-        <Card>
+        <Card className={styles["chart-container"]}>
           <HistoricalChainTVL data={dataTVLHistory} />
         </Card>
         <TotalValueLockedTable data={dataTVL} />

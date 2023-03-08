@@ -2,19 +2,20 @@ import HighchartsReact from "highcharts-react-official";
 import { formatNumberToLocale } from "../../../utils/helpers";
 import Highcharts from "../highChartsTheme";
 
-const HistoricalChainTVL = ({ data }) => {
-  const transformedData = data.map(({ date, tvl }) => {
+const VolumesChart = ({ data }) => {
+  const transformedData = data.map(([date, volume]) => {
     date = new Date(date * 1000).getTime();
-    return [date, tvl];
+    return [date, volume];
   });
 
+  console.log(data);
   const options = {
     chart: {
       zoomType: "x",
       type: "area",
     },
     title: {
-      text: "TVL history",
+      text: "Dex Volumes History",
     },
     series: [
       {
@@ -64,4 +65,4 @@ const HistoricalChainTVL = ({ data }) => {
   );
 };
 
-export default HistoricalChainTVL;
+export default VolumesChart;

@@ -22,8 +22,9 @@ The table can be expanded with all the data showing next to each other or collap
 */
 
 export const FeesTable = ({ isExpanded = true, timeFrame = "total24h" }) => {
-  const { data } = useQuery(["fees"], () => fetchData(defillama.feesRevenue.all()));
-  console.log(data);
+  const { data } = useQuery(["fees"], () =>
+    fetchData(defillama.feesRevenue.all({ exludeTotalDataChart: false, exludeTotalDataChartBreakdown: false }))
+  );
 
   const globalFilterFn = (row, columnId, filterValue) => {
     const search = filterValue.toLowerCase();
@@ -86,10 +87,12 @@ export const FeesTable = ({ isExpanded = true, timeFrame = "total24h" }) => {
 
   return (
     <Suspense>
-      <Filter
-        table={tableInstance}
-        column={tableInstance.getColumn("name")}
-      />
+      {isExpanded && (
+        <Filter
+          table={tableInstance}
+          column={tableInstance.getColumn("name")}
+        />
+      )}
       <Table
         tableInstance={tableInstance}
         linkTo={"/fees"}
