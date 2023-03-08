@@ -22,6 +22,11 @@ const HistoricalChainTVL = ({ data }) => {
         data: transformedData,
       },
     ],
+    tooltip: {
+      formatter: function () {
+        return `<br/><span> ${new Date(this.x).toLocaleDateString()}<br/><span style='font-weight: bold'> ${formatNumberToLocale(this.y)}</span>`;
+      },
+    },
 
     xAxis: {
       type: "datetime",

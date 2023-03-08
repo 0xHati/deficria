@@ -1,5 +1,6 @@
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "../highChartsTheme";
+import { formatNumberToLocale } from "../../../utils/helpers";
 
 const FeeHistoryChart = ({ data }) => {
   const transformedData = data.map(([time, value]) => {
@@ -20,6 +21,11 @@ const FeeHistoryChart = ({ data }) => {
         data: transformedData,
       },
     ],
+    tooltip: {
+      formatter: function () {
+        return `<br/><span> ${new Date(this.x).toLocaleDateString()}<br/><span style='font-weight: bold'> ${formatNumberToLocale(this.y)}</span>`;
+      },
+    },
 
     xAxis: {
       type: "datetime",

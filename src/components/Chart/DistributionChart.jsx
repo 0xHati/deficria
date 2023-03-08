@@ -29,6 +29,17 @@ const DistributionChart = ({ data, title }) => {
         data: filteredData,
       },
     ],
+
+    tooltip: {
+      formatter: function () {
+        console.log(this);
+        return `<text x="8" data-z-index="1" y="18"; font-size: 12px; ;"><tspan style="font-size: 10px;">${
+          this.key
+        }</tspan><tspan class="highcharts-br" dy="15" x="8">​</tspan><tspan style="color: ${this.color}; fill: ${
+          this.color
+        };">●</tspan> Share: <tspan style="font-weight: bold;">${this.y.toFixed(2)}%</tspan><tspan class="highcharts-br">​</tspan></text>`;
+      },
+    },
   };
 
   useEffect(() => {

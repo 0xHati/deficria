@@ -2,6 +2,7 @@ import HighchartsReact from "highcharts-react-official";
 import Highcharts from "../highChartsTheme";
 import { COLORS } from "../highChartsTheme";
 import Card from "../../Card";
+import { formatNumberToLocale } from "../../../utils/helpers";
 
 //we apply the threshold on the totalFees, first filter all the values > threshold,
 // calculate the sum of the them and to get the others amount we do the total - the sum
@@ -50,7 +51,6 @@ const FeesCategoryChart = ({ data }) => {
     },
     xAxis: {
       categories: transformedData.map(([category]) => category),
-      // crosshair: true,
     },
     yAxis: {
       min: 0,
@@ -59,11 +59,19 @@ const FeesCategoryChart = ({ data }) => {
       },
     },
     tooltip: {
-      headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-      pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' + '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
-      footerFormat: "</table>",
+      formatter: function () {
+        return this.points.reduce(function (s, point) {
+          return s + `<br/><span style='color:${point.color}'> ${point.series.name}</span>: ${formatNumberToLocale(point.y)}`;
+        }, "<b>" + this.x + "</b>");
+      },
       shared: true,
-      useHTML: true,
+      // headerFormat: '<span style="font-size:10px">{(point.key)}</span><table>',
+      // pointFormat:
+      //   '<tr><td ;padding:0">{series.name}: </td>' +
+      //   '<td style="padding:0"><b>' +formatNumberToLocale({point.y}) +'</b></td></tr>',
+      // footerFormat: "</table>",
+      // shared: true,
+      // useHTML: true,
     },
     plotOptions: {
       column: {
