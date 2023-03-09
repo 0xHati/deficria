@@ -1,4 +1,5 @@
 import { formatNumberToLocale } from "../../../utils/helpers";
+import Sparkline from "../../Chart/Fees/Sparkline";
 import { LogoName } from "../LogoName";
 
 export const getColumns = (isExpanded) => {
@@ -6,13 +7,16 @@ export const getColumns = (isExpanded) => {
     {
       header: "Name",
       accessorKey: "name",
-      cell: ({ getValue, row }) => {
+      cell: ({ getValue, row, table }) => {
         const logo = row.original.logo;
         const value = getValue();
+        const index = table.getSortedRowModel().rows.findIndex((x) => x.id === row.id) + 1;
+
         return (
           <LogoName
             logoSrc={logo}
             value={value}
+            rank={index}
           />
         );
       },
@@ -74,6 +78,12 @@ export const getColumns = (isExpanded) => {
       header: isExpanded ? "Total Fees" : "Fees",
       accessorKey: "totalAllTime",
       cell: ({ getValue }) => (getValue() ? formatNumberToLocale(getValue()) : "-"),
+      size: 150,
+    },
+    {
+      header: "Trend",
+      accessorKey: "sparkline",
+      cell: ({ getValue }) => <Sparkline data={getValue()} />,
       size: 150,
     },
   ];

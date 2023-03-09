@@ -8,7 +8,6 @@ import { formatNumberToLocale } from "../../../utils/helpers";
 // calculate the sum of the them and to get the others amount we do the total - the sum
 const createThreshold = (data, totalFees, totalRevenue, threshold) => {
   const filteredData = data.filter(([category, { dailyFees }]) => {
-    console.log((dailyFees / totalFees) * 100);
     return (dailyFees / totalFees) * 100 > threshold;
   });
   const sum = filteredData.reduce(

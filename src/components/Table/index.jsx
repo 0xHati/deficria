@@ -17,7 +17,7 @@ export const Table = ({ tableInstance, linkTo }) => {
 
   const rowVirtualizer = useWindowVirtualizer({
     count: rows.length,
-    overscan: 20,
+    overscan: 40,
     estimateSize: () => 40,
   });
 
@@ -80,7 +80,7 @@ export const Table = ({ tableInstance, linkTo }) => {
             return (
               <tr
                 key={row.id}
-                onClick={handleClick.bind(null, row.original.name)}>
+                onClick={() => handleClick(row.original.name)}>
                 {row.getVisibleCells().map((cell) => {
                   const meta = cell.column.columnDef?.meta;
 

@@ -9,22 +9,29 @@ import {
   getFacetedMinMaxValues,
 } from "@tanstack/react-table";
 import { Table } from "..";
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, Suspense, useMemo } from "react";
 import { getColumns } from "./columns";
 import Filter from "../../Filter";
 import defillama from "defillama-api";
 import { useQuery } from "react-query";
-
+import { subMonths } from "date-fns";
+import { unixToMs, groupDatesByWeek } from "../../../utils/helpers";
 import { fetchData } from "../../../utils/helpers";
 
 /*
 The table can be expanded with all the data showing next to each other or collapsed with the option to toggle fees
 */
 
+//how much months looking back we want to have the trendline for the sparklines graph
+//eventually data is further grouped to have one point every week
+const TIMESPAN_SPARKLINE = 3;
+
 export const FeesTable = ({ isExpanded = true, timeFrame = "total24h" }) => {
   const { data } = useQuery(["fees"], () =>
     fetchData(defillama.feesRevenue.all({ exludeTotalDataChart: false, exludeTotalDataChartBreakdown: false }))
   );
+
+  useMemo(() => transformDataSparkline(data, TIMESPAN_SPARKLINE), [data]);
 
   const globalFilterFn = (row, columnId, filterValue) => {
     const search = filterValue.toLowerCase();
@@ -99,4 +106,29 @@ export const FeesTable = ({ isExpanded = true, timeFrame = "total24h" }) => {
       />
     </Suspense>
   );
+};
+
+const transformDataSparkline = (data, timespan) => {
+  const referenceTime = subMonths(new Date(), timespan);
+
+  const filteredData = data.totalDataChartBreakdown
+    .map(([time, chains]) => [unixToMs(time), chains])
+    .filter(([time]) => {
+      return time > referenceTime;
+    });
+
+  const groupedData = groupDatesByWeek(filteredData);
+
+  for (const protocol of data.protocols) {
+    const protocolName = protocol.module;
+    const valuesArray = [];
+
+    for (const timestampData of groupedData) {
+      const timestamp = timestampData[0];
+      const protocolValue = timestampData[1][protocolName] || 0;
+      valuesArray.push([timestamp, protocolValue]);
+    }
+
+    protocol.sparkline = valuesArray;
+  }
 };

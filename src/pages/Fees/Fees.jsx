@@ -8,6 +8,7 @@ import { fetchData } from "../../utils/helpers";
 import defillama from "defillama-api";
 import FeeStats from "../../components/Stats/FeeStats";
 import FeesCategoryChart from "../../components/Chart/Fees/FeesCategoryChart";
+import FeeDistributionChartHistory from "../../components/Chart/Fees/FeeDistributionChartHistory";
 
 const Fees = () => {
   const { data, isLoading, isError } = useQuery(
@@ -22,14 +23,18 @@ const Fees = () => {
         <>
           <FeeStats data={data} />
           <div className={styles.charts}>
-            <FeesCategoryChart data={data} />
+            <FeesCategoryChart
+              data={data}
+              className={styles.chart}
+            />
             <FeeDistribution
               feeData={data}
-              className={styles.feeDistribution}
+              className={styles.chart}
             />
-            <Card className={styles.feeHistory}>
-              <FeeHistoryChart data={data.totalDataChart} />
-            </Card>
+
+            <FeeHistoryChart data={data.totalDataChart} />
+
+            <FeeDistributionChartHistory data={data.totalDataChartBreakdown} />
           </div>
 
           <FeesTable

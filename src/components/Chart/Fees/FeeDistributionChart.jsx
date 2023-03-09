@@ -1,5 +1,5 @@
 import HighchartsReact from "highcharts-react-official";
-import Highcharts from "./highChartsTheme";
+import Highcharts from "../highChartsTheme";
 import { useEffect, useState } from "react";
 
 const createThreshold = (data, threshold) => {
@@ -11,7 +11,7 @@ const createThreshold = (data, threshold) => {
   return filteredData;
 };
 
-const DistributionChart = ({ data, title }) => {
+const FeeDistributionChart = ({ data, title }) => {
   const FEES_PIECHART_THRESHOLD = 1;
   const filteredData = createThreshold(data, FEES_PIECHART_THRESHOLD);
 
@@ -32,7 +32,6 @@ const DistributionChart = ({ data, title }) => {
 
     tooltip: {
       formatter: function () {
-        console.log(this);
         return `<text x="8" data-z-index="1" y="18"; font-size: 12px; ;"><tspan style="font-size: 10px;">${
           this.key
         }</tspan><tspan class="highcharts-br" dy="15" x="8">​</tspan><tspan style="color: ${this.color}; fill: ${
@@ -56,4 +55,4 @@ const DistributionChart = ({ data, title }) => {
   );
 };
 
-export default DistributionChart;
+export default FeeDistributionChart;

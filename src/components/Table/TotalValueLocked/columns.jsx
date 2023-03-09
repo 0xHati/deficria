@@ -7,14 +7,19 @@ export const columns = [
   {
     header: "Name",
     accessorKey: "name",
-    cell: ({ getValue, row }) => {
+    cell: ({ getValue, row, table }) => {
       const logo = row.original.logo;
       const value = getValue();
+      const index = table.getSortedRowModel().rows.findIndex((x) => x.id === row.id) + 1;
+
       return (
-        <LogoName
-          logoSrc={logo}
-          value={value}
-        />
+        <>
+          <LogoName
+            logoSrc={logo}
+            value={value}
+            rank={index}
+          />
+        </>
       );
     },
     size: 150,

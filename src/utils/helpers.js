@@ -29,13 +29,24 @@ export const groupDatesByWeek = (data) => {
     if (index === -1) {
       // If the week isn't in the accumulator, add a new array with the date and value
       acc.push([endWeek.getTime(), value]);
-    } else {
+    } else if (typeof value !== "object") {
       // If the week is in the accumulator, add the value to the existing array
       acc[index][1] += value;
+    } else if (typeof value === "object") {
+      acc[index][1] = sumObjectsByKey(acc[index][1], value);
     }
 
     return acc;
   }, []);
+};
+
+const sumObjectsByKey = (...objs) => {
+  return objs.reduce((a, b) => {
+    for (let k in b) {
+      if (b.hasOwnProperty(k)) a[k] = (a[k] || 0) + b[k];
+    }
+    return a;
+  }, {});
 };
 
 export const groupDatesByMonth = (data) => {
@@ -111,4 +122,8 @@ export const fetchData = async (request) => {
   const response = await request;
   const data = await response.json();
   return data;
+};
+
+export const unixToMs = (time) => {
+  return new Date(time * 1000).getTime();
 };
