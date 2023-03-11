@@ -18,7 +18,7 @@ const FeeStats = ({ data }) => {
     setSelectedTimeFrame(nextTimeFrame);
   };
   return (
-    <Card className={styles.container}>
+    <Card className={styles["stats-container"]}>
       {/* <TimeFrameSelectorCompact
         timeFrame={selectedTimeFrame}
         onSetTimeFrame={handleChangeTimeFrame}

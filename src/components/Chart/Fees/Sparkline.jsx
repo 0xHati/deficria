@@ -3,7 +3,6 @@ import HighchartsReact from "highcharts-react-official";
 import { COLORS } from "../highChartsTheme";
 
 const Sparkline = ({ data }) => {
-  console.log(data);
   const options = {
     chart: {
       backgroundColor: null,

@@ -3,7 +3,7 @@ import Highcharts from "../highChartsTheme";
 import { formatNumberToLocale } from "../../../utils/helpers";
 import Card from "../../Card";
 
-const FeeHistoryChart = ({ data }) => {
+const FeeHistoryChart = ({ data, ...props }) => {
   const transformedData = data.map(([time, value]) => {
     return [new Date(time * 1000).getTime(), value];
   });
@@ -38,7 +38,7 @@ const FeeHistoryChart = ({ data }) => {
     },
   };
   return (
-    <Card>
+    <Card className={props.className}>
       <HighchartsReact
         highcharts={Highcharts}
         options={options}

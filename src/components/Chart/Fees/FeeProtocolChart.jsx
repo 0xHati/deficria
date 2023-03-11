@@ -9,7 +9,6 @@ import { groupDatesByPeriod } from "../../../utils/helpers";
 import { time } from "highcharts";
 
 export const FeeProtocolChart = ({ dataSets }) => {
-  console.log(dataSets);
   const options = {
     chart: {
       zoomType: "x",

@@ -4,7 +4,7 @@ import Card from "../../Card";
 import Highcharts from "../highChartsTheme";
 import { unixToMs } from "../../../utils/helpers";
 
-const FeeDistributionChartHistory = ({ data }) => {
+const FeeDistributionChartHistory = ({ data, ...props }) => {
   console.log(data);
 
   let transformedData = {};
@@ -52,7 +52,7 @@ const FeeDistributionChartHistory = ({ data }) => {
     series: series,
   };
   return (
-    <Card>
+    <Card className={props.className}>
       <HighchartsReact
         highcharts={Highcharts}
         options={options}

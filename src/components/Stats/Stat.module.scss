@@ -1,35 +1,60 @@
-.container {
+.wrapper {
   width: fit-content;
   margin-bottom: 2rem;
+}
+
+.header {
+  font-size: 2.5rem;
+  font-weight: 400;
   display: flex;
-}
-
-.title {
-  font-size: 1.6rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
   margin-bottom: 2rem;
-  color: var(--slate8);
-}
 
-.number {
-  font-size: 2rem;
-  margin-right: 2rem;
-  font-weight: 600;
-}
-
-.percentage {
-  font-size: 1.2rem;
-  font-weight: 300;
-  color: var(--slate8);
-
-  & svg {
-    width: 1.5rem;
-    height: 1.5rem;
+  & .logo {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
   }
 }
 
-.stat {
-  padding: 0rem 2rem;
-  &:not(:last-of-type) {
-    border-right: 1px solid var(--blue6);
+.timeFrame {
+  text-align: right;
+}
+
+.stats-container {
+  width: fit-content;
+  margin-bottom: 2rem;
+  display: flex;
+
+  & .title {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+    color: var(--slate8);
+  }
+
+  & .number {
+    font-size: 2rem;
+    margin-right: 2rem;
+    font-weight: 600;
+  }
+
+  & .percentage {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: var(--slate8);
+
+    & svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  & .stat {
+    padding: 0rem 2rem;
+    &:not(:last-of-type) {
+      border-right: 1px solid var(--blue6);
+    }
   }
 }

@@ -1,16 +1,13 @@
-.feeDistribution {
-  flex: 1;
-}
-
-.feeHistory {
-  flex: 1;
-  // display: none;
+.chart {
+  width: 100%;
+  //needed or highcharts won't resize inside a grid container
+  min-width: 0;
 }
 
 .charts {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  // justify-content: space-between;
+
   gap: 2rem;
 }
 

@@ -1,5 +1,4 @@
 import { formatNumberToLocale } from "../../utils/helpers";
-import Card from "../Card";
 import styles from "./Stat.module.scss";
 import { FiArrowUpRight, FiArrowDownRight } from "react-icons/fi";
 import { styleNumber } from "../../utils/helpers";

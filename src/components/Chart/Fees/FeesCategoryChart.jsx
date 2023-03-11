@@ -22,7 +22,7 @@ const createThreshold = (data, totalFees, totalRevenue, threshold) => {
   return filteredData;
 };
 
-const FeesCategoryChart = ({ data }) => {
+const FeesCategoryChart = ({ data, ...props }) => {
   const totalFees = data.total24h;
   const totalRevenue = data.dailyRevenue;
   const chartData = {};
@@ -93,7 +93,7 @@ const FeesCategoryChart = ({ data }) => {
     ],
   };
   return (
-    <Card>
+    <Card className={props.className}>
       <HighchartsReact
         highcharts={Highcharts}
         options={options}

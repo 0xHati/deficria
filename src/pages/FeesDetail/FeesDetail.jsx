@@ -8,7 +8,6 @@ import defillama from "defillama-api";
 import ProtocolFeeStats from "../../components/Stats/ProtocolFeeStats";
 
 import { fetchData } from "../../utils/helpers";
-import { ProtocolFeeInfo } from "./ProtocolFeeInfo";
 
 //TODO: add info about average fees, highest fee date, change starting date to 2019, show total revenue
 const FeesDetail = () => {
@@ -22,9 +21,11 @@ const FeesDetail = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <div className={styles.wrapper}>
-        <ProtocolFeeInfo
-          data={dataFees}
-          protocol={protocol}></ProtocolFeeInfo>
+        <ProtocolFeeStats
+          dataRevenue={dataRevenue}
+          protocol={protocol}
+        />
+
         <FeeProtocolChart dataSets={{ fees: prepareData(dataFees), revenue: prepareData(dataRevenue) }} />
       </div>
     </Suspense>
