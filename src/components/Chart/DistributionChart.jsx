@@ -1,5 +1,5 @@
 import HighchartsReact from "highcharts-react-official";
-import Highcharts from "../highChartsTheme";
+import Highcharts from "./highChartsTheme";
 import { useEffect, useState } from "react";
 
 const createThreshold = (data, threshold) => {
@@ -11,7 +11,7 @@ const createThreshold = (data, threshold) => {
   return filteredData;
 };
 
-const FeeDistributionChart = ({ data, title }) => {
+const DistributionChart = ({ data, title }) => {
   const FEES_PIECHART_THRESHOLD = 1;
   const filteredData = createThreshold(data, FEES_PIECHART_THRESHOLD);
 
@@ -55,4 +55,4 @@ const FeeDistributionChart = ({ data, title }) => {
   );
 };
 
-export default FeeDistributionChart;
+export default DistributionChart;

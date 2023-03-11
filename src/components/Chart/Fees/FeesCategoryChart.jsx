@@ -3,7 +3,6 @@ import Highcharts from "../highChartsTheme";
 import { COLORS } from "../highChartsTheme";
 import Card from "../../Card";
 import { formatNumberToLocale } from "../../../utils/helpers";
-
 //we apply the threshold on the totalFees, first filter all the values > threshold,
 // calculate the sum of the them and to get the others amount we do the total - the sum
 const createThreshold = (data, totalFees, totalRevenue, threshold) => {

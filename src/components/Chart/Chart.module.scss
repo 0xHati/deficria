@@ -1,0 +1,13 @@
+.charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.chart {
+  width: 100%;
+  //needed or highcharts won't resize inside a grid container
+  min-width: 0;
+}

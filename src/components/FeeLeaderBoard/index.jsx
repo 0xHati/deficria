@@ -1,4 +1,4 @@
-import { FeesTable } from "../Table/FeesTable";
+import FeesTable from "../Table/FeesTable";
 import styles from "./FeeLeaderBoard.module.scss";
 import { useState } from "react";
 import { TimeFrameSelector } from "../TimeFrameSelector/TimeFrameSelector";

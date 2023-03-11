@@ -20,6 +20,7 @@ const FeeHistoryChart = ({ data, ...props }) => {
       {
         name: "Total fee history",
         data: transformedData,
+        showInNavigator: true,
       },
     ],
     tooltip: {
@@ -42,6 +43,7 @@ const FeeHistoryChart = ({ data, ...props }) => {
       <HighchartsReact
         highcharts={Highcharts}
         options={options}
+        constructorType={"stockChart"}
       />
     </Card>
   );

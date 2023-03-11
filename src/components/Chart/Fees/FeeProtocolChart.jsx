@@ -5,7 +5,7 @@ import Card from "../../Card";
 import { TimeFrameSelector } from "../../TimeFrameSelector/TimeFrameSelector";
 import { TIMEFRAMES_LIMITED } from "../../../constants/timeframes";
 import { useState } from "react";
-import { groupDatesByPeriod } from "../../../utils/helpers";
+import { groupDatesByPeriod, formatNumberToLocale } from "../../../utils/helpers";
 import { time } from "highcharts";
 
 export const FeeProtocolChart = ({ dataSets }) => {
@@ -26,7 +26,7 @@ export const FeeProtocolChart = ({ dataSets }) => {
         name: "Revenue",
         data: [...dataSets.revenue],
         showInLegend: Boolean(!dataSets.revenue.every(([y, value]) => value === 0)),
-        color: Highcharts.theme.colors[1],
+        color: "#3521bb",
       },
       {
         name: "Moving average fees (90d)",
@@ -45,6 +45,13 @@ export const FeeProtocolChart = ({ dataSets }) => {
     yAxis: {
       title: {
         text: "Amount in usd",
+      },
+    },
+    tooltip: {
+      formatter: function () {
+        return this.points.reduce(function (s, point) {
+          return s + `<br/><span style='color:${point.color}'> ${point.series.name}</span>: ${formatNumberToLocale(point.y)}`;
+        }, "<b>" + this.x + "</b>");
       },
     },
     plotOptions: {
@@ -86,6 +93,7 @@ export const FeeProtocolChart = ({ dataSets }) => {
       <HighchartsReact
         highcharts={Highcharts}
         options={chartOptions}
+        constructorType={"stockChart"}
       />
     </Card>
   );

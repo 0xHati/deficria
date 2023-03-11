@@ -10,7 +10,6 @@ export const Hero = () => {
   const { data } = useQuery(["protocols"], () => fetchData(defillama.tvl.protocols()));
 
   const numberProtocols = data.length;
-  console.log(numberProtocols);
 
   return (
     <>

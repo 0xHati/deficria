@@ -1,6 +1,7 @@
 // define global options here for all charts
 
-import Highcharts from "highcharts";
+// import Highcharts from "highcharts";
+import Highcharts from "highcharts/highstock";
 
 export const COLORS = {
   BG: "#12182b",
@@ -37,6 +38,7 @@ Highcharts.theme = {
         color: COLORS.TEXT,
       },
     },
+
     title: {
       style: {
         color: COLORS.TEXT,
@@ -50,7 +52,7 @@ Highcharts.theme = {
         color: COLORS.TEXT,
       },
     },
-
+    opposite: false,
     title: {
       style: {
         color: COLORS.TEXT,
@@ -92,12 +94,53 @@ Highcharts.theme = {
           [1, "#22426d"],
         ],
       },
+      animation: false,
       marker: {
         lineColor: "#d0ff00",
         radius: 6,
       },
     },
     stacking: "normal",
+  },
+  navigator: {
+    enabled: false,
+  },
+  scrollbar: {
+    enabled: false,
+  },
+  rangeSelector: {
+    allButtonsEnabled: false,
+    selected: 1,
+    buttonTheme: {
+      fill: "none",
+      r: 5,
+      style: {
+        color: COLORS.SERIES[0],
+        fontWeight: "bold",
+        border: "1px solid white",
+      },
+      states: {
+        hover: {
+          fill: "#22426d",
+          style: {
+            color: "#fff",
+          },
+        },
+        select: {
+          fill: "transparent",
+          style: {
+            color: "#d0ff00",
+          },
+        },
+        // disabled: { ... }
+      },
+    },
+
+    labelStyle: {
+      display: "none",
+    },
+
+    inputEnabled: false,
   },
 };
 

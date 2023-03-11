@@ -26,9 +26,11 @@ The table can be expanded with all the data showing next to each other or collap
 //eventually data is further grouped to have one point every week
 const TIMESPAN_SPARKLINE = 3;
 
-export const FeesTable = ({ isExpanded = true, timeFrame = "total24h" }) => {
-  const { data } = useQuery(["fees"], () =>
-    fetchData(defillama.feesRevenue.all({ exludeTotalDataChart: false, exludeTotalDataChartBreakdown: false }))
+const FeesTable = ({ isExpanded = true, timeFrame = "total24h" }) => {
+  const { data, isLoading } = useQuery(
+    ["fees"],
+    () => fetchData(defillama.feesRevenue.all({ exludeTotalDataChart: false, exludeTotalDataChartBreakdown: false })),
+    false
   );
 
   useMemo(() => transformDataSparkline(data, TIMESPAN_SPARKLINE), [data]);
@@ -93,18 +95,20 @@ export const FeesTable = ({ isExpanded = true, timeFrame = "total24h" }) => {
   });
 
   return (
-    <Suspense>
+    <>
       {isExpanded && (
         <Filter
           table={tableInstance}
           column={tableInstance.getColumn("name")}
         />
       )}
-      <Table
-        tableInstance={tableInstance}
-        linkTo={"/fees"}
-      />
-    </Suspense>
+      {!isLoading && (
+        <Table
+          tableInstance={tableInstance}
+          linkTo={"/fees"}
+        />
+      )}
+    </>
   );
 };
 
@@ -131,3 +135,5 @@ const transformDataSparkline = (data, timespan) => {
     protocol.sparkline = valuesArray;
   }
 };
+
+export default FeesTable;

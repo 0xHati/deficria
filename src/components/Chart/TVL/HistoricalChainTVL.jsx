@@ -1,5 +1,6 @@
 import HighchartsReact from "highcharts-react-official";
 import { formatNumberToLocale } from "../../../utils/helpers";
+import Card from "../../Card";
 import Highcharts from "../highChartsTheme";
 
 const HistoricalChainTVL = ({ data }) => {
@@ -62,10 +63,13 @@ const HistoricalChainTVL = ({ data }) => {
     },
   };
   return (
-    <HighchartsReact
-      highcharts={Highcharts}
-      options={options}
-    />
+    <Card>
+      <HighchartsReact
+        highcharts={Highcharts}
+        options={options}
+        constructorType={"stockChart"}
+      />
+    </Card>
   );
 };
 

@@ -3,9 +3,9 @@ import { lazy } from "react";
 import { Tab, TabList, TabPanel, useTabState } from "ariakit";
 import Card from "../Card";
 import styles from "./TablesTab.module.scss";
-import { FeesTable } from "../Table/FeesTable";
-import { DexTable } from "../Table/DexTable";
-import { TotalValueLockedTable } from "../Table/TotalValueLocked";
+import FeesTable from "../Table/FeesTable";
+import DexTable from "../Table/DexTable";
+import TotalValueLockedTable from "../Table/TotalValueLocked";
 
 const TablesTab = ({}) => {
   const defaultSelectedId = "default";

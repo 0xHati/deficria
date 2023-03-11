@@ -4,21 +4,51 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { slug } from "../../utils/helpers";
 import { styleNumber } from "../../utils/helpers";
-import { useWindowVirtualizer } from "@tanstack/react-virtual";
+import { useWindowVirtualizer, defaultRangeExtractor } from "@tanstack/react-virtual";
 import { HiOutlineArrowDown, HiOutlineArrowUp } from "react-icons/hi";
 import Filter from "../../components/Filter";
+import { useCallback, useState, useRef, useEffect } from "react";
 
 export const Table = ({ tableInstance, linkTo }) => {
   const { getRowModel, getHeaderGroups } = tableInstance;
+  const [tableTop, setTableTop] = useState(0);
+  const tableContainerRef = useRef(null);
 
   const navigate = useNavigate();
 
   const { rows } = getRowModel();
+  useEffect(() => {
+    if (tableContainerRef?.current) {
+      setTableTop(tableContainerRef.current.offsetTop);
+    }
+  }, []);
 
   const rowVirtualizer = useWindowVirtualizer({
     count: rows.length,
-    overscan: 40,
-    estimateSize: () => 40,
+    overscan: 10,
+    estimateSize: () => 45,
+    rangeExtractor: useCallback(
+      (range) => {
+        if (!tableTop) {
+          return defaultRangeExtractor(range);
+        }
+
+        const cutoff = tableTop / 45;
+
+        let startIndex = range.startIndex;
+
+        if (range.startIndex <= cutoff) {
+          startIndex = 1;
+        }
+
+        if (range.startIndex - cutoff > 0) {
+          startIndex = range.startIndex - Math.round(cutoff);
+        }
+
+        return defaultRangeExtractor({ ...range, startIndex });
+      },
+      [tableTop]
+    ),
   });
 
   const virtualItems = rowVirtualizer.getVirtualItems();
@@ -32,7 +62,9 @@ export const Table = ({ tableInstance, linkTo }) => {
   };
 
   return (
-    <div className={styles["table-container"]}>
+    <div
+      className={styles["table-container"]}
+      ref={tableContainerRef}>
       <table>
         <thead>
           {getHeaderGroups().map((headerGroup) => (

@@ -18,7 +18,6 @@ const FeeStats = ({ data }) => {
 
   useMemo(() => transformDataSparkline(data, TIMESPAN_SPARKLINE), [data]);
 
-  console.log(data);
   return (
     <Card className={styles["stats-container"]}>
       <Stat
@@ -41,9 +40,7 @@ const FeeStats = ({ data }) => {
 const transformDataSparkline = (data, timespan) => {
   const referenceTime = subMonths(new Date(), timespan);
   const filteredData = data.totalDataChart.map(([time, value]) => [unixToMs(time), value]).filter(([time, value]) => time > referenceTime);
-  console.log(filteredData);
   const groupedData = groupDatesByWeek(filteredData);
-  console.log(groupedData);
 
   data.sparkline = groupedData;
 };

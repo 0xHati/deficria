@@ -61,6 +61,7 @@ const VolumesChart = ({ data }) => {
     <HighchartsReact
       highcharts={Highcharts}
       options={options}
+      constructorType={"stockChart"}
     />
   );
 };

@@ -3,6 +3,7 @@ import HighchartsReact from "highcharts-react-official";
 import { COLORS } from "../highChartsTheme";
 
 const Sparkline = ({ data, margin }) => {
+  const [[marginKey, value]] = Object.entries(margin);
   const options = {
     chart: {
       backgroundColor: null,
@@ -13,7 +14,7 @@ const Sparkline = ({ data, margin }) => {
       height: 20,
       style: {
         overflow: "visible",
-        margin,
+        [marginKey]: value,
       },
       skipClone: true,
     },

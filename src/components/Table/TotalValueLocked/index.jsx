@@ -15,7 +15,7 @@ import { useQuery } from "react-query";
 
 import { fetchData } from "../../../utils/helpers";
 
-export const TotalValueLockedTable = ({ isExpanded = true }) => {
+const TotalValueLockedTable = ({ isExpanded = true }) => {
   const { data } = useQuery(["TVL"], () => fetchData(defillama.tvl.protocols()));
 
   data.forEach((item, index) => (data[index].chains = data[index].chains.toString()));
@@ -78,3 +78,5 @@ export const TotalValueLockedTable = ({ isExpanded = true }) => {
     />
   );
 };
+
+export default TotalValueLockedTable;

@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 
 //is exactly the same as FeesTable, so not sure if could reuse.
 // Kept it seperate to easily customize things if needed per table
-export const DexTable = ({ isExpanded = true, timeFrame = "total24h" }) => {
+const DexTable = ({ isExpanded = true, timeFrame = "total24h" }) => {
   const { data } = useQuery(["dex"], () => fetchData(defillama.volumes.dexsAll()));
   data.protocols.forEach((item, index) => (data.protocols[index].chains = data.protocols[index].chains.toString()));
 
@@ -68,3 +68,5 @@ export const DexTable = ({ isExpanded = true, timeFrame = "total24h" }) => {
     />
   );
 };
+
+export default DexTable;

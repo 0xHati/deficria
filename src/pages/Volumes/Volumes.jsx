@@ -1,4 +1,4 @@
-import { DexTable } from "../../components/Table/DexTable";
+import DexTable from "../../components/Table/DexTable";
 import { useQuery } from "react-query";
 import { fetchData } from "../../utils/helpers";
 import defillama from "defillama-api";
