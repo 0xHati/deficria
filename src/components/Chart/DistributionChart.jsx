@@ -7,13 +7,15 @@ const createThreshold = (data, threshold) => {
   const sum = filteredData.reduce((acc, prevItem) => {
     return (acc += prevItem.y);
   }, 0);
+  console.log(filteredData);
   filteredData.push({ name: "other", y: 100 - sum });
   return filteredData;
 };
 
-const DistributionChart = ({ data, title }) => {
-  const FEES_PIECHART_THRESHOLD = 1;
-  const filteredData = createThreshold(data, FEES_PIECHART_THRESHOLD);
+const DistributionChart = ({ data, title, threshold }) => {
+  console.log(data);
+
+  const filteredData = createThreshold(data, threshold);
 
   const options = {
     chart: {

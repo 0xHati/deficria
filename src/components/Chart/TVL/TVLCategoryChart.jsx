@@ -3,10 +3,11 @@ import HighchartsReact from "highcharts-react-official";
 import Highcharts from "../highChartsTheme";
 import Card from "../../Card";
 import { COLORS } from "../highChartsTheme";
+import { formatNumberToLocale } from "../../../utils/helpers";
 
 const THRESHOLD = 1; //threshold for 'other' category
 
-const TVLCategoryChart = ({ data }) => {
+const TVLCategoryChart = ({ data, totalTVL }) => {
   let chartData = {};
   data.map(({ category, tvl }) => {
     if (!chartData[category]) {
@@ -16,7 +17,6 @@ const TVLCategoryChart = ({ data }) => {
     }
   });
   chartData = createThreshold(Object.entries(chartData), THRESHOLD);
-  console.log(chartData.map(([category, value]) => category));
   const options = {
     chart: {
       type: "bar",
@@ -75,7 +75,6 @@ const createThreshold = (data, threshold) => {
   const filteredData = data.filter(([category, tvl]) => {
     return (tvl / sum) * 100 > threshold;
   });
-  console.log(filteredData);
 
   const remaining = filteredData.reduce((acc, [category, tvl]) => {
     acc += tvl;

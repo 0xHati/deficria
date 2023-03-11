@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { Suspense, useMemo } from "react";
 import { useQuery } from "react-query";
 import Filter from "../../components/Filter";
 import HistoricalChainTVL from "../../components/Chart/TVL/HistoricalChainTVL";
@@ -18,19 +18,35 @@ const TotalValueLocked = () => {
 
   const { data: dataTVLChains } = useQuery(["TVL", "chains"], () => fetchData(defillama.tvl.chains()));
 
+  const TVLChainsTotal = dataTVLChains.reduce((acc, { tvl }) => {
+    return (acc += tvl);
+  }, 0);
+
+  const totalTVL = useMemo(() => {
+    return dataTVL.reduce((acc, { tvl }) => {
+      acc += tvl;
+
+      return acc;
+    }, 0);
+  });
   return (
     <>
       <Suspense fallback={<>Loading...</>}>
         <TVLStats
-          protocols={dataTVL}
+          totalTVL={totalTVL}
           history={dataTVLHistory}
+          totalProtocols={dataTVL.length}
         />
         <ChartContainer>
-          <TVLCategoryChart data={dataTVL} />
+          <TVLCategoryChart
+            totalTVL={totalTVL}
+            data={dataTVL}
+          />
           <Card>
             <DistributionChart
-              data={transformData(dataTVLChains)}
-              title={"TVL Distribution"}
+              data={transformData(dataTVLChains, TVLChainsTotal)}
+              title={"TVL Distribution (chains)"}
+              threshold={0.01}
             />
           </Card>
 
@@ -42,9 +58,11 @@ const TotalValueLocked = () => {
   );
 };
 
-const transformData = (dataTVLChains) => {
+const transformData = (dataTVLChains, totalTVL) => {
+  console.log(totalTVL);
   return dataTVLChains.map(({ name, tvl }) => {
-    return { name: name, y: tvl };
+    console.log({ name, tvl });
+    return { name: name, y: (tvl / totalTVL) * 100 };
   });
 };
 

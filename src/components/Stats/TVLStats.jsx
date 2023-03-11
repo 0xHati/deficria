@@ -9,11 +9,12 @@ import Sparkline from "../Chart/Fees/Sparkline";
 const TIMESPAN_SPARKLINE = 3;
 const TVL_TIMESPAN = 7; // compare current tvl with 7 days ago
 
-const TVLStats = ({ protocols, history }) => {
-  const numberProtocols = { title: "Number of protocols", number: protocols.length };
+const TVLStats = ({ totalTVL, history, totalProtocols }) => {
+  const numberProtocols = { title: "Number of protocols", number: totalProtocols };
+
   const currentTVL = {
     title: "Current TVL",
-    number: formatNumberToLocale(history.at(-1).tvl),
+    number: formatNumberToLocale(totalTVL),
     percentage: ((history.at(-1).tvl - history.at(-TVL_TIMESPAN).tvl) / history.at(-TVL_TIMESPAN).tvl).toFixed(2),
     info: `(vs 7d ago)`,
   };
