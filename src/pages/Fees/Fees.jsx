@@ -37,10 +37,10 @@ const Fees = () => {
               className={styles.chart}
             />
 
-            <FeeDistributionChartHistory
+            {/* <FeeDistributionChartHistory
               data={data.totalDataChartBreakdown}
               className={styles.chart}
-            />
+            /> */}
           </div>
 
           <FeesTable

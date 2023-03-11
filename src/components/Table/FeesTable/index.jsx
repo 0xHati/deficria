@@ -14,9 +14,9 @@ import { getColumns } from "./columns";
 import Filter from "../../Filter";
 import defillama from "defillama-api";
 import { useQuery } from "react-query";
+import { fetchData, unixToMs, groupDatesByWeek } from "../../../utils/helpers";
+
 import { subMonths } from "date-fns";
-import { unixToMs, groupDatesByWeek } from "../../../utils/helpers";
-import { fetchData } from "../../../utils/helpers";
 
 /*
 The table can be expanded with all the data showing next to each other or collapsed with the option to toggle fees
@@ -116,7 +116,6 @@ const transformDataSparkline = (data, timespan) => {
     .filter(([time]) => {
       return time > referenceTime;
     });
-
   const groupedData = groupDatesByWeek(filteredData);
 
   for (const protocol of data.protocols) {

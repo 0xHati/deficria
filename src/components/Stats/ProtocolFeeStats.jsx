@@ -35,7 +35,7 @@ const ProtocolFeeStats = ({ dataRevenue, protocol }) => {
     title: "Fees",
     number: `${formatNumberToLocale(feeStats[selectedTimeFrame].fees, true)} or ${formatNumberToLocale(
       feeStats[selectedTimeFrame].fees / coinPrice,
-      false,
+      true,
       false
     )} ${coinSymbol}`,
     percentage: feeStats[selectedTimeFrame].change,
@@ -56,7 +56,7 @@ const ProtocolFeeStats = ({ dataRevenue, protocol }) => {
     title: "Revenue annualized",
     number: `${formatNumberToLocale(dataRevenue.total24h * 365, true)} or ${formatNumberToLocale(
       (dataRevenue.total24h * 365) / coinPrice,
-      false,
+      true,
       false
     )} ${coinSymbol}`,
     isCurrency: true,

@@ -83,7 +83,12 @@ export const getColumns = (isExpanded) => {
     {
       header: "Trend",
       accessorKey: "sparkline",
-      cell: ({ getValue }) => <Sparkline data={getValue()} />,
+      cell: ({ getValue }) => (
+        <Sparkline
+          data={getValue()}
+          margin={{ marginLeft: "auto" }}
+        />
+      ),
       size: 150,
     },
   ];

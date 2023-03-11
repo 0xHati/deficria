@@ -5,8 +5,6 @@ import Highcharts from "../highChartsTheme";
 import { unixToMs } from "../../../utils/helpers";
 
 const FeeDistributionChartHistory = ({ data, ...props }) => {
-  console.log(data);
-
   let transformedData = {};
 
   //put into memo

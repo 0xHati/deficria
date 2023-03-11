@@ -2,7 +2,7 @@ import Highcharts from "../highChartsTheme";
 import HighchartsReact from "highcharts-react-official";
 import { COLORS } from "../highChartsTheme";
 
-const Sparkline = ({ data }) => {
+const Sparkline = ({ data, margin }) => {
   const options = {
     chart: {
       backgroundColor: null,
@@ -13,7 +13,7 @@ const Sparkline = ({ data }) => {
       height: 20,
       style: {
         overflow: "visible",
-        marginLeft: "auto",
+        margin,
       },
       skipClone: true,
     },
@@ -53,8 +53,6 @@ const Sparkline = ({ data }) => {
             enabled: false,
           },
         },
-
-        // fillOpacity: 0.25,
       },
     },
     area: {
@@ -73,7 +71,6 @@ const Sparkline = ({ data }) => {
     <HighchartsReact
       highcharts={Highcharts}
       options={options}
-      style={{ marginLeft: "auto" }}
     />
   );
 };

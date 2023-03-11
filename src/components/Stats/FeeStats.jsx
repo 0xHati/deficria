@@ -1,36 +1,51 @@
-import { TimeFrameSelectorCompact } from "../TimeFrameSelector/TimeFrameSelector";
-import { getNextTimeFrame } from "../../utils/helpers";
-import { useState } from "react";
+import { getNextTimeFrame, unixToMs } from "../../utils/helpers";
+
 import Stat from "./Stat";
 import styles from "./Stat.module.scss";
 import Card from "../Card";
+import { formatNumberToLocale, groupDatesByWeek } from "../../utils/helpers";
+import { useMemo } from "react";
+import Sparkline from "../Chart/Fees/Sparkline";
+import { subMonths } from "date-fns";
+
+const TIMESPAN_SPARKLINE = 3;
 
 const FeeStats = ({ data }) => {
-  const feeDay = { title: "Today Fees", number: data.total24h, percentage: data.change_1d };
+  const feeDay = { title: "Fees (last 24h)", number: formatNumberToLocale(data.total24h), percentage: data.change_1d };
 
-  const revenueDay = { title: "Today Revenue", number: data.dailyRevenue };
+  const revenueDay = { title: "Revenue (last 24h)", number: formatNumberToLocale(data.dailyRevenue) };
   const numberProtocols = { title: "Number of protocols", number: data.protocols.length };
-  const [selectedTimeFrame, setSelectedTimeFrame] = useState("total24h");
 
-  const handleChangeTimeFrame = (timeFrame) => {
-    const nextTimeFrame = getNextTimeFrame(TIMEFRAMES_LIMITED, timeFrame);
-    setChartData(prepareData(nextTimeFrame));
-    setSelectedTimeFrame(nextTimeFrame);
-  };
+  useMemo(() => transformDataSparkline(data, TIMESPAN_SPARKLINE), [data]);
+
+  console.log(data);
   return (
     <Card className={styles["stats-container"]}>
-      {/* <TimeFrameSelectorCompact
-        timeFrame={selectedTimeFrame}
-        onSetTimeFrame={handleChangeTimeFrame}
-      /> */}
       <Stat
         {...numberProtocols}
         isCurrency={false}
       />
       <Stat {...feeDay} />
       <Stat {...revenueDay} />
+      <div className={styles.stat}>
+        <p className={styles.title}>Trend (last 3 months)</p>
+        <Sparkline
+          data={data.sparkline}
+          margin={{ marginRight: "auto" }}
+        />
+      </div>
     </Card>
   );
+};
+
+const transformDataSparkline = (data, timespan) => {
+  const referenceTime = subMonths(new Date(), timespan);
+  const filteredData = data.totalDataChart.map(([time, value]) => [unixToMs(time), value]).filter(([time, value]) => time > referenceTime);
+  console.log(filteredData);
+  const groupedData = groupDatesByWeek(filteredData);
+  console.log(groupedData);
+
+  data.sparkline = groupedData;
 };
 
 export default FeeStats;
