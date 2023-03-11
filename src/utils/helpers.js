@@ -1,7 +1,9 @@
 import { endOfWeek, endOfMonth } from "date-fns";
 
-export const formatNumberToLocale = function (number, isCompact = false) {
-  return number.toLocaleString(navigator.language, { style: "currency", currency: "USD", ...(isCompact && { notation: "compact" }) });
+export const formatNumberToLocale = function (number, isCompact = false, isCurrency = true) {
+  return isCurrency
+    ? number.toLocaleString(navigator.language, { style: "currency", currency: "USD", ...(isCompact && { notation: "compact" }) })
+    : number.toLocaleString(navigator.language);
 };
 
 export const slug = (string) => {

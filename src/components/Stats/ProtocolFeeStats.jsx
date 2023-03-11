@@ -1,5 +1,5 @@
 import { calculateFeeStats } from "../../utils/helpers";
-import { fetchData, getNextTimeFrame, slug } from "../../utils/helpers";
+import { fetchData, getNextTimeFrame, slug, formatNumberToLocale } from "../../utils/helpers";
 import { useQuery } from "react-query";
 import defillama from "defillama-api";
 import Card from "../Card";
@@ -14,18 +14,32 @@ const ProtocolFeeStats = ({ dataRevenue, protocol }) => {
   const [selectedTimeFrame, setSelectedTimeFrame] = useState("total24h");
   const { data: feeData } = useQuery(["fees"], () => fetchData(defillama.feesRevenue.all()));
 
-  const feeStats = calculateFeeStats(feeData).find((item) => slug(item.name) === slug(protocol));
-  // const revenueStats = calculateFeeStats(dataRevenue).find((item) => slug(item.name) === slug(protocol));
+  const { data: priceData } = useQuery(
+    ["price", protocol],
+    () => fetchData(defillama.coins.pricesCurrent([{ coingecko: dataRevenue.gecko_id }])),
+    !!dataRevenue.gecko_id
+  );
 
-  console.log(dataRevenue);
+  const feeStats = calculateFeeStats(feeData).find((item) => slug(item.name) === slug(protocol));
 
   const handleChangeTimeFrame = (timeFrame) => {
     const nextTimeFrame = getNextTimeFrame(TIMEFRAMES_LIMITED, timeFrame);
     setSelectedTimeFrame(nextTimeFrame);
   };
 
-  const feeRank = { title: "Rank", number: feeStats[selectedTimeFrame].rank, isCurrency: false };
-  const feeAmount = { title: "Fees", number: feeStats[selectedTimeFrame].fees, isCurrency: true, percentage: feeStats[selectedTimeFrame].change };
+  const coinPrice = Object.values(priceData.coins)[0].price;
+  const coinSymbol = Object.values(priceData.coins)[0].symbol;
+
+  const feeRank = { title: "Rank", number: feeStats[selectedTimeFrame].rank };
+  const feeAmount = {
+    title: "Fees",
+    number: `${formatNumberToLocale(feeStats[selectedTimeFrame].fees, true)} or ${formatNumberToLocale(
+      feeStats[selectedTimeFrame].fees / coinPrice,
+      false,
+      false
+    )} ${coinSymbol}`,
+    percentage: feeStats[selectedTimeFrame].change,
+  };
   const feeShare = {
     title: "Market Share",
     number: (feeStats[selectedTimeFrame].percentage * 100).toFixed(2) + "%",
@@ -33,9 +47,19 @@ const ProtocolFeeStats = ({ dataRevenue, protocol }) => {
   };
   const RevenueAmount = {
     title: "Revenue (last 24h)",
-    number: dataRevenue.total24h,
+    number: formatNumberToLocale(dataRevenue.total24h, true),
     isCurrency: true,
-    percentage: dataRevenue.total24h.change_1d,
+    percentage: dataRevenue.change_1d,
+  };
+
+  const RevenueAnnualized = {
+    title: "Revenue annualized",
+    number: `${formatNumberToLocale(dataRevenue.total24h * 365, true)} or ${formatNumberToLocale(
+      (dataRevenue.total24h * 365) / coinPrice,
+      false,
+      false
+    )} ${coinSymbol}`,
+    isCurrency: true,
   };
 
   return (
@@ -58,6 +82,7 @@ const ProtocolFeeStats = ({ dataRevenue, protocol }) => {
         <Stat {...feeAmount} />
         <Stat {...feeShare} />
         <Stat {...RevenueAmount} />
+        <Stat {...RevenueAnnualized} />
       </div>
     </Card>
   );
