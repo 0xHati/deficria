@@ -2,6 +2,7 @@
 
 // import Highcharts from "highcharts";
 import Highcharts from "highcharts/highstock";
+import annotations from "highcharts/modules/annotations";
 
 export const COLORS = {
   BG: "#12182b",
@@ -150,4 +151,6 @@ Highcharts.theme = {
 };
 
 Highcharts.setOptions(Highcharts.theme);
+annotations(Highcharts);
+
 export default Highcharts;

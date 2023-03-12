@@ -1,9 +1,8 @@
-import { chart } from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "./highChartsTheme";
 import Card from "../Card";
 import { COLORS } from "./highChartsTheme";
-import { formatNumberToLocale, formatDate } from "../../utils/helpers";
+import { formatNumberToLocale } from "../../utils/helpers";
 
 const CategoryChart = ({ data, threshold }) => {
   const filteredData = createThreshold(Object.entries(data), threshold);

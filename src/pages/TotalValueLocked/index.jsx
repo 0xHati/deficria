@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 import Filter from "../../components/Filter";
 import TotalValueLockedTable from "../../components/Table/TotalValueLocked";
 import Card from "../../components/Card";
-import { fetchData } from "../../utils/helpers";
+import { fetchData, unixToMs } from "../../utils/helpers";
 import defillama from "defillama-api";
 import styles from "./TotalValueLocked.module.scss";
 import TVLStats from "../../components/Stats/TVLStats";
@@ -89,7 +89,9 @@ const TotalValueLocked = () => {
           </Card>
 
           <LineChart
-            data={dataTVLHistory}
+            data={dataTVLHistory.map(({ date, tvl }) => {
+              return { x: unixToMs(date), y: tvl };
+            })}
             title={"TVL history"}
           />
         </ChartContainer>

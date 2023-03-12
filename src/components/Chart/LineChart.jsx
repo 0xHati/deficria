@@ -1,21 +1,16 @@
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "./highChartsTheme";
-import { formatNumberToLocale, formatDate } from "../../utils/helpers";
+import { formatNumberToLocale, formatDate, unixToMs } from "../../utils/helpers";
 import Card from "../Card";
 import { COLORS } from "./highChartsTheme";
 
-const LineChart = ({ data, title, ...props }) => {
-  const transformedData = data.map((entry) => {
-    let time, val;
-    if (typeof entry === "object") {
-      [time, val] = Object.values(entry);
-    }
-    if (typeof entry === "array") {
-      [time, val] = entry;
-    }
-    return [new Date(time * 1000).getTime(), val];
+const LineChart = ({ data, title, annotations, ...props }) => {
+  const ann = annotations?.map(([date, description]) => {
+    const markerValue = data.find(({ x, y }) => x === unixToMs(date));
+    console.log(markerValue);
+    return { point: { xAxis: 0, yAxis: 0, x: unixToMs(date), y: markerValue?.y }, text: description };
   });
-
+  console.log(ann);
   const options = {
     chart: {
       zoomType: "x",
@@ -26,15 +21,32 @@ const LineChart = ({ data, title, ...props }) => {
     },
     series: [
       {
-        name: "Total fee history",
-        data: transformedData,
+        data: data,
+        turboThreshold: 5000,
       },
     ],
     tooltip: {
       formatter: function () {
-        return `<br/><span> ${formatDate(this.x)}<br/><span style='font-weight: bold'> ${formatNumberToLocale(this.y)}</span>`;
+        return `<br/><span> ${formatDate(this.x)}<br/><span style='font-weight: bold'> ${formatNumberToLocale(this.y)}`;
       },
     },
+    annotations: [
+      {
+        align: "right",
+        shape: "connector",
+        justify: false,
+        crop: true,
+        labelOptions: {
+          backgroundColor: COLORS.ACCENT,
+          style: {
+            fontSize: "0.8em",
+            color: "black",
+          },
+        },
+
+        labels: ann,
+      },
+    ],
 
     xAxis: {
       type: "datetime",
@@ -46,12 +58,12 @@ const LineChart = ({ data, title, ...props }) => {
       plotLines: [
         {
           color: COLORS.ACCENT,
-          value: transformedData[transformedData.length - 1][1],
+          value: data[data.length - 1].y,
           width: "1",
           dashStyle: "dash",
 
           label: {
-            text: formatNumberToLocale(transformedData[transformedData.length - 1][1], true),
+            text: formatNumberToLocale(data[data.length - 1].y, true),
             useHTML: true,
             style: {
               color: COLORS.ACCENT_DARK,

@@ -28,7 +28,6 @@ const StackedLineChart = ({ data, title, ...props }) => {
     tooltip: {
       formatter: function () {
         return this.points.reduce(function (s, point) {
-          console.log(point);
           return s + `<br/><span style='color:${point.color}'> ${point.series.name}</span>: ${formatNumberToLocale(point.y)}`;
         }, "<b>" + formatDate(this.x) + "</b>");
       },

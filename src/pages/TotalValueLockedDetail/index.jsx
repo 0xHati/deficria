@@ -7,6 +7,9 @@ import CategoryChart from "../../components/Chart/CategoryChart";
 import ChartContainer from "../../components/Chart/ChartContainer";
 import { useMemo } from "react";
 import StackedLineChart from "../../components/Chart/StackedLineChart";
+import TVLDetailStats from "../../components/Stats/TVLDetailStats";
+import { AiOutlineFire } from "react-icons/ai";
+import { COLORS } from "../../components/Chart/highChartsTheme";
 
 const TotalValueLockedDetail = () => {
   const { protocol } = useParams();
@@ -26,21 +29,35 @@ const TotalValueLockedDetail = () => {
     return transformedData;
   }, [dataProtocol]);
 
+  const tvlHistory = useMemo(() => {
+    return dataProtocol.tvl.map(({ date, totalLiquidityUSD }) => {
+      return {
+        x: unixToMs(date),
+        y: totalLiquidityUSD,
+      };
+    });
+  });
+
   return (
     <>
+      <TVLDetailStats data={dataProtocol} />
       <ChartContainer>
         <LineChart
-          data={dataProtocol.tvl}
+          data={tvlHistory}
           title={"TVL over time"}
+          annotations={dataProtocol?.hallmarks}
         />
         <CategoryChart
           data={dataProtocol.currentChainTvls}
           threshold={0.5}
         />
-        <StackedLineChart
-          data={distributionChartData}
-          title={"TVL per Chain"}
-        />
+        {/* only show if there are more chains */}
+        {Object.keys(distributionChartData).length > 1 && (
+          <StackedLineChart
+            data={distributionChartData}
+            title={"TVL per Chain"}
+          />
+        )}
       </ChartContainer>
     </>
   );

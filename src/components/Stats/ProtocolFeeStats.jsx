@@ -12,7 +12,7 @@ import { useState } from "react";
 
 const ProtocolFeeStats = ({ dataRevenue, protocol }) => {
   const [selectedTimeFrame, setSelectedTimeFrame] = useState("total24h");
-  const { data: feeData } = useQuery(["fees"], () => fetchData(defillama.feesRevenue.all()));
+  const { data: feeData } = useQuery(["fees", "nochart"], () => fetchData(defillama.feesRevenue.all()));
 
   const { data: priceData } = useQuery(
     ["price", protocol],
