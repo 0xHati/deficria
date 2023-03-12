@@ -134,6 +134,11 @@ Highcharts.theme = {
             opacity: 1,
           },
         },
+        disabled: {
+          style: {
+            opacity: 0.5,
+          },
+        },
       },
     },
     labelStyle: {

@@ -1,32 +1,18 @@
 import HighchartsReact from "highcharts-react-official";
 import { Suspense, useMemo } from "react";
-import Card from "../../Card";
-import Highcharts from "../highChartsTheme";
-import { unixToMs, formatNumberToLocale, formatDate } from "../../../utils/helpers";
-import { COLORS } from "../highChartsTheme";
+import Card from "../Card";
+import Highcharts from "./highChartsTheme";
+import { unixToMs, formatNumberToLocale, formatDate } from "../../utils/helpers";
+import { COLORS } from "./highChartsTheme";
 
-const FeeProtocolDistribution = ({ data, ...props }) => {
-  let transformedData = {};
-
-  useMemo(() => {
-    data.forEach(([time, chains]) => {
-      Object.entries(chains).forEach(([chain, value]) => {
-        //sum over different versions on the chain (ex uni v1, uni v2)
-        const sum = Object.values(value).reduce((acc, prev) => (acc += prev), 0);
-        if (!transformedData[chain]) {
-          transformedData[chain] = [[unixToMs(time), sum]];
-        } else {
-          transformedData[chain].push([unixToMs(time), sum]);
-        }
-      });
-    });
-  });
-
-  const series = Object.entries(transformedData).map(([name, data], index) => {
+const StackedLineChart = ({ data, title, ...props }) => {
+  const series = Object.entries(data).map(([name, data], index) => {
     return {
       name: name,
       data: data,
       fillColor: COLORS.SERIES[index],
+      //needed to get the color in the tooltip
+      color: COLORS.SERIES[index],
     };
   });
 
@@ -36,12 +22,13 @@ const FeeProtocolDistribution = ({ data, ...props }) => {
       zoomType: "x",
     },
     title: {
-      text: "Fee distribution over time",
+      text: title,
     },
 
     tooltip: {
       formatter: function () {
         return this.points.reduce(function (s, point) {
+          console.log(point);
           return s + `<br/><span style='color:${point.color}'> ${point.series.name}</span>: ${formatNumberToLocale(point.y)}`;
         }, "<b>" + formatDate(this.x) + "</b>");
       },
@@ -68,6 +55,9 @@ const FeeProtocolDistribution = ({ data, ...props }) => {
       type: "datetime",
     },
     series: series,
+    legend: {
+      enabled: true,
+    },
   };
   return (
     <Card className={props.className}>
@@ -80,4 +70,4 @@ const FeeProtocolDistribution = ({ data, ...props }) => {
   );
 };
 
-export default FeeProtocolDistribution;
+export default StackedLineChart;

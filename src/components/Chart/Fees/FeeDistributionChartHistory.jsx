@@ -7,6 +7,7 @@ import { unixToMs } from "../../../utils/helpers";
 const FeeDistributionChartHistory = ({ data, ...props }) => {
   let transformedData = {};
 
+  console.log(data);
   useMemo(() => {
     data.forEach(([time, chains]) => {
       Object.entries(chains).forEach(([chain, value]) => {
