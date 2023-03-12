@@ -27,17 +27,15 @@ const ProtocolFeeStats = ({ dataRevenue, protocol }) => {
     setSelectedTimeFrame(nextTimeFrame);
   };
 
-  const coinPrice = Object.values(priceData.coins)[0].price;
-  const coinSymbol = Object.values(priceData.coins)[0].symbol;
+  const coinPrice = Object.values(priceData.coins)[0]?.price;
+  const coinSymbol = Object.values(priceData.coins)[0]?.symbol;
 
   const feeRank = { title: "Rank", number: feeStats[selectedTimeFrame].rank };
   const feeAmount = {
     title: "Fees",
-    number: `${formatNumberToLocale(feeStats[selectedTimeFrame].fees, true)} or ${formatNumberToLocale(
-      feeStats[selectedTimeFrame].fees / coinPrice,
-      true,
-      false
-    )} ${coinSymbol}`,
+    number: `${formatNumberToLocale(feeStats[selectedTimeFrame].fees, true)}${
+      coinPrice ? ` or ${formatNumberToLocale(feeStats[selectedTimeFrame].fees / coinPrice, true, false)} ${coinSymbol}` : ``
+    }`,
     percentage: feeStats[selectedTimeFrame].change,
   };
   const feeShare = {
@@ -54,11 +52,10 @@ const ProtocolFeeStats = ({ dataRevenue, protocol }) => {
 
   const RevenueAnnualized = {
     title: "Revenue annualized",
-    number: `${formatNumberToLocale(dataRevenue.total24h * 365, true)} or ${formatNumberToLocale(
-      (dataRevenue.total24h * 365) / coinPrice,
-      true,
-      false
-    )} ${coinSymbol}`,
+    number: `${formatNumberToLocale(dataRevenue.total24h * 365, true)}${
+      coinPrice ? ` or ${formatNumberToLocale((dataRevenue.total24h * 365) / coinPrice, true, false)} ${coinSymbol}` : ` `
+    }`,
+
     isCurrency: true,
   };
 

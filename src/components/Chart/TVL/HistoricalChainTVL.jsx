@@ -1,7 +1,8 @@
 import HighchartsReact from "highcharts-react-official";
-import { formatNumberToLocale } from "../../../utils/helpers";
+import { formatNumberToLocale, formatDate } from "../../../utils/helpers";
 import Card from "../../Card";
 import Highcharts from "../highChartsTheme";
+import { COLORS } from "../highChartsTheme";
 
 const HistoricalChainTVL = ({ data }) => {
   const transformedData = data.map(({ date, tvl }) => {
@@ -25,7 +26,7 @@ const HistoricalChainTVL = ({ data }) => {
     ],
     tooltip: {
       formatter: function () {
-        return `<br/><span> ${new Date(this.x).toLocaleDateString()}<br/><span style='font-weight: bold'> ${formatNumberToLocale(this.y)}</span>`;
+        return `<br/><span> ${formatDate(this.x)}<br/><span style='font-weight: bold'> ${formatNumberToLocale(this.y)}</span>`;
       },
     },
 
@@ -38,7 +39,7 @@ const HistoricalChainTVL = ({ data }) => {
       },
       plotLines: [
         {
-          color: "#b7e000",
+          color: COLORS.ACCENT,
           value: transformedData[transformedData.length - 1][1],
           width: "1",
           dashStyle: "dash",
@@ -47,8 +48,8 @@ const HistoricalChainTVL = ({ data }) => {
             text: formatNumberToLocale(transformedData[transformedData.length - 1][1], true),
             useHTML: true,
             style: {
-              color: "#212900",
-              backgroundColor: "#d0ff00",
+              color: COLORS.ACCENT_DARK,
+              backgroundColor: COLORS.ACCENT,
               fontSize: "1.6rem",
               borderRadius: "20%",
               border: "2px solid black",

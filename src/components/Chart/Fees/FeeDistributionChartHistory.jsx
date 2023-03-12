@@ -1,5 +1,5 @@
 import HighchartsReact from "highcharts-react-official";
-import { Suspense } from "react";
+import { useMemo } from "react";
 import Card from "../../Card";
 import Highcharts from "../highChartsTheme";
 import { unixToMs } from "../../../utils/helpers";
@@ -7,16 +7,17 @@ import { unixToMs } from "../../../utils/helpers";
 const FeeDistributionChartHistory = ({ data, ...props }) => {
   let transformedData = {};
 
-  //put into memo
-  data.forEach(([time, chains]) => {
-    Object.entries(chains).forEach(([chain, value]) => {
-      if (!transformedData[chain]) {
-        transformedData[chain] = [[unixToMs(time), value]];
-      } else {
-        transformedData[chain].push([unixToMs(time), value]);
-      }
+  useMemo(() => {
+    data.forEach(([time, chains]) => {
+      Object.entries(chains).forEach(([chain, value]) => {
+        if (!transformedData[chain]) {
+          transformedData[chain] = [[unixToMs(time), value]];
+        } else {
+          transformedData[chain].push([unixToMs(time), value]);
+        }
+      });
     });
-  });
+  }, [data]);
 
   const series = Object.entries(transformedData).map(([name, data]) => {
     return { name: name, data: data };
@@ -25,7 +26,6 @@ const FeeDistributionChartHistory = ({ data, ...props }) => {
   const options = {
     chart: {
       type: "line",
-      //   data: data,
     },
     title: {
       text: "Fee distribution over time",
@@ -54,6 +54,7 @@ const FeeDistributionChartHistory = ({ data, ...props }) => {
       <HighchartsReact
         highcharts={Highcharts}
         options={options}
+        constructorType={"stockChart"}
       />
     </Card>
   );

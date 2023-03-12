@@ -5,11 +5,14 @@ import Highcharts from "highcharts/highstock";
 
 export const COLORS = {
   BG: "#12182b",
-  TEXT: "#fff",
-  GRID: "#aebbc11a",
+  TEXT: ["#fff", "#c1c8cd"],
+  GRID: "#16272534",
   TOOLTIP_BG: "#1d395d",
   PIE: ["#a2bee2", "#739dd3", "#457cc4", "#2962b1", "#09b4f7", "#3521bb", "#0fc9da", "#2f297c", "#141acb", "#880de7"],
-  SERIES: ["#a2bee2", "#22426d", "#739dd3", "#e89907"],
+  SERIES: ["#a2bee2", "#e89907", "#09f780", "#09b4f7", "#84cc10", "#9d458e", "#3521bb"],
+  AREA: "#22426d",
+  ACCENT: "#d0ff00",
+  ACCENT_DARK: "#212900",
 };
 
 Highcharts.theme = {
@@ -23,80 +26,75 @@ Highcharts.theme = {
   },
   title: {
     style: {
-      color: COLORS.TEXT,
+      color: COLORS.TEXT[0],
     },
     text: undefined,
   },
   legend: {
     itemStyle: {
-      color: COLORS.TEXT,
+      color: COLORS.TEXT[0],
     },
   },
   xAxis: {
     labels: {
       style: {
-        color: COLORS.TEXT,
+        color: COLORS.TEXT[0],
       },
     },
-
     title: {
       style: {
-        color: COLORS.TEXT,
+        color: COLORS.TEXT[0],
       },
     },
-    gridLineColor: "#16272534",
+    gridLineColor: COLORS.GRID,
+    // crosshair: false,
   },
   yAxis: {
     labels: {
       style: {
-        color: COLORS.TEXT,
+        color: COLORS.TEXT[0],
       },
     },
     opposite: false,
     title: {
       style: {
-        color: COLORS.TEXT,
+        color: COLORS.TEXT[0],
       },
     },
     gridLineColor: COLORS.GRID,
   },
-
   tooltip: {
     style: {
-      color: COLORS.TEXT,
-      borderColor: "blue",
+      color: COLORS.TEXT[0],
     },
-    // borderColor: "none",
     borderRadius: "10",
-
     backgroundColor: COLORS.TOOLTIP_BG,
   },
   plotOptions: {
     pie: {
-      colors: COLORS.PIE,
+      colors: COLORS.SERIES,
       dataLabels: {
         style: {
-          color: COLORS.TEXT,
+          color: COLORS.TEXT[0],
         },
       },
     },
-
     area: {
-      lineColor: "#457cc4",
-    },
-    series: {
-      stacking: "normal",
-      borderColor: "none",
+      lineColor: COLORS.SERIES[0],
       color: {
         linearGradient: { x1: 0, x2: 0, y1: 0, y2: 1 },
         stops: [
           [0, "transparent"],
-          [1, "#22426d"],
+          [1, COLORS.AREA],
         ],
       },
+    },
+    series: {
+      stacking: "normal",
+      borderColor: "none",
       animation: false,
       marker: {
-        lineColor: "#d0ff00",
+        lineColor: COLORS.ACCENT,
         radius: 6,
       },
     },
@@ -115,24 +113,26 @@ Highcharts.theme = {
       fill: "none",
       r: 5,
       style: {
-        color: COLORS.SERIES[0],
+        color: COLORS.TEXT[1],
         fontWeight: "bold",
-        border: "1px solid white",
+        border: `1px solid ${COLORS.TEXT[0]}`,
+        opacity: 0.8,
       },
       states: {
         hover: {
-          fill: "#22426d",
+          fill: COLORS.AREA,
           style: {
-            color: "#fff",
+            color: COLORS.TEXT[0],
+            opacity: 1,
           },
         },
         select: {
           fill: "transparent",
           style: {
-            color: "#d0ff00",
+            color: COLORS.ACCENT,
+            opacity: 1,
           },
         },
-        // disabled: { ... }
       },
     },
 

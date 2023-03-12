@@ -6,6 +6,10 @@ export const formatNumberToLocale = function (number, isCompact = false, isCurre
     : number.toLocaleString(navigator.language, isCompact && { notation: "compact" });
 };
 
+export const formatDate = (date) => {
+  return new Date(date).toLocaleDateString(navigator.language);
+};
+
 export const slug = (string) => {
   return string
     .split(" ")

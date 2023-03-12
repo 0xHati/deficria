@@ -6,8 +6,10 @@ import { useQuery } from "react-query";
 import defillama from "defillama-api";
 
 import ProtocolFeeStats from "../../components/Stats/ProtocolFeeStats";
+import FeeDistributionChartHistory from "../../components/Chart/Fees/FeeDistributionChartHistory";
 
 import { fetchData } from "../../utils/helpers";
+import FeeProtocolDistribution from "../../components/Chart/Fees/FeeProtocolDistribution";
 
 //TODO: add info about average fees, highest fee date, change starting date to 2019, show total revenue
 const FeesDetail = () => {
@@ -18,6 +20,8 @@ const FeesDetail = () => {
     fetchData(defillama.feesRevenue.protocol(protocol, { dataType: "dailyRevenue" }))
   );
 
+  console.log(dataFees);
+
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <div className={styles.wrapper}>
@@ -27,6 +31,7 @@ const FeesDetail = () => {
         />
 
         <FeeProtocolChart dataSets={{ fees: prepareData(dataFees), revenue: prepareData(dataRevenue) }} />
+        <FeeProtocolDistribution data={dataFees.totalDataChartBreakdown} />
       </div>
     </Suspense>
   );

@@ -3,11 +3,11 @@ import HighchartsReact from "highcharts-react-official";
 import Highcharts from "../highChartsTheme";
 import Card from "../../Card";
 import { COLORS } from "../highChartsTheme";
-import { formatNumberToLocale } from "../../../utils/helpers";
+import { formatNumberToLocale, formatDate } from "../../../utils/helpers";
 
 const THRESHOLD = 1; //threshold for 'other' category
 
-const TVLCategoryChart = ({ data, totalTVL }) => {
+const TVLCategoryChart = ({ data }) => {
   let chartData = {};
   data.map(({ category, tvl }) => {
     if (!chartData[category]) {
@@ -36,9 +36,7 @@ const TVLCategoryChart = ({ data, totalTVL }) => {
     },
     tooltip: {
       formatter: function () {
-        return this.points.reduce(function (s, point) {
-          return s + `<br/><span style='color:${point.color}'> ${point.series.name}</span>: ${formatNumberToLocale(point.y)}`;
-        }, "<b>" + this.x + "</b>");
+        return `<br/><span> ${this.x}<br/><span style='font-weight: bold'> ${formatNumberToLocale(this.y)}</span>`;
       },
     },
     plotOptions: {

@@ -31,6 +31,7 @@ const FeeDistribution = ({ feeData, ...props }) => {
       <DistributionChart
         data={chartData}
         title={"Fee Distribution"}
+        threshold={1}
       />
     </Card>
   );

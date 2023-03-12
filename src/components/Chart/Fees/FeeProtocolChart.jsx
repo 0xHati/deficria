@@ -5,7 +5,7 @@ import Card from "../../Card";
 import { TimeFrameSelector } from "../../TimeFrameSelector/TimeFrameSelector";
 import { TIMEFRAMES_LIMITED } from "../../../constants/timeframes";
 import { useState } from "react";
-import { groupDatesByPeriod, formatNumberToLocale } from "../../../utils/helpers";
+import { groupDatesByPeriod, formatNumberToLocale, formatDate } from "../../../utils/helpers";
 import { time } from "highcharts";
 
 export const FeeProtocolChart = ({ dataSets }) => {
@@ -20,27 +20,22 @@ export const FeeProtocolChart = ({ dataSets }) => {
         name: "Fees",
         data: [...dataSets.fees],
         showInLegend: Boolean(!dataSets.fees.every(([y, value]) => value === 0)),
-        color: Highcharts.theme.colors[0],
       },
       {
         name: "Revenue",
         data: [...dataSets.revenue],
         showInLegend: Boolean(!dataSets.revenue.every(([y, value]) => value === 0)),
-        color: "#3521bb",
       },
       {
         name: "Moving average fees (90d)",
         type: "spline",
         data: calculateSMA(dataSets.fees),
-        color: Highcharts.theme.colors[3],
-
         showInLegend: true,
       },
     ],
 
     xAxis: {
       type: "datetime",
-      min: new Date(2020, 1, 1).getTime(),
     },
     yAxis: {
       title: {
@@ -50,8 +45,8 @@ export const FeeProtocolChart = ({ dataSets }) => {
     tooltip: {
       formatter: function () {
         return this.points.reduce(function (s, point) {
-          return s + `<br/><span style='color:${point.color}'> ${point.series.name}</span>: ${formatNumberToLocale(point.y)}`;
-        }, "<b>" + this.x + "</b>");
+          return s + (point.y > 0 ? `<br/><span style='color:${point.color}'> ${point.series.name}</span>: ${formatNumberToLocale(point.y)}` : "");
+        }, "<b>" + formatDate(this.x) + "</b>");
       },
     },
     plotOptions: {

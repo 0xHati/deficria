@@ -13,8 +13,6 @@ const createThreshold = (data, threshold) => {
 };
 
 const DistributionChart = ({ data, title, threshold }) => {
-  console.log(data);
-
   const filteredData = createThreshold(data, threshold);
 
   const options = {
