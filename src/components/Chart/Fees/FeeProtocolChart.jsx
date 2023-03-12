@@ -6,7 +6,6 @@ import { TimeFrameSelector } from "../../TimeFrameSelector/TimeFrameSelector";
 import { TIMEFRAMES_LIMITED } from "../../../constants/timeframes";
 import { useState } from "react";
 import { groupDatesByPeriod, formatNumberToLocale, formatDate } from "../../../utils/helpers";
-import { time } from "highcharts";
 
 export const FeeProtocolChart = ({ dataSets }) => {
   const options = {

@@ -10,6 +10,7 @@ import FeeDistributionChartHistory from "../../components/Chart/Fees/FeeDistribu
 
 import { fetchData } from "../../utils/helpers";
 import FeeProtocolDistribution from "../../components/Chart/Fees/FeeProtocolDistribution";
+import ChartContainer from "../../components/Chart/ChartContainer";
 
 //TODO: add info about average fees, highest fee date, change starting date to 2019, show total revenue
 const FeesDetail = () => {
@@ -29,9 +30,10 @@ const FeesDetail = () => {
           dataRevenue={dataRevenue}
           protocol={protocol}
         />
-
-        <FeeProtocolChart dataSets={{ fees: prepareData(dataFees), revenue: prepareData(dataRevenue) }} />
-        <FeeProtocolDistribution data={dataFees.totalDataChartBreakdown} />
+        <ChartContainer>
+          <FeeProtocolChart dataSets={{ fees: prepareData(dataFees), revenue: prepareData(dataRevenue) }} />
+          <FeeProtocolDistribution data={dataFees.totalDataChartBreakdown} />
+        </ChartContainer>
       </div>
     </Suspense>
   );

@@ -9,10 +9,11 @@ export const COLORS = {
   GRID: "#16272534",
   TOOLTIP_BG: "#1d395d",
   PIE: ["#a2bee2", "#739dd3", "#457cc4", "#2962b1", "#09b4f7", "#3521bb", "#0fc9da", "#2f297c", "#141acb", "#880de7"],
-  SERIES: ["#a2bee2", "#e89907", "#09f780", "#09b4f7", "#84cc10", "#9d458e", "#3521bb"],
+  SERIES: ["#a2bee2", "#e89907", "#09f780", "#09b4f7", "#84cc10", "#9d458e", "#3521bb", "#bb2121"],
   AREA: "#22426d",
   ACCENT: "#d0ff00",
   ACCENT_DARK: "#212900",
+  BUTTON: "#315f9b",
 };
 
 Highcharts.theme = {
@@ -111,7 +112,7 @@ Highcharts.theme = {
     selected: 1,
     buttonTheme: {
       fill: "none",
-      r: 5,
+      r: "5",
       style: {
         color: COLORS.TEXT[1],
         fontWeight: "bold",
@@ -127,15 +128,14 @@ Highcharts.theme = {
           },
         },
         select: {
-          fill: "transparent",
+          fill: COLORS.BUTTON,
           style: {
-            color: COLORS.ACCENT,
+            color: COLORS.TEXT[0],
             opacity: 1,
           },
         },
       },
     },
-
     labelStyle: {
       display: "none",
     },

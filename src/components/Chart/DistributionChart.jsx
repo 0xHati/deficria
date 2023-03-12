@@ -7,7 +7,6 @@ const createThreshold = (data, threshold) => {
   const sum = filteredData.reduce((acc, prevItem) => {
     return (acc += prevItem.y);
   }, 0);
-  console.log(filteredData);
   filteredData.push({ name: "other", y: 100 - sum });
   return filteredData;
 };

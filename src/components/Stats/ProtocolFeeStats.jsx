@@ -78,8 +78,8 @@ const ProtocolFeeStats = ({ dataRevenue, protocol }) => {
         <Stat {...feeRank} />
         <Stat {...feeAmount} />
         <Stat {...feeShare} />
-        <Stat {...RevenueAmount} />
-        <Stat {...RevenueAnnualized} />
+        {dataRevenue.total24h > 0 && <Stat {...RevenueAmount} />}
+        {dataRevenue.total24h > 0 && <Stat {...RevenueAnnualized} />}
       </div>
     </Card>
   );

@@ -1,13 +1,19 @@
 import HighchartsReact from "highcharts-react-official";
-import { formatNumberToLocale, formatDate } from "../../../utils/helpers";
-import Card from "../../Card";
-import Highcharts from "../highChartsTheme";
-import { COLORS } from "../highChartsTheme";
+import Highcharts from "./highChartsTheme";
+import { formatNumberToLocale, formatDate } from "../../utils/helpers";
+import Card from "../Card";
+import { COLORS } from "./highChartsTheme";
 
-const HistoricalChainTVL = ({ data }) => {
-  const transformedData = data.map(({ date, tvl }) => {
-    date = new Date(date * 1000).getTime();
-    return [date, tvl];
+const LineChart = ({ data, title, ...props }) => {
+  const transformedData = data.map((entry) => {
+    let time, val;
+    if (typeof entry === "object") {
+      [time, val] = Object.values(entry);
+    }
+    if (typeof entry === "array") {
+      [time, val] = entry;
+    }
+    return [new Date(time * 1000).getTime(), val];
   });
 
   const options = {
@@ -16,11 +22,11 @@ const HistoricalChainTVL = ({ data }) => {
       type: "area",
     },
     title: {
-      text: "TVL history",
+      text: title,
     },
     series: [
       {
-        name: "TVL",
+        name: "Total fee history",
         data: transformedData,
       },
     ],
@@ -64,7 +70,7 @@ const HistoricalChainTVL = ({ data }) => {
     },
   };
   return (
-    <Card>
+    <Card className={props.className}>
       <HighchartsReact
         highcharts={Highcharts}
         options={options}
@@ -74,4 +80,4 @@ const HistoricalChainTVL = ({ data }) => {
   );
 };
 
-export default HistoricalChainTVL;
+export default LineChart;

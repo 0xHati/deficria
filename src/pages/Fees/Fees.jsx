@@ -4,7 +4,6 @@ import { lazy, Suspense } from "react";
 import FeesTable from "../../components/Table/FeesTable";
 import FeeDistribution from "../../components/FeeDistribution/FeeDistribution";
 import styles from "./Fees.module.scss";
-import FeeHistoryChart from "../../components/Chart/Fees/FeeHistoryChart";
 import { useQuery } from "react-query";
 import { fetchData } from "../../utils/helpers";
 import defillama from "defillama-api";
@@ -12,6 +11,7 @@ import FeeStats from "../../components/Stats/FeeStats";
 import FeesCategoryChart from "../../components/Chart/Fees/FeesCategoryChart";
 import FeeDistributionChartHistory from "../../components/Chart/Fees/FeeDistributionChartHistory";
 import ChartContainer from "../../components/Chart/ChartContainer";
+import LineChart from "../../components/Chart/LineChart";
 
 const Fees = () => {
   const { data, isLoading, isError } = useQuery(
@@ -35,9 +35,10 @@ const Fees = () => {
               className={styles.chart}
             />
 
-            <FeeHistoryChart
+            <LineChart
               data={data.totalDataChart}
               className={styles.chart}
+              title="Combined Fee History"
             />
 
             {/* <FeeDistributionChartHistory
