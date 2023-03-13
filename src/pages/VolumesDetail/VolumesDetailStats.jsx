@@ -17,7 +17,7 @@ const VolumesDetailStats = ({ data }) => {
 
   const totalVolumeAllTime = {
     title: "Total Volume All Time",
-    number: formatNumberToLocale(data.totalAllTime),
+    number: data.totalAllTime && formatNumberToLocale(data.totalAllTime),
   };
 
   const chains = { title: "Chains", number: data.chains.length };
@@ -32,11 +32,13 @@ const VolumesDetailStats = ({ data }) => {
         />
         {data.displayName}
       </h1>
-      <div className={styles["stats-container"]}>
+      <div
+        className={styles["stats-container"]}
+        style={{ marginBottom: 0 }}>
         <Stat {...chains} />
 
         <Stat {...totalVolume} />
-        <Stat {...totalVolumeAllTime} />
+        {data?.totalAllTime && <Stat {...totalVolumeAllTime} />}
         <SparklineStat data={data.sparkline} />
       </div>
     </Card>

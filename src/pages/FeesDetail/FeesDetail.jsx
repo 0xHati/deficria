@@ -10,8 +10,8 @@ import FeeDetailStats from "./FeeDetailStats";
 import { fetchData, unixToMs } from "../../utils/helpers";
 import ChartContainer from "../../components/Chart/ChartContainer";
 import StackedLineChart from "../../components/Chart/StackedLineChart";
+import Loader from "../../components/Loader/Loader";
 
-//TODO: add info about average fees, highest fee date, change starting date to 2019, show total revenue
 const FeesDetail = () => {
   const { protocol } = useParams();
 
@@ -37,7 +37,7 @@ const FeesDetail = () => {
   }, [dataFees]);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <>
       <div className={styles.wrapper}>
         <FeeDetailStats
           dataRevenue={dataRevenue}
@@ -51,7 +51,7 @@ const FeesDetail = () => {
           />
         </ChartContainer>
       </div>
-    </Suspense>
+    </>
   );
 };
 

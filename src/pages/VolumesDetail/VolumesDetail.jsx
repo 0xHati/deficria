@@ -41,7 +41,7 @@ const VolumesDetail = () => {
   }, [dataProtocol]);
 
   return (
-    <Suspense fallback={<>Loading...</>}>
+    <>
       <VolumesDetailStats data={dataProtocol} />
       <ChartContainer>
         <LineChart
@@ -53,7 +53,7 @@ const VolumesDetail = () => {
           title={"Volume per Chain"}
         />
       </ChartContainer>
-    </Suspense>
+    </>
   );
 };
 

@@ -140,11 +140,16 @@ button {
   color: var(--color-red);
 }
 
-main {
+#root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
 
+main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   @include media(">big-desktop") {
     padding: 0 20rem;
   }

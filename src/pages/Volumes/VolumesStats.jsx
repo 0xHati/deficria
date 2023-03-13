@@ -16,13 +16,11 @@ const VolumesStats = ({ data }) => {
   useMemo(() => transformDataSparkline(data, TIMESPAN_SPARKLINE), [data]);
 
   return (
-    <Card className={styles.wrapper}>
-      <div className={styles["stats-container"]}>
-        {/* {/* <Stat {...feeRank} /> */}
-        <Stat {...protocols} />
-        <Stat {...volume} />
-        <SparklineStat data={data.sparkline} />
-      </div>
+    <Card className={styles["stats-container"]}>
+      {/* {/* <Stat {...feeRank} /> */}
+      <Stat {...protocols} />
+      <Stat {...volume} />
+      <SparklineStat data={data.sparkline} />
     </Card>
   );
 };

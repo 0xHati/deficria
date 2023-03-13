@@ -4,7 +4,7 @@ import { useReactTable, getCoreRowModel, getSortedRowModel, getPaginationRowMode
 import { useQuery } from "react-query";
 
 import defillama from "defillama-api";
-
+import Filter from "../../Filter";
 import { fetchData } from "../../../utils/helpers";
 import { useState, useEffect } from "react";
 
@@ -62,10 +62,18 @@ const DexTable = ({ isExpanded = true, timeFrame = "total24h" }) => {
   });
 
   return (
-    <Table
-      tableInstance={tableInstance}
-      linkTo={"/volumes"}
-    />
+    <>
+      {isExpanded && (
+        <Filter
+          table={tableInstance}
+          column={tableInstance.getColumn("name")}
+        />
+      )}
+      <Table
+        tableInstance={tableInstance}
+        linkTo={"/volumes"}
+      />
+    </>
   );
 };
 

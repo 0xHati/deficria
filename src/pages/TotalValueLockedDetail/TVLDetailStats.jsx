@@ -35,10 +35,10 @@ const TVLDetailStats = ({ data }) => {
         {data.name}
       </h1>
 
-      <div className={styles["stats-container"]}>
-        {/* {/* <Stat {...feeRank} /> */}
+      <div
+        className={styles["stats-container"]}
+        style={{ marginBottom: 0 }}>
         <Stat {...tokens} />
-
         <Stat {...totalTVL} />
         <SparklineStat data={data.sparkline} />
       </div>

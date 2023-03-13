@@ -18,7 +18,7 @@ const Volumes = () => {
   });
 
   return (
-    <Suspense fallback={<>Loading...</>}>
+    <>
       <VolumesStats data={data} />
       <ChartContainer>
         <LineChart
@@ -32,7 +32,7 @@ const Volumes = () => {
       </ChartContainer>
 
       <DexTable data={data.protocols} />
-    </Suspense>
+    </>
   );
 };
 

@@ -1,8 +1,6 @@
-import { lazy, Suspense } from "react";
-// const FeesTable = lazy(() => import("../../components/Table/FeesTable/index"));
+import { Suspense } from "react";
 
 import FeesTable from "../../components/Table/FeesTable";
-import FeeDistribution from "../../components/DataDistribution/DataDistribution";
 import styles from "./Fees.module.scss";
 import { useQuery } from "react-query";
 import { fetchData, unixToMs } from "../../utils/helpers";
@@ -14,6 +12,7 @@ import ChartContainer from "../../components/Chart/ChartContainer";
 import LineChart from "../../components/Chart/LineChart";
 import { useMemo } from "react";
 import DataDistribution from "../../components/DataDistribution/DataDistribution";
+import Loader from "../../components/Loader/Loader";
 
 const Fees = () => {
   const { data } = useQuery(["fees"], () =>
@@ -29,7 +28,7 @@ const Fees = () => {
   console.log(feeHistoryData);
 
   return (
-    <Suspense fallback={<>Loading...</>}>
+    <>
       <FeeStats data={data} />
       <ChartContainer>
         <FeesCategoryChart
@@ -57,7 +56,7 @@ const Fees = () => {
         isExpanded={true}
         data={data.protocols}
       />
-    </Suspense>
+    </>
   );
 };
 

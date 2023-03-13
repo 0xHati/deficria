@@ -12,6 +12,7 @@ import { Table } from "..";
 import { columns } from "./columns";
 import defillama from "defillama-api";
 import { useQuery } from "react-query";
+import Filter from "../../Filter";
 
 import { fetchData } from "../../../utils/helpers";
 
@@ -72,10 +73,18 @@ const TotalValueLockedTable = ({ isExpanded = true }) => {
   // console.log(tableInstance);
 
   return (
-    <Table
-      tableInstance={tableInstance}
-      linkTo={"/tvl"}
-    />
+    <>
+      {isExpanded && (
+        <Filter
+          table={tableInstance}
+          column={tableInstance.getColumn("name")}
+        />
+      )}
+      <Table
+        tableInstance={tableInstance}
+        linkTo={"/tvl"}
+      />
+    </>
   );
 };
 
