@@ -2,7 +2,7 @@ import { lazy, Suspense } from "react";
 // const FeesTable = lazy(() => import("../../components/Table/FeesTable/index"));
 
 import FeesTable from "../../components/Table/FeesTable";
-import FeeDistribution from "../../components/FeeDistribution/FeeDistribution";
+import FeeDistribution from "../../components/DataDistribution/DataDistribution";
 import styles from "./Fees.module.scss";
 import { useQuery } from "react-query";
 import { fetchData, unixToMs } from "../../utils/helpers";
@@ -13,6 +13,7 @@ import FeeDistributionChartHistory from "../../components/Chart/Fees/FeeDistribu
 import ChartContainer from "../../components/Chart/ChartContainer";
 import LineChart from "../../components/Chart/LineChart";
 import { useMemo } from "react";
+import DataDistribution from "../../components/DataDistribution/DataDistribution";
 
 const Fees = () => {
   const { data } = useQuery(["fees"], () =>
@@ -35,9 +36,10 @@ const Fees = () => {
           data={data}
           className={styles.chart}
         />
-        <FeeDistribution
-          feeData={data}
+        <DataDistribution
+          data={data}
           className={styles.chart}
+          title={"Fee Distribution"}
         />
 
         <LineChart

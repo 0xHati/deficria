@@ -1,4 +1,4 @@
-import { calculateFeeStats } from "../../utils/helpers";
+import { calculateStats } from "../../utils/helpers";
 import { fetchData, getNextTimeFrame, slug, formatNumberToLocale } from "../../utils/helpers";
 import { useQuery } from "react-query";
 import defillama from "defillama-api";
@@ -20,7 +20,7 @@ const ProtocolFeeStats = ({ dataRevenue, protocol }) => {
     !!dataRevenue.gecko_id
   );
 
-  const feeStats = calculateFeeStats(feeData).find((item) => slug(item.name) === slug(protocol));
+  const feeStats = calculateStats(feeData).find((item) => slug(item.name) === slug(protocol));
 
   const handleChangeTimeFrame = (timeFrame) => {
     const nextTimeFrame = getNextTimeFrame(TIMEFRAMES_LIMITED, timeFrame);
@@ -33,7 +33,7 @@ const ProtocolFeeStats = ({ dataRevenue, protocol }) => {
   const feeRank = { title: "Rank", number: feeStats[selectedTimeFrame].rank };
   const feeAmount = {
     title: "Fees",
-    number: `${formatNumberToLocale(feeStats[selectedTimeFrame].fees, true)}${
+    number: `${formatNumberToLocale(feeStats[selectedTimeFrame].total, true)}${
       coinPrice ? ` or ${formatNumberToLocale(feeStats[selectedTimeFrame].fees / coinPrice, true, false)} ${coinSymbol}` : ``
     }`,
     percentage: feeStats[selectedTimeFrame].change,

@@ -55,25 +55,7 @@ const TotalValueLocked = () => {
             history={dataTVLHistory}
             totalProtocols={dataTVL.length}
           />
-          <div>
-            <label className={styles.label}>
-              <VisuallyHidden>
-                <Checkbox
-                  state={checkbox}
-                  onFocusVisible={() => setFocusVisible(true)}
-                  onBlur={() => setFocusVisible(false)}
-                />
-              </VisuallyHidden>
-              <div
-                className={styles.checkbox}
-                data-focus-visible={focusVisible ? "" : null}>
-                <CheckboxCheck checked={checkbox.value} />
-              </div>
-              Hide CEX
-            </label>
-          </div>
         </div>
-
         <ChartContainer>
           <CategoryChart
             totalTVL={totalTVL}

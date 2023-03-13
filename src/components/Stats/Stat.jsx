@@ -5,6 +5,11 @@ import { styleNumber } from "../../utils/helpers";
 
 const Stat = ({ title, number, percentage, info }) => {
   const className = styleNumber(percentage);
+
+  let logo;
+  if (percentage > 0) logo = <FiArrowUpRight className={className} />;
+  if (percentage < 0) logo = <FiArrowDownRight className={className} />;
+  if (percentage == 0) logo = "";
   return (
     <div className={styles.stat}>
       <p className={styles.title}>
@@ -15,7 +20,7 @@ const Stat = ({ title, number, percentage, info }) => {
         <span className={styles.number}>{number}</span>
         <span className={styles.percentage}>
           {percentage && percentage + "%"}
-          {percentage && percentage > 0 ? <FiArrowUpRight className={className} /> : percentage && <FiArrowDownRight className={className} />}
+          {logo}
         </span>
       </p>
     </div>

@@ -5,6 +5,7 @@ import defillama from "defillama-api";
 import { Suspense } from "react";
 import ChartContainer from "../../components/Chart/ChartContainer";
 import LineChart from "../../components/Chart/LineChart";
+import DataDistribution from "../../components/DataDistribution/DataDistribution";
 
 const Volumes = () => {
   const { data } = useQuery(["dex", "chartData"], () =>
@@ -21,6 +22,10 @@ const Volumes = () => {
         <LineChart
           data={transformedData}
           title={"Dex Volumes History"}
+        />
+        <DataDistribution
+          data={data}
+          title={"Volume Distribution"}
         />
       </ChartContainer>
 

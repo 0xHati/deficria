@@ -8,13 +8,14 @@ export const Logos = ({ protocolNames }) => {
   return (
     <ul className={styles.logos}>
       {protocolNames.slice(0, iconsToShow).map((item, index) => {
+        const slugProtocol = slug(item) === "bsc" ? "binance" : slug(item);
         return (
           <li
             key={item}
             style={{ zIndex: protocolNames.length - index }}>
             <img
               className={styles.logo}
-              src={`https://icons.llama.fi/chains/rsz_${slug(item)}.jpg`}
+              src={`https://icons.llama.fi/chains/rsz_${slugProtocol}.jpg`}
               alt={`${item} logo`}
               title={item}
             />

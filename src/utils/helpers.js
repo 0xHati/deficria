@@ -85,7 +85,7 @@ export const groupDatesByPeriod = (data, period) => {
   }
 };
 
-export const calculateFeeStats = (data) => {
+export const calculateStats = (data) => {
   const { total7d, total24h, total30d, protocols } = data;
   const sorted24h = [...protocols].sort((a, b) => b.total24h - a.total24h);
   const sorted7d = [...protocols].sort((a, b) => b.total7d - a.total7d);
@@ -98,19 +98,19 @@ export const calculateFeeStats = (data) => {
         percentage: protocol.total24h / total24h,
         rank: sorted24h.indexOf(protocol) + 1,
         change: protocol.change_1d,
-        fees: protocol.total24h,
+        total: protocol.total24h,
       },
       total7d: {
         percentage: protocol.total7d / total7d,
         rank: sorted7d.indexOf(protocol) + 1,
         change: protocol.change_7d,
-        fees: protocol.total7d,
+        total: protocol.total7d,
       },
       total30d: {
         percentage: protocol.total30d / total30d,
         rank: sorted30d.indexOf(protocol) + 1,
         change: protocol.change_1m,
-        fees: protocol.total30d,
+        total: protocol.total30d,
       },
 
       totalProjects: protocols.length,

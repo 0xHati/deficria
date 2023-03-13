@@ -11,7 +11,7 @@ import { useState, useEffect } from "react";
 //is exactly the same as FeesTable, so not sure if could reuse.
 // Kept it seperate to easily customize things if needed per table
 const DexTable = ({ isExpanded = true, timeFrame = "total24h" }) => {
-  const { data } = useQuery(["dex"], () => fetchData(defillama.volumes.dexsAll()));
+  const { data } = useQuery(["volumes"], () => fetchData(defillama.volumes.dexsAll()));
   data.protocols.forEach((item, index) => (data.protocols[index].chains = data.protocols[index].chains.toString()));
 
   const columnSorting = [
@@ -64,7 +64,7 @@ const DexTable = ({ isExpanded = true, timeFrame = "total24h" }) => {
   return (
     <Table
       tableInstance={tableInstance}
-      linkTo={"/dex"}
+      linkTo={"/volumes"}
     />
   );
 };

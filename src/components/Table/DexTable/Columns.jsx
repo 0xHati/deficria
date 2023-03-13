@@ -11,6 +11,7 @@ export const getColumns = (isExpanded) => {
         const logo = row.original.logo;
         const value = getValue();
         const index = table.getSortedRowModel().rows.findIndex((x) => x.id === row.id) + 1;
+
         return (
           <LogoName
             logoSrc={logo}

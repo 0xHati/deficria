@@ -2,13 +2,13 @@ import Card from "../Card";
 import { TimeFrameSelectorCompact } from "../TimeFrameSelector/TimeFrameSelector";
 import { useState } from "react";
 import DistributionChart from "../Chart/DistributionChart";
-import { calculateFeeStats, getNextTimeFrame } from "../../utils/helpers";
+import { calculateStats, getNextTimeFrame } from "../../utils/helpers";
 import { TIMEFRAMES_LIMITED } from "../../constants/timeframes";
-import styles from "./FeeDistribution.module.scss";
+import styles from "./DataDistribution.module.scss";
 
-const FeeDistribution = ({ feeData, ...props }) => {
+const DataDistribution = ({ data, title, ...props }) => {
   const prepareData = (timeFrame) => {
-    return calculateFeeStats(feeData).map((protocol) => {
+    return calculateStats(data).map((protocol) => {
       return { name: protocol.name, y: protocol[timeFrame].percentage * 100 };
     });
   };
@@ -30,11 +30,11 @@ const FeeDistribution = ({ feeData, ...props }) => {
       />
       <DistributionChart
         data={chartData}
-        title={"Fee Distribution"}
+        title={title}
         threshold={1}
       />
     </Card>
   );
 };
 
-export default FeeDistribution;
+export default DataDistribution;

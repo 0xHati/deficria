@@ -1,8 +1,7 @@
 import HighchartsReact from "highcharts-react-official";
-import { Suspense, useMemo } from "react";
 import Card from "../Card";
 import Highcharts from "./highChartsTheme";
-import { unixToMs, formatNumberToLocale, formatDate } from "../../utils/helpers";
+import { formatNumberToLocale, formatDate } from "../../utils/helpers";
 import { COLORS } from "./highChartsTheme";
 
 const StackedLineChart = ({ data, title, ...props }) => {

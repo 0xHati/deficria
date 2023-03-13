@@ -4,7 +4,7 @@ import styles from "./Stat.module.scss";
 import { formatNumberToLocale, unixToMs, groupDatesByWeek } from "../../utils/helpers";
 import { useMemo } from "react";
 import subMonths from "date-fns/subMonths";
-import Sparkline from "../Chart/Fees/Sparkline";
+import SparklineStat from "./SparklineStat";
 
 const TIMESPAN_SPARKLINE = 3;
 const TVL_TIMESPAN = 7; // compare current tvl with 7 days ago
@@ -28,13 +28,7 @@ const TVLStats = ({ totalTVL, history, totalProtocols }) => {
       <Stat {...numberProtocols} />
 
       <Stat {...currentTVL} />
-      <div className={styles.stat}>
-        <p className={styles.title}>Trend (last 3 months)</p>
-        <Sparkline
-          data={sparklineData}
-          margin={{ marginRight: "auto" }}
-        />
-      </div>
+      <SparklineStat data={sparklineData} />
     </Card>
   );
 };

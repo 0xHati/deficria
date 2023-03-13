@@ -11,11 +11,6 @@ export const Menu = () => {
           Home
         </NavLink>
         <NavLink
-          to="protocols"
-          className={({ isActive }) => (isActive ? styles.active : "")}>
-          Protocols
-        </NavLink>
-        <NavLink
           to="fees"
           className={({ isActive }) => (isActive ? styles.active : "")}>
           Fees

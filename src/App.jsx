@@ -8,7 +8,8 @@ import Fees from "./pages/Fees/Fees";
 import TotalValueLocked from "./pages/TotalValueLocked";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import TotalValueLockedDetail from "./pages/TotalValueLockedDetail";
-import Dex from "./pages/Volumes/Volumes";
+import Volumes from "./pages/Volumes/Volumes";
+import VolumesDetail from "./pages/VolumesDetail/VolumesDetail";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -48,11 +49,11 @@ const router = createBrowserRouter([
           },
           {
             path: "/volumes",
-            element: <Dex />,
+            element: <Volumes />,
           },
           {
             path: "/volumes/:protocol",
-            element: <></>,
+            element: <VolumesDetail />,
           },
         ],
       },
