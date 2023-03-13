@@ -6,6 +6,7 @@ import { Suspense } from "react";
 import ChartContainer from "../../components/Chart/ChartContainer";
 import LineChart from "../../components/Chart/LineChart";
 import DataDistribution from "../../components/DataDistribution/DataDistribution";
+import VolumesStats from "./VolumesStats";
 
 const Volumes = () => {
   const { data } = useQuery(["dex", "chartData"], () =>
@@ -16,10 +17,9 @@ const Volumes = () => {
     return { x: unixToMs(date), y: volume };
   });
 
-  console.log(data);
-
   return (
     <Suspense fallback={<>Loading...</>}>
+      <VolumesStats data={data} />
       <ChartContainer>
         <LineChart
           data={transformedData}
