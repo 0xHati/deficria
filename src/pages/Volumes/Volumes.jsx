@@ -1,24 +1,29 @@
 import DexTable from "../../components/Table/DexTable";
 import { useQuery } from "react-query";
-import { fetchData } from "../../utils/helpers";
+import { fetchData, unixToMs } from "../../utils/helpers";
 import defillama from "defillama-api";
-import VolumesChart from "../../components/Chart/Volumes/VolumesChart";
 import { Suspense } from "react";
-import Card from "../../components/Card";
-import styles from "./Volumes.module.scss";
+import ChartContainer from "../../components/Chart/ChartContainer";
+import LineChart from "../../components/Chart/LineChart";
 
 const Volumes = () => {
   const { data } = useQuery(["dex", "chartData"], () =>
     fetchData(defillama.volumes.dexsAll({ exludeTotalDataChart: false, exludeTotalDataChartBreakdown: false }))
   );
 
-  console.log(data);
+  const transformedData = data.totalDataChart.map(([date, volume]) => {
+    return { x: unixToMs(date), y: volume };
+  });
 
   return (
     <Suspense fallback={<>Loading...</>}>
-      <Card className={styles["chart-container"]}>
-        <VolumesChart data={data.totalDataChart} />
-      </Card>
+      <ChartContainer>
+        <LineChart
+          data={transformedData}
+          title={"Dex Volumes History"}
+        />
+      </ChartContainer>
+
       <DexTable data={data.protocols} />
     </Suspense>
   );

@@ -4,13 +4,11 @@ import { formatNumberToLocale, formatDate, unixToMs } from "../../utils/helpers"
 import Card from "../Card";
 import { COLORS } from "./highChartsTheme";
 
-const LineChart = ({ data, title, annotations, ...props }) => {
-  const ann = annotations?.map(([date, description]) => {
+const LineChart = ({ data, title, annotationsData, ...props }) => {
+  const annotations = annotationsData?.map(([date, description]) => {
     const markerValue = data.find(({ x, y }) => x === unixToMs(date));
-    console.log(markerValue);
     return { point: { xAxis: 0, yAxis: 0, x: unixToMs(date), y: markerValue?.y }, text: description };
   });
-  console.log(ann);
   const options = {
     chart: {
       zoomType: "x",
@@ -43,8 +41,7 @@ const LineChart = ({ data, title, annotations, ...props }) => {
             color: "black",
           },
         },
-
-        labels: ann,
+        labels: annotations,
       },
     ],
 

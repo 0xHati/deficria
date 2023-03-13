@@ -15,6 +15,7 @@ const TotalValueLockedDetail = () => {
   const { protocol } = useParams();
   const { data: dataProtocol } = useQuery(["fees", protocol], () => fetchData(defillama.tvl.protocol(protocol)));
 
+  console.log(dataProtocol);
   const distributionChartData = useMemo(() => {
     const transformedData = {};
     Object.entries(dataProtocol.chainTvls).forEach(([chain, { tvl }]) => {
@@ -45,7 +46,7 @@ const TotalValueLockedDetail = () => {
         <LineChart
           data={tvlHistory}
           title={"TVL over time"}
-          annotations={dataProtocol?.hallmarks}
+          annotationsData={dataProtocol?.hallmarks}
         />
         <CategoryChart
           data={dataProtocol.currentChainTvls}
