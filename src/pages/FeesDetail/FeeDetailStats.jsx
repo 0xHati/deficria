@@ -2,15 +2,15 @@ import { calculateStats } from "../../utils/helpers";
 import { fetchData, getNextTimeFrame, slug, formatNumberToLocale } from "../../utils/helpers";
 import { useQuery } from "react-query";
 import defillama from "defillama-api";
-import Card from "../Card";
-import styles from "./Stat.module.scss";
-import Stat from "./Stat";
-import { TimeFrameSelectorCompact } from "../TimeFrameSelector/TimeFrameSelector";
+import Card from "../../components/Card";
+import styles from "../../components/Stats/Stat.module.scss";
+import Stat from "../../components/Stats/Stat";
+import { TimeFrameSelectorCompact } from "../../components/TimeFrameSelector/TimeFrameSelector";
 import { TIMEFRAMES_LIMITED } from "../../constants/timeframes";
 
 import { useState } from "react";
 
-const ProtocolFeeStats = ({ dataRevenue, protocol }) => {
+const FeeDetailStats = ({ dataRevenue, protocol }) => {
   const [selectedTimeFrame, setSelectedTimeFrame] = useState("total24h");
   const { data: feeData } = useQuery(["fees", "nochart"], () => fetchData(defillama.feesRevenue.all()));
 
@@ -34,7 +34,7 @@ const ProtocolFeeStats = ({ dataRevenue, protocol }) => {
   const feeAmount = {
     title: "Fees",
     number: `${formatNumberToLocale(feeStats[selectedTimeFrame].total, true)}${
-      coinPrice ? ` or ${formatNumberToLocale(feeStats[selectedTimeFrame].fees / coinPrice, true, false)} ${coinSymbol}` : ``
+      coinPrice ? ` or ${formatNumberToLocale(feeStats[selectedTimeFrame].total / coinPrice, true, false)} ${coinSymbol}` : ``
     }`,
     percentage: feeStats[selectedTimeFrame].change,
   };
@@ -85,4 +85,4 @@ const ProtocolFeeStats = ({ dataRevenue, protocol }) => {
   );
 };
 
-export default ProtocolFeeStats;
+export default FeeDetailStats;

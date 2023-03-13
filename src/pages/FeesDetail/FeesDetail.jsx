@@ -5,7 +5,7 @@ import { Suspense, useMemo } from "react";
 import { useQuery } from "react-query";
 import defillama from "defillama-api";
 
-import ProtocolFeeStats from "../../components/Stats/ProtocolFeeStats";
+import FeeDetailStats from "./FeeDetailStats";
 
 import { fetchData, unixToMs } from "../../utils/helpers";
 import ChartContainer from "../../components/Chart/ChartContainer";
@@ -39,7 +39,7 @@ const FeesDetail = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <div className={styles.wrapper}>
-        <ProtocolFeeStats
+        <FeeDetailStats
           dataRevenue={dataRevenue}
           protocol={protocol}
         />

@@ -1,10 +1,10 @@
-import Card from "../Card";
-import Stat from "./Stat";
-import styles from "./Stat.module.scss";
+import Card from "../../components/Card";
+import Stat from "../../components/Stats/Stat";
+import styles from "../../components/Stats/Stat.module.scss";
 import { formatNumberToLocale, unixToMs, groupDatesByWeek } from "../../utils/helpers";
 import { useMemo } from "react";
 import subMonths from "date-fns/subMonths";
-import SparklineStat from "./SparklineStat";
+import SparklineStat from "../../components/Stats/SparklineStat";
 
 const TIMESPAN_SPARKLINE = 3;
 const TVL_TIMESPAN = 7; // compare current tvl with 7 days ago

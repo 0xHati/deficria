@@ -1,10 +1,10 @@
 import { unixToMs, formatNumberToLocale, groupDatesByWeek } from "../../utils/helpers";
 
-import Stat from "./Stat";
-import styles from "./Stat.module.scss";
-import Card from "../Card";
+import Stat from "../../components/Stats/Stat";
+import styles from "../../components/Stats/Stat.module.scss";
+import Card from "../../components/Card";
 import { useMemo } from "react";
-import Sparkline from "../Chart/Fees/Sparkline";
+import Sparkline from "../../components/Chart/Fees/Sparkline";
 import { subMonths } from "date-fns";
 
 const TIMESPAN_SPARKLINE = 3;

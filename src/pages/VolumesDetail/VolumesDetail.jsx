@@ -3,7 +3,7 @@ import defillama from "defillama-api";
 import { useQuery } from "react-query";
 import { fetchData, unixToMs } from "../../utils/helpers";
 import { Suspense, useMemo } from "react";
-import VolumesDetailStats from "../../components/Stats/VolumesDetailStats";
+import VolumesDetailStats from "./VolumesDetailStats";
 import ChartContainer from "../../components/Chart/ChartContainer";
 import LineChart from "../../components/Chart/LineChart";
 import StackedLineChart from "../../components/Chart/StackedLineChart";

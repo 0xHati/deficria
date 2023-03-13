@@ -7,7 +7,7 @@ import CategoryChart from "../../components/Chart/CategoryChart";
 import ChartContainer from "../../components/Chart/ChartContainer";
 import { useMemo } from "react";
 import StackedLineChart from "../../components/Chart/StackedLineChart";
-import TVLDetailStats from "../../components/Stats/TVLDetailStats";
+import TVLDetailStats from "./TVLDetailStats";
 
 const TotalValueLockedDetail = () => {
   const { protocol } = useParams();

@@ -16,6 +16,8 @@ const Volumes = () => {
     return { x: unixToMs(date), y: volume };
   });
 
+  console.log(data);
+
   return (
     <Suspense fallback={<>Loading...</>}>
       <ChartContainer>

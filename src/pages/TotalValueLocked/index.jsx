@@ -6,7 +6,7 @@ import Card from "../../components/Card";
 import { fetchData, unixToMs } from "../../utils/helpers";
 import defillama from "defillama-api";
 import styles from "./TotalValueLocked.module.scss";
-import TVLStats from "../../components/Stats/TVLStats";
+import TVLStats from "./TVLStats";
 import DistributionChart from "../../components/Chart/DistributionChart";
 import ChartContainer from "../../components/Chart/ChartContainer";
 import CategoryChart from "../../components/Chart/CategoryChart";

@@ -7,7 +7,7 @@ import styles from "./Fees.module.scss";
 import { useQuery } from "react-query";
 import { fetchData, unixToMs } from "../../utils/helpers";
 import defillama from "defillama-api";
-import FeeStats from "../../components/Stats/FeeStats";
+import FeeStats from "./FeeStats";
 import FeesCategoryChart from "../../components/Chart/Fees/FeesCategoryChart";
 import FeeDistributionChartHistory from "../../components/Chart/Fees/FeeDistributionChartHistory";
 import ChartContainer from "../../components/Chart/ChartContainer";

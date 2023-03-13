@@ -1,13 +1,12 @@
-import Card from "../Card";
-import styles from "./Stat.module.scss";
-import Stat from "./Stat";
+import Card from "../../components/Card";
+import styles from "../../components/Stats/Stat.module.scss";
+import Stat from "../../components/Stats/Stat";
 import { useMemo } from "react";
-import Sparkline from "../Chart/Fees/Sparkline";
 import { subMonths } from "date-fns";
 import { unixToMs, formatNumberToLocale, groupDatesByWeek } from "../../utils/helpers";
 import { IoClipboardSharp } from "react-icons/io5";
 import { TIMESPAN_SPARKLINE } from "../../constants/charts";
-import SparklineStat from "./SparklineStat";
+import SparklineStat from "../../components/Stats/SparklineStat";
 
 const TVL_TIMESPAN = 7; // compare current tvl with 7 days ago
 

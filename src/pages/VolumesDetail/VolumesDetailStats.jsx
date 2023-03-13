@@ -1,8 +1,8 @@
-import Card from "../Card";
-import SparklineStat from "./SparklineStat";
-import styles from "./Stat.module.scss";
+import Card from "../../components/Card";
+import SparklineStat from "../../components/Stats/SparklineStat";
+import styles from "../../components/Stats/Stat.module.scss";
 import { formatNumberToLocale, unixToMs, groupDatesByWeek } from "../../utils/helpers";
-import Stat from "./Stat";
+import Stat from "../../components/Stats/Stat";
 import { subMonths } from "date-fns";
 import { TIMESPAN_SPARKLINE } from "../../constants/charts";
 import { useMemo } from "react";
