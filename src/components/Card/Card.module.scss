@@ -1,5 +1,3 @@
-@use "../../styles/index" as *;
-
 .card {
   border-radius: 1.5rem;
   background-color: var(--blue8);
@@ -8,8 +6,4 @@
   position: relative;
   width: 100%;
   height: 100%;
-
-  @include media(">desktop") {
-    // padding: 2rem;
-  }
 }

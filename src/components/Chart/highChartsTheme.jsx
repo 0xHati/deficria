@@ -1,6 +1,3 @@
-// define global options here for all charts
-
-// import Highcharts from "highcharts";
 import Highcharts from "highcharts/highstock";
 import annotations from "highcharts/modules/annotations";
 

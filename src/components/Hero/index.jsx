@@ -1,5 +1,4 @@
 import styles from "./Hero.module.scss";
-import { Background } from "./Background";
 
 import { fetchData } from "../../utils/helpers";
 import { useQuery } from "react-query";
@@ -18,14 +17,13 @@ export const Hero = () => {
           Tracking{" "}
           <AnimatedNumber
             value={numberProtocols}
-            className={styles.accent}
+            className={styles.gradient}
           />
-          <span> crypto projects</span>
+          <span> projects</span>
         </h1>
         <h2>
-          <span className={styles.underline}>Analyse</span> the market
+          <span className={styles.gradient}>Analyse</span> the market and gain <span className={styles.gradient}>insights</span>
         </h2>
-        <Background />
       </div>
     </>
   );

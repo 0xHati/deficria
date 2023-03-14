@@ -42,3 +42,21 @@
     display: block;
   }
 }
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  cursor: pointer;
+  &--name {
+    text-transform: uppercase;
+    font-size: 2rem;
+    letter-spacing: 2px;
+  }
+
+  &--icon {
+    width: 5rem;
+    height: 5rem;
+  }
+}

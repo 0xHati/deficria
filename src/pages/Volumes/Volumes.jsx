@@ -2,7 +2,6 @@ import DexTable from "../../components/Table/DexTable";
 import { useQuery } from "react-query";
 import { fetchData, unixToMs } from "../../utils/helpers";
 import defillama from "defillama-api";
-import { Suspense } from "react";
 import ChartContainer from "../../components/Chart/ChartContainer";
 import LineChart from "../../components/Chart/LineChart";
 import DataDistribution from "../../components/DataDistribution/DataDistribution";

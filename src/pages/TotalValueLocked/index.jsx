@@ -1,6 +1,5 @@
-import { Suspense, useMemo } from "react";
+import { useMemo } from "react";
 import { useQuery } from "react-query";
-import Filter from "../../components/Filter";
 import TotalValueLockedTable from "../../components/Table/TotalValueLocked";
 import Card from "../../components/Card";
 import { fetchData, unixToMs } from "../../utils/helpers";
@@ -10,19 +9,13 @@ import TVLStats from "./TVLStats";
 import DistributionChart from "../../components/Chart/DistributionChart";
 import ChartContainer from "../../components/Chart/ChartContainer";
 import CategoryChart from "../../components/Chart/CategoryChart";
-import { Checkbox, CheckboxCheck, useCheckboxState } from "ariakit/checkbox";
-import { VisuallyHidden } from "ariakit/visually-hidden";
-import { useState } from "react";
 import LineChart from "../../components/Chart/LineChart";
-import Loader from "../../components/Loader/Loader";
 
 const TotalValueLocked = () => {
   const { data: dataTVL } = useQuery(["TVL"], () => fetchData(defillama.tvl.protocols()));
   const { data: dataTVLHistory } = useQuery(["TVL", "history"], () => fetchData(defillama.tvl.chainsHistorical()));
 
   const { data: dataTVLChains } = useQuery(["TVL", "chains"], () => fetchData(defillama.tvl.chains()));
-  const checkbox = useCheckboxState(true);
-  const [focusVisible, setFocusVisible] = useState(false);
 
   const dataTVLCategory = useMemo(() => {
     let chartData = {};

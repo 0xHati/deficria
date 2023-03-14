@@ -11,9 +11,6 @@ const TablesTab = ({}) => {
   const defaultSelectedId = "default";
   const tab = useTabState({ defaultSelectedId });
 
-  // dataTVL.forEach((item, index) => (dataFees[index].chains = data[index].chains.toString()));
-
-  //easier to filter, get unique values, etc with strings than with arrays in react-table
   return (
     <Card>
       <TabList

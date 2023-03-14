@@ -49,9 +49,7 @@ const transformDataSparkline = (data, timespan) => {
   const referenceTime = subMonths(new Date(), timespan);
   const filteredData = data.totalDataChart.map(([date, value]) => [unixToMs(date), value]).filter(([date, value]) => date > referenceTime);
   const groupedData = groupDatesByWeek(filteredData);
-
   data.sparkline = groupedData;
-  console.log(data);
 };
 
 export default VolumesDetailStats;

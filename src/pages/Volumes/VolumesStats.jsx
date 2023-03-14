@@ -15,7 +15,6 @@ const VolumesStats = ({ data }) => {
 
   return (
     <Card className={styles["stats-container"]}>
-      {/* {/* <Stat {...feeRank} /> */}
       <Stat {...protocols} />
       <Stat {...volume} />
       <SparklineStat data={data.sparkline} />

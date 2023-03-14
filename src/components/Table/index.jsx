@@ -1,12 +1,10 @@
 import styles from "./Table.module.scss";
 import { flexRender } from "@tanstack/react-table";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { slug } from "../../utils/helpers";
 import { styleNumber } from "../../utils/helpers";
 import { useWindowVirtualizer, defaultRangeExtractor } from "@tanstack/react-virtual";
 import { HiOutlineArrowDown, HiOutlineArrowUp } from "react-icons/hi";
-import Filter from "../../components/Filter";
 import { useCallback, useState, useRef, useEffect } from "react";
 
 export const Table = ({ tableInstance, linkTo }) => {

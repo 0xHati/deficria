@@ -35,11 +35,6 @@ const Fees = () => {
           data={data}
           title={"Fee Distribution"}
         />
-
-        {/* <FeeDistributionChartHistory
-              data={data.totalDataChartBreakdown}
-              className={styles.chart}
-            /> */}
       </ChartContainer>
       <FeesTable
         isExpanded={true}

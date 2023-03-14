@@ -14,8 +14,6 @@ const VolumesDetail = () => {
 
   const { data: dataProtocol } = useQuery(["volume", protocol], () => fetchData(defillama.volumes.dexsProtocol(protocol)));
 
-  console.log(dataProtocol);
-
   const volumeHistory = useMemo(() => {
     return dataProtocol.totalDataChart.map(([time, value]) => {
       return {

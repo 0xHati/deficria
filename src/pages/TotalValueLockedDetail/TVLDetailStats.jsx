@@ -4,7 +4,6 @@ import Stat from "../../components/Stats/Stat";
 import { useMemo } from "react";
 import { subMonths } from "date-fns";
 import { unixToMs, formatNumberToLocale, groupDatesByWeek } from "../../utils/helpers";
-import { IoClipboardSharp } from "react-icons/io5";
 import { TIMESPAN_SPARKLINE } from "../../constants/charts";
 import SparklineStat from "../../components/Stats/SparklineStat";
 
