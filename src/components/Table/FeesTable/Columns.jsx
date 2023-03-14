@@ -1,9 +1,8 @@
 import { formatNumberToLocale } from "../../../utils/helpers";
-
 import Sparkline from "../../Chart/Fees/Sparkline";
 import { LogoName } from "../LogoName";
 
-const getColumns = (isExpanded) => {
+export const getColumns = (isExpanded) => {
   return [
     {
       header: "Name",
@@ -94,5 +93,3 @@ const getColumns = (isExpanded) => {
     },
   ];
 };
-
-export default getColumns;

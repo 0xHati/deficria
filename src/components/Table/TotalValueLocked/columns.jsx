@@ -2,7 +2,7 @@ import { LogoName } from "../LogoName";
 import { formatNumberToLocale } from "../../../utils/helpers";
 import { Logos } from "../../Logos";
 
-const columns = [
+export const columns = [
   {
     header: "Name",
     accessorKey: "name",
@@ -76,5 +76,3 @@ const columns = [
     },
   },
 ];
-
-export default columns;
