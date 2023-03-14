@@ -3,7 +3,7 @@ import { formatNumberToLocale } from "../../../utils/helpers";
 import Sparkline from "../../Chart/Fees/Sparkline";
 import { LogoName } from "../LogoName";
 
-export const getColumns = (isExpanded) => {
+const getColumns = (isExpanded) => {
   return [
     {
       header: "Name",
@@ -94,3 +94,5 @@ export const getColumns = (isExpanded) => {
     },
   ];
 };
+
+export default getColumns;

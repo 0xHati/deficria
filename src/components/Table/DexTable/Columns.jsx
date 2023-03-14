@@ -2,7 +2,7 @@ import { formatNumberToLocale } from "../../../utils/helpers";
 import { LogoName } from "../LogoName";
 import { Logos } from "../../Logos";
 
-export const getColumns = (isExpanded) => {
+const getColumns = (isExpanded) => {
   return [
     {
       header: "Name",
@@ -89,3 +89,5 @@ export const getColumns = (isExpanded) => {
     },
   ];
 };
+
+export default getColumns;

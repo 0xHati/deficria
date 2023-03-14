@@ -10,7 +10,7 @@ import {
 } from "@tanstack/react-table";
 import { Table } from "..";
 import { useState, useEffect, useMemo } from "react";
-import { getColumns } from "./columns";
+import getColumns from "./columns.jsx";
 import Filter from "../../Filter";
 import defillama from "defillama-api";
 import { useQuery } from "react-query";
