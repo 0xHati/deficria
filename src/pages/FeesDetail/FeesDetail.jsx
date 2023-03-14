@@ -44,10 +44,14 @@ const FeesDetail = () => {
           protocol={protocol}
         />
         <ChartContainer>
-          <FeeProtocolChart dataSets={{ fees: prepareData(dataFees), revenue: prepareData(dataRevenue) }} />
+          <FeeProtocolChart
+            dataSets={{ fees: prepareData(dataFees), revenue: prepareData(dataRevenue) }}
+            className={styles["chart--full-width"]}
+          />
           <StackedLineChart
             data={distributionChartData}
             title={"Fee Distribution over time"}
+            className={styles["chart--full-width"]}
           />
         </ChartContainer>
       </div>

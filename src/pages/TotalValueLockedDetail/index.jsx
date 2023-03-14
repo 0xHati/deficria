@@ -8,6 +8,7 @@ import ChartContainer from "../../components/Chart/ChartContainer";
 import { useMemo } from "react";
 import StackedLineChart from "../../components/Chart/StackedLineChart";
 import TVLDetailStats from "./TVLDetailStats";
+import styles from "./TotalValueLockedDetail.module.scss";
 
 const TotalValueLockedDetail = () => {
   const { protocol } = useParams();
@@ -40,6 +41,14 @@ const TotalValueLockedDetail = () => {
     <>
       <TVLDetailStats data={dataProtocol} />
       <ChartContainer>
+        {/* only show if there are more chains */}
+        {Object.keys(distributionChartData).length > 1 && (
+          <StackedLineChart
+            data={distributionChartData}
+            title={"TVL per Chain"}
+            className={styles["chart--full-width"]}
+          />
+        )}
         <LineChart
           data={tvlHistory}
           title={"TVL over time"}
@@ -49,13 +58,6 @@ const TotalValueLockedDetail = () => {
           data={dataProtocol.currentChainTvls}
           threshold={0.5}
         />
-        {/* only show if there are more chains */}
-        {Object.keys(distributionChartData).length > 1 && (
-          <StackedLineChart
-            data={distributionChartData}
-            title={"TVL per Chain"}
-          />
-        )}
       </ChartContainer>
     </>
   );

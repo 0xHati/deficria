@@ -4,7 +4,7 @@ import Card from "../Card";
 import { COLORS } from "./highChartsTheme";
 import { formatNumberToLocale } from "../../utils/helpers";
 
-const CategoryChart = ({ data, threshold }) => {
+const CategoryChart = ({ data, threshold, ...props }) => {
   const filteredData = createThreshold(Object.entries(data), threshold);
   const options = {
     chart: {
@@ -44,7 +44,7 @@ const CategoryChart = ({ data, threshold }) => {
     ],
   };
   return (
-    <Card>
+    <Card className={props.className}>
       <HighchartsReact
         highcharts={Highcharts}
         options={options}

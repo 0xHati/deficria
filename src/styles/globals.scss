@@ -144,15 +144,27 @@ button {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  padding: 1.5rem 1rem;
+
+  @include media(">tablet") {
+    padding: 1.5rem 5rem;
+  }
+
+  @include media(">desktop") {
+    padding: 1.5rem 10rem;
+  }
+  @include media(">big-desktop") {
+    padding: 1.5rem 15rem;
+  }
+  @include media(">xl") {
+    padding: 1.5rem 20rem;
+  }
 }
 
 main {
   display: flex;
   flex-direction: column;
   flex: 1;
-  @include media(">big-desktop") {
-    padding: 0 20rem;
-  }
 }
 // background-image: radial-gradient(circle farthest-corner at 10% 20%, rgba(14, 174, 87, 1) 0%, rgba(12, 116, 117, 1) 90%);
 // background-image: linear-gradient(112.1deg, rgba(32, 38, 57, 1) 11.4%, rgba(63, 76, 119, 1) 70.2%);

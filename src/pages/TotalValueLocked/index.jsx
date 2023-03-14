@@ -57,6 +57,13 @@ const TotalValueLocked = () => {
         />
       </div>
       <ChartContainer>
+        <LineChart
+          data={dataTVLHistory.map(({ date, tvl }) => {
+            return { x: unixToMs(date), y: tvl };
+          })}
+          title={"TVL over time"}
+          className={styles["chart--full-width"]}
+        />
         <CategoryChart
           totalTVL={totalTVL}
           data={dataTVLCategory}
@@ -69,13 +76,6 @@ const TotalValueLocked = () => {
             threshold={1}
           />
         </Card>
-
-        <LineChart
-          data={dataTVLHistory.map(({ date, tvl }) => {
-            return { x: unixToMs(date), y: tvl };
-          })}
-          title={"TVL history"}
-        />
       </ChartContainer>
       <TotalValueLockedTable data={dataTVL} />
     </>

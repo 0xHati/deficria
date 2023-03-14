@@ -1,3 +1,0 @@
-const Button = () => {
-  return <></>;
-};

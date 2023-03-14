@@ -5,7 +5,7 @@ const SparklineStat = ({ data }) => {
   return (
     <div className={styles.stat}>
       <p className={styles.title}>
-        Trend <span lassName={styles.info}>(last 3 months)</span>
+        Trend <span className={styles.info}>(last 3 months)</span>
       </p>
       <Sparkline
         data={data}

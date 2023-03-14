@@ -1,9 +1,15 @@
-.charts {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+@use "../../styles/index" as *;
 
+.charts {
   gap: 2rem;
+  display: flex;
+  flex-direction: column;
   margin-bottom: 2rem;
+
+  @include media(">big-desktop") {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .chart {

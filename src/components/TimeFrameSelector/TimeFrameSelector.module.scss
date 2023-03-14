@@ -2,15 +2,15 @@
 
 .timeFrameSelector {
   display: flex;
-  width: 30%;
+  width: 100%;
   justify-content: space-evenly;
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
   background-color: var(--blue6);
   padding: 2px;
 
-  @include media(">phone") {
-    margin-left: 7rem;
+  @include media(">tablet") {
+    width: 50%;
   }
 
   .timeFrame {

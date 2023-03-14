@@ -1,5 +1,6 @@
 import styles from "./NavBar.module.scss";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 export const Menu = () => {
   return (

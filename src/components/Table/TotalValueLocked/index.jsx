@@ -28,10 +28,13 @@ const TotalValueLockedTable = ({ isExpanded = true }) => {
     },
   ];
 
+  const inititalColumnOrder = ["name", "category", "chains", "tvl", "change_1h", "change_1d", "change_7d"];
+
   const [sorting, setSorting] = useState(columnSorting);
   const [columnFilters, setColumnFilters] = useState([]);
   const [globalFilter, setGlobalFilter] = useState("");
   const [columnVisibility, setColumnVisibility] = useState();
+  const [columnOrder, setColumnOrder] = useState(inititalColumnOrder);
 
   useEffect(() => {
     setSorting(columnSorting);
@@ -50,6 +53,7 @@ const TotalValueLockedTable = ({ isExpanded = true }) => {
       return safeValue?.toLowerCase().includes(filterValue.toLowerCase());
     },
     state: {
+      columnOrder,
       sorting,
       globalFilter,
       columnFilters,
@@ -66,20 +70,14 @@ const TotalValueLockedTable = ({ isExpanded = true }) => {
     getFacetedUniqueValues: getFacetedUniqueValues(),
     getPaginationRowModel: !isExpanded ? getPaginationRowModel() : "",
     onColumnVisibilityChange: setColumnVisibility,
+    onColumnOrderChange: setColumnOrder,
   });
 
   //
 
-  // console.log(tableInstance);
-
   return (
     <>
-      {isExpanded && (
-        <Filter
-          table={tableInstance}
-          column={tableInstance.getColumn("name")}
-        />
-      )}
+      {isExpanded && <Filter table={tableInstance} />}
       <Table
         tableInstance={tableInstance}
         linkTo={"/tvl"}

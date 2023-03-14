@@ -96,12 +96,7 @@ const FeesTable = ({ isExpanded = true, timeFrame = "total24h" }) => {
 
   return (
     <>
-      {isExpanded && (
-        <Filter
-          table={tableInstance}
-          column={tableInstance.getColumn("name")}
-        />
-      )}
+      {isExpanded && <Filter table={tableInstance} />}
       {!isLoading && (
         <Table
           tableInstance={tableInstance}

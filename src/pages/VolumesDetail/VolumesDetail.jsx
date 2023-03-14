@@ -7,6 +7,7 @@ import VolumesDetailStats from "./VolumesDetailStats";
 import ChartContainer from "../../components/Chart/ChartContainer";
 import LineChart from "../../components/Chart/LineChart";
 import StackedLineChart from "../../components/Chart/StackedLineChart";
+import styles from "./VolumesDetail.module.scss";
 
 const VolumesDetail = () => {
   const { protocol } = useParams();
@@ -47,10 +48,12 @@ const VolumesDetail = () => {
         <LineChart
           data={volumeHistory}
           title={"Volume History"}
+          className={styles["chart--full-width"]}
         />
         <StackedLineChart
           data={distributionChartData}
           title={"Volume per Chain"}
+          className={styles["chart--full-width"]}
         />
       </ChartContainer>
     </>

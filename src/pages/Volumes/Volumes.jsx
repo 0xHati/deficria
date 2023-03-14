@@ -7,6 +7,7 @@ import ChartContainer from "../../components/Chart/ChartContainer";
 import LineChart from "../../components/Chart/LineChart";
 import DataDistribution from "../../components/DataDistribution/DataDistribution";
 import VolumesStats from "./VolumesStats";
+import styles from "./Volumes.module.scss";
 
 const Volumes = () => {
   const { data } = useQuery(["dex", "chartData"], () =>
@@ -23,11 +24,13 @@ const Volumes = () => {
       <ChartContainer>
         <LineChart
           data={transformedData}
-          title={"Dex Volumes History"}
+          title={"Dex Volumes over time"}
+          className={styles["chart--full-width"]}
         />
         <DataDistribution
           data={data}
           title={"Volume Distribution"}
+          className={styles["chart--full-width"]}
         />
       </ChartContainer>
 

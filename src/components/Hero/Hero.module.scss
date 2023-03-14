@@ -3,11 +3,14 @@
 .hero {
   //   height: 30vh;
   font-size: 3rem;
-  margin: 2rem 2rem;
+  margin: 2rem 0rem;
 
   text-transform: uppercase;
   letter-spacing: 1px;
   padding: 0;
+
+  @include media(">phone") {
+  }
   & .accent {
     color: var(--green1);
   }
@@ -22,7 +25,6 @@
 
   @include media(">phone") {
     margin: 8rem 4rem;
-    margin-bottom: 4rem;
   }
 }
 

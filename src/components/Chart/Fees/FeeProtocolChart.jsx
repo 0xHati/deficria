@@ -7,7 +7,7 @@ import { TIMEFRAMES_LIMITED } from "../../../constants/timeframes";
 import { useState } from "react";
 import { groupDatesByPeriod, formatNumberToLocale, formatDate } from "../../../utils/helpers";
 
-export const FeeProtocolChart = ({ dataSets }) => {
+export const FeeProtocolChart = ({ dataSets, ...props }) => {
   const options = {
     chart: {
       zoomType: "x",
@@ -77,7 +77,7 @@ export const FeeProtocolChart = ({ dataSets }) => {
   };
 
   return (
-    <Card>
+    <Card className={props.className}>
       <TimeFrameSelector
         timeFrames={TIMEFRAMES_LIMITED}
         timeFrame={timeFrame}

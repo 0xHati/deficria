@@ -3,11 +3,13 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { AiOutlineClose } from "react-icons/ai";
 import { useState, useRef, useEffect } from "react";
 import styles from "./Header.module.scss";
-import { Hero } from "../Hero";
+import { useLocation } from "react-router-dom";
 
-export const Header = ({ isHome }) => {
+export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { pathname } = useLocation();
+
   const header = useRef(null);
   useEffect(() => {
     const scrollListener = () => {
@@ -18,6 +20,11 @@ export const Header = ({ isHome }) => {
 
     return () => window.removeEventListener("scroll", scrollListener);
   }, []);
+
+  //close menu after pathchanges
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
 
   const handleClick = () => {
     setIsOpen((prevState) => !prevState);
@@ -35,7 +42,7 @@ export const Header = ({ isHome }) => {
         {isOpen && <AiOutlineClose className={styles["menu__icon"]} />}
       </button>
       <NavBar show={isOpen} />
-      <div className={styles.profile}>Profile</div>
+      {/* <div className={styles.profile}>Profile</div> */}
     </header>
   );
 };

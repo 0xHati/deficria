@@ -12,17 +12,17 @@ const Stat = ({ title, number, percentage, info }) => {
   if (percentage == 0) logo = "";
   return (
     <div className={styles.stat}>
-      <p className={styles.title}>
+      <div className={styles.title}>
         <span>{title}</span>
         <span className={styles.info}> {info}</span>
-      </p>
-      <p>
+      </div>
+      <div className={styles["number-container"]}>
         <span className={styles.number}>{number}</span>
         <span className={styles.percentage}>
           {percentage && percentage + "%"}
           {logo}
         </span>
-      </p>
+      </div>
     </div>
   );
 };

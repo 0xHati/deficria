@@ -6,13 +6,14 @@
   top: 5rem;
   right: 0;
   z-index: 100;
-  background-color: var(--color-primary-dark);
+  background-color: var(--blue6);
+
   height: 0;
   width: 100%;
 
   transition: height 0.25s ease-out;
 
-  @include media(">phone") {
+  @include media(">desktop") {
     display: flex;
     position: static;
     width: auto;
@@ -23,7 +24,8 @@
 
   &--open {
     display: block;
-    height: 100vh;
+    // height: 100vh;
+    height: fit-content;
     opacity: 1;
   }
 }
@@ -36,7 +38,7 @@
   align-items: center;
   gap: 2rem;
 
-  @include media(">phone") {
+  @include media(">desktop") {
     flex-direction: row;
     align-items: flex-start;
 
@@ -50,20 +52,20 @@
     border-radius: var(--border-radius);
     border: 1px solid transparent;
     position: relative;
-    @include media(">phone") {
+    @include media(">desktop") {
       margin: 1rem 1rem;
       font-size: 1.8rem;
     }
 
     &:hover {
-      color: #e0ff4f;
+      color: var(--lime4);
     }
   }
 
   & a.active {
     color: var(--white);
     background-color: #dfff4f00;
-    border: 2px solid #e0ff4f;
+    border: 2px solid var(--lime4);
     border-radius: var(--border-radius);
   }
 }

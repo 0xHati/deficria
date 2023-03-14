@@ -1,11 +1,13 @@
 import styles from "./Chart.module.scss";
-import { Children } from "react";
+import { Children, cloneElement } from "react";
 
 const ChartContainer = ({ children }) => {
   return (
     <div className={styles.charts}>
       {Children.map(children, (child) => {
-        return <div className={styles.chart}>{child}</div>;
+        return cloneElement(child, {
+          className: child.props.className ? `${child.props.className} ${styles.chart}` : styles.chart,
+        });
       })}
     </div>
   );

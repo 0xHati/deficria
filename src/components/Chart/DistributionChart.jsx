@@ -1,6 +1,7 @@
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "./highChartsTheme";
 import { useEffect, useState } from "react";
+import Card from "../Card";
 
 const createThreshold = (data, threshold) => {
   const filteredData = data.filter((item) => item.y > threshold);
@@ -11,7 +12,7 @@ const createThreshold = (data, threshold) => {
   return filteredData;
 };
 
-const DistributionChart = ({ data, title, threshold }) => {
+const DistributionChart = ({ data, title, threshold, ...props }) => {
   const filteredData = createThreshold(data, threshold);
 
   const options = {

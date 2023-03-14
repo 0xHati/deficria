@@ -29,6 +29,7 @@ Highcharts.theme = {
   title: {
     style: {
       color: COLORS.TEXT[0],
+      fontSize: "1.6rem",
     },
     text: undefined,
   },
