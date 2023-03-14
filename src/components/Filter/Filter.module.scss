@@ -1,8 +1,18 @@
+@use "../../styles/index" as *;
+
 .filter {
   display: flex;
-  align-items: center;
+  align-items: start;
   gap: 2rem;
   margin: 1rem;
+  flex-direction: column;
+
+  @include media(">phone") {
+    flex-direction: row;
+    align-items: center;
+
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .search {
@@ -13,7 +23,10 @@
   font-size: 1.8rem;
   background-color: var(--slate5);
   padding: 0rem 1rem;
-  margin-left: auto;
+
+  @include media(">phone") {
+    margin-left: auto;
+  }
 
   &:focus-within {
     border-color: var(--blue1);
@@ -79,7 +92,7 @@
   padding: 1rem;
   margin: 1rem;
   border: 1px solid var(--blue4);
-  z-index: 50;
+  z-index: 100;
 
   &:focus-visible,
   &[data-focus-visible],
@@ -139,20 +152,5 @@
   &__checkbox[data-focus-visible] {
     outline: 2px solid var(--blue1);
     outline-offset: 2px;
-  }
-}
-
-.slider {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-
-  &__input {
-    font-size: 1.6rem;
-    // padding: 0.5rem 1rem;
-    width: 6rem;
-    height: 3rem;
-    width: fit-content;
-    border-radius: var(--border-radius-sm);
   }
 }

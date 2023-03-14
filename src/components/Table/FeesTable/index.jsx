@@ -9,8 +9,8 @@ import {
   getFacetedMinMaxValues,
 } from "@tanstack/react-table";
 import { Table } from "..";
-import { useState, useEffect, Suspense, useMemo } from "react";
-import { getColumns } from "./columns";
+import { useState, useEffect, useMemo } from "react";
+import { getColumns } from "./Columns";
 import Filter from "../../Filter";
 import defillama from "defillama-api";
 import { useQuery } from "react-query";
