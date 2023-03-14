@@ -1,5 +1,5 @@
 import { Table } from "..";
-import { getColumns } from "./Columns";
+import { getColumns } from "./columns";
 import {
   useReactTable,
   getCoreRowModel,
