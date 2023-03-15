@@ -1,11 +1,13 @@
-import HighchartsReact from "highcharts-react-official";
-import Card from "../Card";
-import Highcharts from "./highChartsTheme";
-import { formatNumberToLocale, formatDate } from "../../utils/helpers";
-import { COLORS } from "./highChartsTheme";
+import HighchartsReact from 'highcharts-react-official';
+import Card from '../Card';
+import Highcharts from './highChartsTheme';
+import { formatNumberToLocale, formatDate } from '../../utils/helpers';
+import { COLORS } from './highChartsTheme';
 
 const StackedLineChart = ({ data, title, ...props }) => {
+  console.log(data);
   const series = Object.entries(data).map(([name, data], index) => {
+    // const i = Math.abs(COLORS.SERIES.length - index);
     return {
       name: name,
       data: data,
@@ -17,8 +19,8 @@ const StackedLineChart = ({ data, title, ...props }) => {
 
   const options = {
     chart: {
-      type: "area",
-      zoomType: "x",
+      type: 'area',
+      zoomType: 'x',
     },
     title: {
       text: title,
@@ -28,14 +30,14 @@ const StackedLineChart = ({ data, title, ...props }) => {
       formatter: function () {
         return this.points.reduce(function (s, point) {
           return s + `<br/><span style='color:${point.color}'> ${point.series.name}</span>: ${formatNumberToLocale(point.y)}`;
-        }, "<b>" + formatDate(this.x) + "</b>");
+        }, '<b>' + formatDate(this.x) + '</b>');
       },
 
       shared: true,
     },
     plotOptions: {
       area: {
-        stacking: "normal",
+        stacking: 'normal',
         lineWidth: 1,
       },
       series: {
@@ -50,7 +52,7 @@ const StackedLineChart = ({ data, title, ...props }) => {
       },
     },
     xAxis: {
-      type: "datetime",
+      type: 'datetime',
     },
     series: series,
     legend: {
@@ -62,7 +64,7 @@ const StackedLineChart = ({ data, title, ...props }) => {
       <HighchartsReact
         highcharts={Highcharts}
         options={options}
-        constructorType={"stockChart"}
+        constructorType={'stockChart'}
       />
     </Card>
   );

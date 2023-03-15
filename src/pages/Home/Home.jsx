@@ -1,6 +1,6 @@
-import { Hero } from "../../components/Hero";
+import { Hero } from '../../components/Hero';
 
-import TablesTab from "../../components/TablesTab";
+import TablesTab from '../../components/TablesTab';
 
 const Home = () => {
   return (

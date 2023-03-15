@@ -1,25 +1,17 @@
-@use "../../styles/index" as *;
+@use '../../styles/index' as *;
 
 .navbar {
-  position: fixed;
+  flex-basis: 100%;
   opacity: 0;
-  top: 5rem;
-  right: 0;
-  z-index: 100;
-  background-color: var(--blue6);
-
   height: 0;
-  width: 100%;
 
-  transition: height 0.25s ease-out;
-
-  @include media(">desktop") {
+  @include media('>desktop') {
     display: flex;
-    position: static;
     width: auto;
     height: auto;
     opacity: 1;
-    background-color: unset;
+    // background-color: unset;
+    flex-basis: 0;
   }
 
   &--open {
@@ -27,22 +19,43 @@
     // height: 100vh;
     height: fit-content;
     opacity: 1;
+    border: 1px solid var(--blue4);
+    border-radius: var(--border-radius);
+    background-color: var(--blue8);
+
+    @include media('>desktop') {
+      border: unset;
+      border-radius: unset;
+      background-color: unset;
+    }
+  }
+
+  &--open > .menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+
+    @include media('>desktop') {
+      flex-direction: row;
+      align-items: flex-start;
+      display: flex;
+      gap: 0rem;
+    }
   }
 }
 
 .menu {
   padding: 2rem 0;
   font-size: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
+  display: none;
 
-  @include media(">desktop") {
+  @include media('>desktop') {
     flex-direction: row;
     align-items: flex-start;
-
+    display: flex;
     padding: 0;
+    gap: 2rem;
   }
 
   & a {
@@ -52,7 +65,7 @@
     border-radius: var(--border-radius);
     border: 1px solid transparent;
     position: relative;
-    @include media(">desktop") {
+    @include media('>desktop') {
       margin: 1rem 1rem;
       font-size: 1.8rem;
     }
@@ -64,7 +77,6 @@
 
   & a.active {
     color: var(--white);
-    background-color: #dfff4f00;
     border: 2px solid var(--lime4);
     border-radius: var(--border-radius);
   }

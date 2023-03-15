@@ -1,8 +1,9 @@
-@use "../../styles/index" as *;
+@use '../../styles/index' as *;
 
 .header {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   position: sticky;
   align-items: center;
   backdrop-filter: blur(5px);
@@ -24,13 +25,14 @@
   height: 2.5rem;
   width: 2.5rem;
 
-  @include media(">desktop") {
+  @include media('>desktop') {
     display: none;
   }
 }
 
 .menu__button {
-  @include media(">desktop") {
+  // width: 50%;
+  @include media('>desktop') {
     display: none;
   }
 }
@@ -38,7 +40,7 @@
 .profile {
   display: none;
 
-  @include media(">desktop") {
+  @include media('>desktop') {
     display: block;
   }
 }
