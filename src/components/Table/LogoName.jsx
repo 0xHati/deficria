@@ -1,4 +1,4 @@
-import styles from "./Table.module.scss";
+import styles from './Table.module.scss';
 
 export const LogoName = ({ logoSrc, value, rank }) => {
   return (
@@ -6,10 +6,10 @@ export const LogoName = ({ logoSrc, value, rank }) => {
       {rank && <span>{rank}</span>}
       <img
         src={logoSrc}
-        alt={value + " image"}
+        alt={value + ' image'}
         className={styles.logo}
       />
-      <span>{value}</span>
+      <span className={styles.name}>{value}</span>
     </span>
   );
 };

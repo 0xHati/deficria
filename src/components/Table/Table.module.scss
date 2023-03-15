@@ -1,4 +1,4 @@
-@use "../../styles/index" as *;
+@use '../../styles/index' as *;
 
 .table-container {
   width: 100%;
@@ -9,7 +9,7 @@
     border-collapse: collapse;
     table-layout: fixed;
 
-    @include media(">phone") {
+    @include media('>phone') {
       table-layout: fixed;
       width: 100%;
     }
@@ -93,6 +93,11 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  // overflow: hidden;
+
+  & .name {
+    overflow-wrap: break-word;
+  }
 }
 
 .header {

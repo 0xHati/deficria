@@ -5,7 +5,6 @@ import { formatNumberToLocale, formatDate } from '../../utils/helpers';
 import { COLORS } from './highChartsTheme';
 
 const StackedLineChart = ({ data, title, ...props }) => {
-  console.log(data);
   const series = Object.entries(data).map(([name, data], index) => {
     // const i = Math.abs(COLORS.SERIES.length - index);
     return {

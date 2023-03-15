@@ -1,12 +1,12 @@
-import { formatNumberToLocale } from "../../../utils/helpers";
-import Sparkline from "../../Chart/Fees/Sparkline";
-import { LogoName } from "../LogoName";
+import { formatNumberToLocale } from '../../../utils/helpers';
+import Sparkline from '../../Chart/Fees/Sparkline';
+import { LogoName } from '../LogoName';
 
 export const getColumns = (isExpanded) => {
   return [
     {
-      header: "Name",
-      accessorKey: "name",
+      header: 'Name',
+      accessorKey: 'name',
       cell: ({ getValue, row, table }) => {
         const logo = row.original.logo;
         const value = getValue();
@@ -20,73 +20,73 @@ export const getColumns = (isExpanded) => {
           />
         );
       },
-      size: 150,
+      size: 200,
     },
     {
-      header: "Category",
-      accessorKey: "category",
+      header: 'Category',
+      accessorKey: 'category',
       size: 100,
     },
     {
-      header: "1d change",
-      accessorKey: "change_1d",
-      cell: ({ getValue }) => (getValue() ? getValue() + "%" : "-"),
+      header: '1d change',
+      accessorKey: 'change_1d',
+      cell: ({ getValue }) => (getValue() ? getValue() + '%' : '-'),
       meta: {
         color: true,
       },
       size: 100,
     },
     {
-      header: "7d change",
-      accessorKey: "change_7d",
-      cell: ({ getValue }) => (getValue() ? getValue() + "%" : "-"),
+      header: '7d change',
+      accessorKey: 'change_7d',
+      cell: ({ getValue }) => (getValue() ? getValue() + '%' : '-'),
       meta: {
         color: true,
       },
       size: 100,
     },
     {
-      header: "1m change",
-      accessorKey: "change_1m",
-      cell: ({ getValue }) => (getValue() ? getValue() + "%" : "-"),
+      header: '1m change',
+      accessorKey: 'change_1m',
+      cell: ({ getValue }) => (getValue() ? getValue() + '%' : '-'),
       meta: {
         color: true,
       },
       size: 100,
     },
     {
-      header: isExpanded ? "24h fees" : "Fees",
-      accessorKey: "total24h",
+      header: isExpanded ? '24h fees' : 'Fees',
+      accessorKey: 'total24h',
       cell: ({ getValue }) => {
-        return getValue() ? formatNumberToLocale(getValue()) : "-";
+        return getValue() ? formatNumberToLocale(getValue()) : '-';
       },
       size: 150,
     },
     {
-      header: isExpanded ? "7d fees" : "Fees",
-      accessorKey: "total7d",
-      cell: ({ getValue }) => (getValue() ? formatNumberToLocale(getValue()) : "-"),
+      header: isExpanded ? '7d fees' : 'Fees',
+      accessorKey: 'total7d',
+      cell: ({ getValue }) => (getValue() ? formatNumberToLocale(getValue()) : '-'),
       size: 150,
     },
     {
-      header: isExpanded ? "30d fees" : "Fees",
-      accessorKey: "total30d",
-      cell: ({ getValue }) => (getValue() ? formatNumberToLocale(getValue()) : "-"),
+      header: isExpanded ? '30d fees' : 'Fees',
+      accessorKey: 'total30d',
+      cell: ({ getValue }) => (getValue() ? formatNumberToLocale(getValue()) : '-'),
       size: 150,
     },
     {
-      header: isExpanded ? "Total Fees" : "Fees",
-      accessorKey: "totalAllTime",
-      cell: ({ getValue }) => (getValue() ? formatNumberToLocale(getValue()) : "-"),
+      header: isExpanded ? 'Total Fees' : 'Fees',
+      accessorKey: 'totalAllTime',
+      cell: ({ getValue }) => (getValue() ? formatNumberToLocale(getValue()) : '-'),
       size: 150,
     },
     {
-      header: "Trend",
-      accessorKey: "sparkline",
+      header: 'Trend',
+      accessorKey: 'sparkline',
       cell: ({ getValue }) => (
         <Sparkline
           data={getValue()}
-          margin={{ marginLeft: "auto" }}
+          margin={{ marginLeft: 'auto' }}
         />
       ),
       size: 150,
