@@ -5,30 +5,38 @@ export const Menu = ({ onClickMenuItem }) => {
   return (
     <>
       <ul className={`${styles.menu}`}>
-        <NavLink
-          to="/"
-          className={({ isActive }) => (isActive ? styles.active : '')}
-          onClick={onClickMenuItem}>
-          Home
-        </NavLink>
-        <NavLink
-          to="fees"
-          className={({ isActive }) => (isActive ? styles.active : '')}
-          onClick={onClickMenuItem}>
-          Fees
-        </NavLink>
-        <NavLink
-          to="tvl"
-          className={({ isActive }) => (isActive ? styles.active : '')}
-          onClick={onClickMenuItem}>
-          TVL
-        </NavLink>
-        <NavLink
-          to="volumes"
-          className={({ isActive }) => (isActive ? styles.active : '')}
-          onClick={onClickMenuItem}>
-          Volumes
-        </NavLink>
+        <li>
+          <NavLink
+            to="/"
+            className={({ isActive }) => (isActive ? styles.active : '')}
+            onClick={onClickMenuItem}>
+            Home
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="fees"
+            className={({ isActive }) => (isActive ? styles.active : '')}
+            onClick={onClickMenuItem}>
+            Fees
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="tvl"
+            className={({ isActive }) => (isActive ? styles.active : '')}
+            onClick={onClickMenuItem}>
+            TVL
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
+            to="volumes"
+            className={({ isActive }) => (isActive ? styles.active : '')}
+            onClick={onClickMenuItem}>
+            Volumes
+          </NavLink>
+        </li>
       </ul>
     </>
   );

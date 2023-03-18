@@ -1,8 +1,8 @@
-import HighchartsReact from "highcharts-react-official";
-import Highcharts from "./highChartsTheme";
-import { formatNumberToLocale, formatDate, unixToMs } from "../../utils/helpers";
-import Card from "../Card";
-import { COLORS } from "./highChartsTheme";
+import HighchartsReact from 'highcharts-react-official';
+import Highcharts from './highChartsTheme';
+import { formatNumberToLocale, formatDate, unixToMs } from '../../utils/helpers';
+import Card from '../Card';
+import { COLORS } from './highChartsTheme';
 
 const LineChart = ({ data, title, annotationsData, ...props }) => {
   const annotations = annotationsData?.map(([date, description]) => {
@@ -11,8 +11,8 @@ const LineChart = ({ data, title, annotationsData, ...props }) => {
   });
   const options = {
     chart: {
-      zoomType: "x",
-      type: "area",
+      zoomType: 'x',
+      type: 'area',
     },
     title: {
       text: title,
@@ -30,15 +30,15 @@ const LineChart = ({ data, title, annotationsData, ...props }) => {
     },
     annotations: [
       {
-        align: "right",
-        shape: "connector",
+        align: 'right',
+        shape: 'connector',
         justify: false,
         crop: true,
         labelOptions: {
           backgroundColor: COLORS.ACCENT,
           style: {
-            fontSize: "0.8em",
-            color: "black",
+            fontSize: '0.8em',
+            color: 'black',
           },
         },
         labels: annotations,
@@ -46,18 +46,18 @@ const LineChart = ({ data, title, annotationsData, ...props }) => {
     ],
 
     xAxis: {
-      type: "datetime",
+      type: 'datetime',
     },
     yAxis: {
       title: {
-        text: "Amount in usd",
+        text: 'Amount in usd',
       },
       plotLines: [
         {
           color: COLORS.ACCENT,
           value: data[data.length - 1].y,
-          width: "1",
-          dashStyle: "dash",
+          width: '1',
+          dashStyle: 'dash',
 
           label: {
             text: formatNumberToLocale(data[data.length - 1].y, true),
@@ -65,14 +65,14 @@ const LineChart = ({ data, title, annotationsData, ...props }) => {
             style: {
               color: COLORS.ACCENT_DARK,
               backgroundColor: COLORS.ACCENT,
-              fontSize: "1.6rem",
-              borderRadius: "20%",
-              border: "2px solid black",
-              padding: "2px",
+              fontSize: '1.6rem',
+              borderRadius: '20%',
+              border: '2px solid black',
+              padding: '2px',
             },
             y: -40,
-            x: -10,
-            align: "right",
+            x: -20,
+            align: 'right',
           },
         },
       ],
@@ -83,7 +83,7 @@ const LineChart = ({ data, title, annotationsData, ...props }) => {
       <HighchartsReact
         highcharts={Highcharts}
         options={options}
-        constructorType={"stockChart"}
+        constructorType={'stockChart'}
       />
     </Card>
   );
