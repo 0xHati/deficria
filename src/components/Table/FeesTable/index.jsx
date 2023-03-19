@@ -7,17 +7,17 @@ import {
   getFacetedRowModel,
   getFacetedUniqueValues,
   getFacetedMinMaxValues,
-} from "@tanstack/react-table";
-import { Table } from "..";
-import { useState, useEffect, useMemo } from "react";
-import { getColumns } from "./columns";
+} from '@tanstack/react-table';
+import { Table } from '..';
+import { useState, useEffect, useMemo } from 'react';
+import { getColumns } from './columns';
 
-import Filter from "../../Filter";
-import defillama from "defillama-api";
-import { useQuery } from "react-query";
-import { fetchData, unixToMs, groupDatesByWeek } from "../../../utils/helpers";
+import Filter from '../../Filter';
+import defillama from 'defillama-api';
+import { useQuery } from 'react-query';
+import { fetchData, unixToMs, groupDatesByWeek } from '../../../utils/helpers';
 
-import { subMonths } from "date-fns";
+import { subMonths } from 'date-fns';
 
 /*
 The table can be expanded with all the data showing next to each other or collapsed with the option to toggle fees
@@ -27,9 +27,9 @@ The table can be expanded with all the data showing next to each other or collap
 //eventually data is further grouped to have one point every week
 const TIMESPAN_SPARKLINE = 3;
 
-const FeesTable = ({ isExpanded = true, timeFrame = "total24h" }) => {
+const FeesTable = ({ isExpanded = true, timeFrame = 'total24h' }) => {
   const { data, isLoading } = useQuery(
-    ["fees"],
+    ['fees'],
     () => fetchData(defillama.feesRevenue.all({ exludeTotalDataChart: false, exludeTotalDataChartBreakdown: false })),
     false
   );
@@ -40,7 +40,7 @@ const FeesTable = ({ isExpanded = true, timeFrame = "total24h" }) => {
     const search = filterValue.toLowerCase();
 
     let value = row.getValue(columnId);
-    if (typeof value === "number") value = String(value);
+    if (typeof value === 'number') value = String(value);
 
     return value?.toLowerCase().includes(search);
   };
@@ -53,12 +53,12 @@ const FeesTable = ({ isExpanded = true, timeFrame = "total24h" }) => {
   ];
 
   const inititalColumnOrder = isExpanded
-    ? ["name", "category", "total24h", "total7d", "total30d", "totalAllTime", "change_1d"]
-    : ["name", "category", "total24h", "total7d", "total30d", "totalAllTime", "change_1d", "change_7d", "change_1m"];
+    ? ['name', 'category', 'total24h', 'total7d', 'total30d', 'totalAllTime', 'change_1d']
+    : ['name', 'category', 'total24h', 'total7d', 'total30d', 'totalAllTime', 'change_1d', 'change_7d', 'change_1m'];
   const [sorting, setSorting] = useState(columnSorting);
   const [columnVisibility, setColumnVisibility] = useState();
   const [columnOrder, setColumnOrder] = useState(inititalColumnOrder);
-  const [globalFilter, setGlobalFilter] = useState("");
+  const [globalFilter, setGlobalFilter] = useState('');
 
   // since the column is not expanded all column names will be 'fees' and visibility change depending on selection
 
@@ -87,7 +87,7 @@ const FeesTable = ({ isExpanded = true, timeFrame = "total24h" }) => {
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
     getFacetedMinMaxValues: getFacetedMinMaxValues(),
-    getPaginationRowModel: !isExpanded ? getPaginationRowModel() : "",
+    getPaginationRowModel: !isExpanded ? getPaginationRowModel() : '',
     onColumnVisibilityChange: setColumnVisibility,
     onColumnOrderChange: setColumnOrder,
     globalFilterFn: globalFilterFn,
@@ -101,7 +101,7 @@ const FeesTable = ({ isExpanded = true, timeFrame = "total24h" }) => {
       {!isLoading && (
         <Table
           tableInstance={tableInstance}
-          linkTo={"/fees"}
+          linkTo={'/fees'}
         />
       )}
     </>
@@ -116,10 +116,11 @@ const transformDataSparkline = (data, timespan) => {
     .filter(([time]) => {
       return time > referenceTime;
     });
+
   const groupedData = groupDatesByWeek(filteredData);
 
   for (const protocol of data.protocols) {
-    const protocolName = protocol.module;
+    const protocolName = protocol.name;
     const valuesArray = [];
 
     for (const timestampData of groupedData) {
