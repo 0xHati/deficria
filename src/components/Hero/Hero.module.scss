@@ -1,4 +1,4 @@
-@use "../../styles/include-media.scss" as *;
+@use '../../styles/include-media.scss' as *;
 
 .hero {
   font-size: 2rem;
@@ -8,14 +8,14 @@
   letter-spacing: 1px;
   padding: 0;
 
-  @include media(">phone") {
+  @include media('>phone') {
     font-size: 2.5rem;
   }
 
-  @include media(">tablet") {
+  @include media('>tablet') {
     font-size: 3rem;
   }
-  @include media(">desktop") {
+  @include media('>desktop') {
     width: 75%;
   }
   & .accent {
@@ -27,6 +27,7 @@
     background-size: 100%;
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
+    background-clip: text;
     background-repeat: repeat;
   }
 
@@ -34,7 +35,7 @@
     margin-bottom: 5rem;
   }
 
-  @include media(">phone") {
+  @include media('>phone') {
     margin: 8rem 4rem;
   }
 }

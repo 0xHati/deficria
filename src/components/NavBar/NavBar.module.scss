@@ -85,7 +85,7 @@
     &::after,
     &::before {
       content: '';
-      background: conic-gradient(from 145deg, var(--lime4), var(--green3));
+      background: linear-gradient(45deg, var(--lime2), var(--lime3), var(--lime4), var(--green2), var(--green3));
       inset: -0.2rem;
       position: absolute;
       border-radius: inherit;

@@ -1,18 +1,18 @@
-import { useParams } from "react-router-dom";
-import defillama from "defillama-api";
-import { useQuery } from "react-query";
-import { fetchData, unixToMs } from "../../utils/helpers";
-import LineChart from "../../components/Chart/LineChart";
-import CategoryChart from "../../components/Chart/CategoryChart";
-import ChartContainer from "../../components/Chart/ChartContainer";
-import { useMemo } from "react";
-import StackedLineChart from "../../components/Chart/StackedLineChart";
-import TVLDetailStats from "./TVLDetailStats";
-import styles from "./TotalValueLockedDetail.module.scss";
+import { useParams } from 'react-router-dom';
+import defillama from 'defillama-api';
+import { useQuery } from 'react-query';
+import { fetchData, unixToMs } from '../../utils/helpers';
+import LineChart from '../../components/Chart/LineChart';
+import CategoryChart from '../../components/Chart/CategoryChart';
+import ChartContainer from '../../components/Chart/ChartContainer';
+import { useMemo } from 'react';
+import StackedLineChart from '../../components/Chart/StackedLineChart';
+import TVLDetailStats from './TVLDetailStats';
+import styles from './TotalValueLockedDetail.module.scss';
 
 const TotalValueLockedDetail = () => {
   const { protocol } = useParams();
-  const { data: dataProtocol } = useQuery(["fees", protocol], () => fetchData(defillama.tvl.protocol(protocol)));
+  const { data: dataProtocol } = useQuery(['fees', protocol], () => fetchData(defillama.tvl.protocol(protocol)));
 
   const distributionChartData = useMemo(() => {
     const transformedData = {};
@@ -45,13 +45,13 @@ const TotalValueLockedDetail = () => {
         {Object.keys(distributionChartData).length > 1 && (
           <StackedLineChart
             data={distributionChartData}
-            title={"TVL per Chain"}
-            className={styles["chart--full-width"]}
+            title={'TVL per Chain'}
+            className={styles['chart--full-width']}
           />
         )}
         <LineChart
           data={tvlHistory}
-          title={"TVL over time"}
+          title={'TVL over time'}
           annotationsData={dataProtocol?.hallmarks}
         />
         <CategoryChart

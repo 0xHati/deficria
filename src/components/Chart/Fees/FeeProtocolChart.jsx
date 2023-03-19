@@ -1,63 +1,63 @@
-import HighchartsReact from "highcharts-react-official";
-import Highcharts from "../highChartsTheme";
-import Card from "../../Card";
-import { TimeFrameSelector } from "../../TimeFrameSelector/TimeFrameSelector";
-import { TIMEFRAMES_LIMITED } from "../../../constants/timeframes";
-import { useState } from "react";
-import { groupDatesByPeriod, formatNumberToLocale, formatDate } from "../../../utils/helpers";
+import HighchartsReact from 'highcharts-react-official';
+import Highcharts from '../highChartsTheme';
+import Card from '../../Card';
+import { TimeFrameSelector } from '../../TimeFrameSelector/TimeFrameSelector';
+import { TIMEFRAMES_LIMITED } from '../../../constants/timeframes';
+import { useState } from 'react';
+import { groupDatesByPeriod, formatNumberToLocale, formatDate } from '../../../utils/helpers';
 
 export const FeeProtocolChart = ({ dataSets, ...props }) => {
   const options = {
     chart: {
-      zoomType: "x",
-      type: "column",
+      zoomType: 'x',
+      type: 'column',
     },
 
     series: [
       {
-        name: "Fees",
+        name: 'Fees',
         data: [...dataSets.fees],
         showInLegend: Boolean(!dataSets.fees.every(([y, value]) => value === 0)),
       },
       {
-        name: "Revenue",
+        name: 'Revenue',
         data: [...dataSets.revenue],
         showInLegend: Boolean(!dataSets.revenue.every(([y, value]) => value === 0)),
       },
       {
-        name: "Rolling moving average (fees) (90d)",
-        type: "spline",
+        name: 'Rolling moving average (fees) (90d)',
+        type: 'spline',
         data: calculateSMA(dataSets.fees),
         showInLegend: true,
       },
     ],
 
     xAxis: {
-      type: "datetime",
+      type: 'datetime',
     },
     yAxis: {
       title: {
-        text: "Amount in usd",
+        text: 'Amount in usd',
       },
     },
     tooltip: {
       formatter: function () {
         return this.points.reduce(function (s, point) {
-          return s + (point.y > 0 ? `<br/><span style='color:${point.color}'> ${point.series.name}</span>: ${formatNumberToLocale(point.y)}` : "");
-        }, "<b>" + formatDate(this.x) + "</b>");
+          return s + (point.y > 0 ? `<br/><span style='color:${point.color}'> ${point.series.name}</span>: ${formatNumberToLocale(point.y)}` : '');
+        }, '<b>' + formatDate(this.x) + '</b>');
       },
     },
     plotOptions: {
       column: {
-        stacking: "normal",
+        stacking: 'normal',
       },
     },
   };
   const [chartOptions, setChartOptions] = useState(options);
-  const [timeFrame, setTimeFrame] = useState("total24h");
+  const [timeFrame, setTimeFrame] = useState('total24h');
 
   const handleChangeTimeFrame = (timeFrame) => {
-    const window = timeFrame === "total24?" ? 90 : timeFrame === "total7d" ? 13 : 3;
+    const window = timeFrame === 'total24?' ? 90 : timeFrame === 'total7d' ? 13 : 3;
     const feeData = groupDatesByPeriod(dataSets.fees, timeFrame);
     setChartOptions({
       series: [
@@ -86,7 +86,7 @@ export const FeeProtocolChart = ({ dataSets, ...props }) => {
       <HighchartsReact
         highcharts={Highcharts}
         options={chartOptions}
-        constructorType={"stockChart"}
+        constructorType={'stockChart'}
       />
     </Card>
   );
